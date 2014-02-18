@@ -19,11 +19,19 @@
 			axis: "y"
     }, options );
 
-		this.wrap("<div class='flip'></div>");
-		var width = this.width();
+    var flipedRotate = "rotatey(-180deg)";
+    var width = this.width();
 		var height = this.height();
+		var prespective = width*2;
+
+		if(settings.axis.toLowerCase() == "x"){
+			flipedRotate = "rotatex(180deg)";
+			prespective = height*2;
+		}
+
+		this.wrap("<div class='flip'></div>");
 		this.parent().css({
-			perspective: (width*2),
+			perspective: prespective,
 			position: "relative",
 			width: width,
 			height: height
@@ -42,15 +50,8 @@
 			"backface-visibility": "hidden",
 			width: "100%",
 			height: "100%",
-			top: 0,
-			left: 0
 		})
 
-		var flipedRotate = "rotatey(-180deg)";
-
-		if(settings.axis.toLowerCase() == "x"){
-			flipedRotate = "rotatex(-180deg)";
-		}
 		this.find(".back-wrap").css({
 			transform: flipedRotate
 		})
