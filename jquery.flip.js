@@ -11,85 +11,96 @@
 * - Prevent conflicting with other libary on alias $
 * - Scope varaible to be private
 */
+
+/*
+* TODO: manaul trigger using flip(true); and flip(flase);
+*/
 (function( $ ) {
+	var flip = function(dom, flipedRotate){
+		dom.data("fliped", true);
+		dom.css({
+			transform: flipedRotate
+		});
+	};
+	var unflip = function(dom){
+		dom.data("fliped", false);
+		dom.css({
+			transform: "rotatey(0deg)"
+		});
+	};
+	var flipedRotate = "rotatey(-180deg)";
+
   $.fn.flip = function(options) {
-
-		// Define default setting
-		var settings = $.extend({
-			axis: "y",
-			trigger: "click"
-    }, options );
-
-    var flipedRotate = "rotatey(-180deg)";
     var width = this.width();
 		var height = this.height();
 		var prespective = width*2;
 
-		if(settings.axis.toLowerCase() == "x"){
-			flipedRotate = "rotatex(180deg)";
-			prespective = height*2;
-		}
+  	if(options && typeof(options) == "boolean"){ // Force flip the DOM
+  		if(options){
+  			flip(this, flipedRotate);
+  		}else{
+  			// unflip(this);
+  		}
+  	}else{ //Init flipable DOM
+  		// Define default setting
+			var settings = $.extend({
+				axis: "y",
+				trigger: "click"
+	    }, options );
 
-		this.wrap("<div class='flip'></div>");
-		this.parent().css({
-			perspective: prespective,
-			position: "relative",
-			width: width,
-			height: height
-		});
+			if(settings.axis.toLowerCase() == "x"){
+				flipedRotate = "rotatex(180deg)";
+				prespective = height*2;
+			}
 
-		this.css({
-			"transform-style": "preserve-3d",
-			transition: "all 0.5s ease-out"
-		})
-
-		this.find(".front").wrap("<div class='front-wrap'></div>");
-		this.find(".back").wrap("<div class='back-wrap'></div>");
-
-		this.find(".front, .back").css({
-			width: "100%",
-			height: "100%"
-		});
-
-		this.find(".front-wrap, .back-wrap").css({
-			position: "absolute",
-			"backface-visibility": "hidden",
-			width: "100%",
-			height: "100%"
-		})
-
-		this.find(".back-wrap").css({
-			transform: flipedRotate
-		})
-
-		if(settings.trigger.toLowerCase() == "click"){
-			this.click(function(){
-				if($(this).data("fliped")){
-					$(this).data("fliped", false);
-					$(this).css({
-						transform: "rotatey(0deg)"
-					});
-	      }else{
-	        $(this).data("fliped", true);
-					$(this).css({
-						transform: flipedRotate
-					});
-	      }
+			this.wrap("<div class='flip'></div>");
+			this.parent().css({
+				perspective: prespective,
+				position: "relative",
+				width: width,
+				height: height
 			});
-		}else if(settings.trigger.toLowerCase() == "hover"){
-			this.hover(function(){
-				$(this).data("fliped", true);
-				$(this).css({
-					transform: flipedRotate
-				});
-			}, function(){
-				$(this).data("fliped", false);
-				$(this).css({
-					transform: "rotatey(0deg)"
-				});
+
+			this.css({
+				"transform-style": "preserve-3d",
+				transition: "all 0.5s ease-out"
+			})
+
+			this.find(".front").wrap("<div class='front-wrap'></div>");
+			this.find(".back").wrap("<div class='back-wrap'></div>");
+
+			this.find(".front, .back").css({
+				width: "100%",
+				height: "100%"
 			});
-		}
-	
+
+			this.find(".front-wrap, .back-wrap").css({
+				position: "absolute",
+				"backface-visibility": "hidden",
+				width: "100%",
+				height: "100%"
+			})
+
+			this.find(".back-wrap").css({
+				transform: flipedRotate
+			})
+
+			if(settings.trigger.toLowerCase() == "click"){
+				this.click(function(){
+					if($(this).data("fliped")){
+						unflip($(this));
+		      }else{
+		      	flip($(this), flipedRotate);
+		      }
+				});
+			}else if(settings.trigger.toLowerCase() == "hover"){
+				this.hover(function(){
+					flip($(this), flipedRotate);
+				}, function(){
+					unflip($(this));
+				});
+			}	
+  	}
 		// Return jQuery so that it's chainable 
 		return this;		
   };
