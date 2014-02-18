@@ -16,7 +16,8 @@
 
 		// Define default setting
 		var settings = $.extend({
-			axis: "y"
+			axis: "y",
+			trigger: "click"
     }, options );
 
     var flipedRotate = "rotatey(-180deg)";
@@ -45,30 +46,49 @@
 		this.find(".front").wrap("<div class='front-wrap'></div>");
 		this.find(".back").wrap("<div class='back-wrap'></div>");
 
+		this.find(".front, .back").css({
+			width: "100%",
+			height: "100%"
+		});
+
 		this.find(".front-wrap, .back-wrap").css({
 			position: "absolute",
 			"backface-visibility": "hidden",
 			width: "100%",
-			height: "100%",
+			height: "100%"
 		})
 
 		this.find(".back-wrap").css({
 			transform: flipedRotate
 		})
 
-		this.on("click", function(){
-			if($(this).data("fliped")){
+		if(settings.trigger.toLowerCase() == "click"){
+			this.click(function(){
+				if($(this).data("fliped")){
+					$(this).data("fliped", false);
+					$(this).css({
+						transform: "rotatey(0deg)"
+					});
+	      }else{
+	        $(this).data("fliped", true);
+					$(this).css({
+						transform: flipedRotate
+					});
+	      }
+			});
+		}else if(settings.trigger.toLowerCase() == "hover"){
+			this.hover(function(){
+				$(this).data("fliped", true);
+				$(this).css({
+					transform: flipedRotate
+				});
+			}, function(){
 				$(this).data("fliped", false);
 				$(this).css({
 					transform: "rotatey(0deg)"
 				});
-      }else{
-        $(this).data("fliped", true);
-				$(this).css({
-					transform: flipedRotate
-				});
-      }
-		})
+			});
+		}
 	
 		// Return jQuery so that it's chainable 
 		return this;		
