@@ -17,26 +17,21 @@
 */
 (function( $ ) {
 	var flip = function(dom, flipedRotate){
-		if(dom.data("fliped") == undefined || dom.data("fliped") == false){
-			console.log("flip");
-			dom.data("fliped", true);
-			dom.css({
-				transform: flipedRotate
-			});
-		}
+		dom.data("fliped", true);
+		dom.css({
+			transform: flipedRotate
+		});
 	};
 	var unflip = function(dom){
-		if(dom.data("fliped") == true){
-			console.log("unflip");
-			dom.data("fliped", false);
-			dom.css({
-				transform: "rotatey(0deg)"
-			});
-		}
+		dom.data("fliped", false);
+		dom.css({
+			transform: "rotatey(0deg)"
+		});
 	};
 	var flipedRotate = "rotatey(-180deg)";
 
   $.fn.flip = function(options) {
+  	var jqObj = this;
     var width = this.width();
 		var height = this.height();
 		var prespective = width*2;
@@ -92,20 +87,18 @@
 			})
 
 			if(settings.trigger.toLowerCase() == "click"){
-				var obj = this;
 				this.parent().click(function(){
-					if(obj.data("fliped")){
-						unflip(obj);
+					if(jqObj.data("fliped")){
+						unflip(jqObj);
 		      }else{
-		      	flip(obj, flipedRotate);
+		      	flip(jqObj, flipedRotate);
 		      }
 				});
 			}else if(settings.trigger.toLowerCase() == "hover"){
-				var obj = this;
 				this.parent().hover(function(){
-					flip(obj, flipedRotate);
+					flip(jqObj, flipedRotate);
 				}, function(){
-					unflip(obj);
+					unflip(jqObj);
 				});
 			}	
   	}
