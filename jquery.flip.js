@@ -25,21 +25,21 @@
 	var unflip = function(dom){
 		dom.data("fliped", false);
 		dom.css({
-			transform: "rotatey(0deg)"
+			transform: "rotatex(0deg)"
 		});
 	};
-	var flipedRotate = "rotatey(-180deg)";
-
   $.fn.flip = function(options) {
   	var jqObj = this;
     var width = this.width();
 		var height = this.height();
 		var prespective = width*2;
 
-  	if(options && typeof(options) == "boolean"){ // Force flip the DOM
+  	if(options !== undefined && typeof(options) == "boolean"){ // Force flip the DOM
   		if(options){
-  			flip(this, flipedRotate);
+  			console.log("flip");
+  			flip(this, this.data("flipedRotate"));
   		}else{
+  			console.log("unflip");
   			unflip(this);
   		}
   	}else{ //Init flipable DOM
@@ -50,9 +50,13 @@
 	    }, options );
 
 			if(settings.axis.toLowerCase() == "x"){
-				flipedRotate = "rotatex(180deg)";
 				prespective = height*2;
+				// save rotating css to DOM for manual flip
+				this.data("flipedRotate", "rotatex(180deg)");
+			}else{
+				this.data("flipedRotate", "rotatex(-180deg)");
 			}
+			var flipedRotate = this.data("flipedRotate");
 
 			this.wrap("<div class='flip'></div>");
 			this.parent().css({

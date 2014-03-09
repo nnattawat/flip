@@ -6,9 +6,9 @@
     <script src="jquery.flip.js"></script>
     <title>jQuery plugin</title>
     <style type="text/css">
-      #card{
-        width: 400px;
-        height: 300px;
+      #card, #card2{
+        width: 600px;
+        height: 400px;
       }
       .front, .back{
         padding: 10px;
@@ -30,11 +30,12 @@
           Back: Dolor scelerisque ridiculus! Mus? Augue, montes, montes proin rhoncus vel a parturient dapibus eros? Penatibus nascetur. In turpis nisi elementum nascetur habitasse augue egestas, in ac rhoncus odio porttitor turpis.
       </div> 
     </div>
+
     <script type="text/javascript">
     $(function(){
       $("#card").flip({
-        axis: "x",
-        trigger: "hover"
+        axis: "y",
+        trigger: "click"
       });
     });
     </script>
