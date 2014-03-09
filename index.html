@@ -14,35 +14,92 @@
     <div class="jumbotron">
       <div class="container">
         <h2>Flip</h2>
-        <p>A jQuery plugin to flip content with 3D animation.</p>
-      </div>
-      <div class="download">
-        <a href="https://github.com/nnattawat/flip/zipball/master" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .zip</a>
-        <a href="https://github.com/nnattawat/flip/tarball/master" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .tar</a>
-        <a href="https://github.com/nnattawat/flip" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span> View on Github</a>
+        <p>A jQuery plugin to flip content with 3D animation</p>
       </div>
     </div>
-    <div class="example">
-      
+    <div class="download">
+      <a href="https://github.com/nnattawat/flip/zipball/master" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .zip</a>
+      <a href="https://github.com/nnattawat/flip/tarball/master" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .tar</a>
+      <a href="https://github.com/nnattawat/flip" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span> View on Github</a>
     </div>
     <div class="container">
+      <h3>Example</h3>
+      <div class="example">
+        <div id="card-1" class="card"> 
+          <div class="front alert alert-info"> 
+            <strong>Front<br/></strong>
+            Click to flip me!
+          </div> 
+          <div class="back well well-lg">
+            <strong>Back<br/></strong>
+            Click to flip me back!
+          </div> 
+        </div>
+      </div>
       <h3>How to include</h3>
-      <p>Simply include jquery.js and jquery.flip.js you have downloaded.</p>
+      <p>Simply include jquery.js and jquery.flip.js you have downloaded</p>
       <pre>&lt;script src="http://code.jquery.com/jquery-[latest].min.js"&gt;<br/>&lt;script src="jquery.flip.js"&gt;</pre>
 
       <h3>How to use</h3>
-
+      <p>In HTML file, create a <code>&lt;div&gt;</code> with two <code>&lt;div&gt;</code> inside with class <code>.front</code> and <code>.back</code></p>
+      <pre>&lt;div id="card"&gt; 
+  &lt;div class="front"&gt; 
+    Front content
+  &lt;/div&gt; 
+  &lt;div class="back"&gt;
+    Back content
+  &lt;/div&gt; 
+&lt;/div&gt;</pre>
+      <p>Then, call jQuery <code>flip()</code> on a DOM</p>
+      <pre>$("#card").flip();</pre>
       <h3>Options</h3>
       <table class="table table-bordered">
         <thead>
           <th>Attribute</th>
-          <th>Type</th>
+          <th>Possible value</th>
           <th>Default</th>
           <th>Description</th>
         </thead>
         <tbody>
+          <tr>
+            <td>axis</td>
+            <td><code>y</code>, <code>x</code></td>
+            <td><code>y</code></td>
+            <td>The axis that you want to rotate around</td>
+          </tr>
+          <tr>
+            <td>trigger</td>
+            <td><code>click</code>, <code>hover</code>, <code>manual</code></td>
+            <td><code>click</code></td>
+            <td>Event that activates the flip action. Using <code>manual</code> means that you have to activate it via javascript.</td>
+          </tr>
+          <tr></tr>
         </tbody>
       </table>
+      <h4>Using via javascript</h4>
+      <p>You can flip to the back by calling</p>
+      <pre>$("#card").flip(true);</pre>
+      <p>And flip it back to the front by calling</p>
+      <pre>$("#card").flip(false);</pre>
+      <h4>Example with options</h4>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="card-2" class="card"> 
+            <div class="front"> 
+              <img src="asset/img/ls-1.jpg">
+            </div> 
+            <div class="back">
+              Image from www.w8themes.com
+            </div> 
+          </div>
+        </div>
+        <div class="col-md-6">
+          <pre>$("#card").flip({
+  axis: 'x',
+  trigger: 'hover'
+});</pre>
+        </div>
+      </div>
     </div>
     <footer>
       <div class="container">
@@ -54,6 +111,12 @@
     <script src="asset/js/jquery.flip.js"></script>
     <script type="text/javascript">
       $(function(){
+        $("#card-1").flip();
+
+        $("#card-2").flip({
+          axis: 'x',
+          trigger: 'hover'
+        });
       });
     </script>
   </body>
