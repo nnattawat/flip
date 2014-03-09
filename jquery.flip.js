@@ -11,10 +11,6 @@
 * - Prevent conflicting with other libary on alias $
 * - Scope varaible to be private
 */
-
-/*
-* TODO: manaul trigger using flip(true); and flip(flase);
-*/
 (function( $ ) {
 	var flip = function(dom, flipedRotate){
 		dom.data("fliped", true);
@@ -36,10 +32,8 @@
 
   	if(options !== undefined && typeof(options) == "boolean"){ // Force flip the DOM
   		if(options){
-  			console.log("flip");
   			flip(this, this.data("flipedRotate"));
   		}else{
-  			console.log("unflip");
   			unflip(this);
   		}
   	}else{ //Init flipable DOM
