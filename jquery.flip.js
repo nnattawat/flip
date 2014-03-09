@@ -48,7 +48,7 @@
 				// save rotating css to DOM for manual flip
 				this.data("flipedRotate", "rotatex(180deg)");
 			}else{
-				this.data("flipedRotate", "rotatex(-180deg)");
+				this.data("flipedRotate", "rotatey(180deg)");
 			}
 			var flipedRotate = this.data("flipedRotate");
 
