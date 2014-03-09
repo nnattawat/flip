@@ -17,16 +17,22 @@
 */
 (function( $ ) {
 	var flip = function(dom, flipedRotate){
-		dom.data("fliped", true);
-		dom.css({
-			transform: flipedRotate
-		});
+		if(dom.data("fliped") == undefined || dom.data("fliped") == false){
+			console.log("flip");
+			dom.data("fliped", true);
+			dom.css({
+				transform: flipedRotate
+			});
+		}
 	};
 	var unflip = function(dom){
-		dom.data("fliped", false);
-		dom.css({
-			transform: "rotatey(0deg)"
-		});
+		if(dom.data("fliped") == true){
+			console.log("unflip");
+			dom.data("fliped", false);
+			dom.css({
+				transform: "rotatey(0deg)"
+			});
+		}
 	};
 	var flipedRotate = "rotatey(-180deg)";
 
@@ -39,7 +45,7 @@
   		if(options){
   			flip(this, flipedRotate);
   		}else{
-  			// unflip(this);
+  			unflip(this);
   		}
   	}else{ //Init flipable DOM
   		// Define default setting
@@ -64,7 +70,7 @@
 			this.css({
 				"transform-style": "preserve-3d",
 				transition: "all 0.5s ease-out"
-			})
+			});
 
 			this.find(".front").wrap("<div class='front-wrap'></div>");
 			this.find(".back").wrap("<div class='back-wrap'></div>");
@@ -86,18 +92,20 @@
 			})
 
 			if(settings.trigger.toLowerCase() == "click"){
-				this.click(function(){
-					if($(this).data("fliped")){
-						unflip($(this));
+				var obj = this;
+				this.parent().click(function(){
+					if(obj.data("fliped")){
+						unflip(obj);
 		      }else{
-		      	flip($(this), flipedRotate);
+		      	flip(obj, flipedRotate);
 		      }
 				});
 			}else if(settings.trigger.toLowerCase() == "hover"){
-				this.hover(function(){
-					flip($(this), flipedRotate);
+				var obj = this;
+				this.parent().hover(function(){
+					flip(obj, flipedRotate);
 				}, function(){
-					unflip($(this));
+					unflip(obj);
 				});
 			}	
   	}
