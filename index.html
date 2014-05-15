@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>jQuery - Flip</title>
     <link href="asset/css/bootstrap.min.css" rel="stylesheet">
+    <link href="asset/css/prettify.css" rel="stylesheet">
     <link href="asset/css/index.css" rel="stylesheet">
 
   </head>
@@ -38,11 +39,11 @@
       </div>
       <h3>How to include</h3>
       <p>Simply include jquery.js and jquery.flip.js you have downloaded</p>
-      <pre>&lt;script src="http://code.jquery.com/jquery-[latest].min.js"&gt;<br/>&lt;script src="jquery.flip.js"&gt;</pre>
+      <pre class="prettyprint">&lt;script src="http://code.jquery.com/jquery-[latest].min.js"&gt;<br/>&lt;script src="jquery.flip.js"&gt;</pre>
 
       <h3>How to use</h3>
       <p>In HTML file, create a <code>&lt;div&gt;</code> with two <code>&lt;div&gt;</code> inside with class <code>.front</code> and <code>.back</code></p>
-      <pre>&lt;div id="card"&gt; 
+      <pre class="prettyprint">&lt;div id="card"&gt; 
   &lt;div class="front"&gt; 
     Front content
   &lt;/div&gt; 
@@ -51,7 +52,7 @@
   &lt;/div&gt; 
 &lt;/div&gt;</pre>
       <p>Then, call jQuery <code>flip()</code> on a DOM</p>
-      <pre>$("#card").flip();</pre>
+      <pre class="prettyprint">$("#card").flip();</pre>
       <h3>Options</h3>
       <table class="table table-bordered">
         <thead>
@@ -78,9 +79,9 @@
       </table>
       <h4>Using via javascript</h4>
       <p>You can flip to the back by calling</p>
-      <pre>$("#card").flip(true);</pre>
+      <pre class="prettyprint">$("#card").flip(true);</pre>
       <p>And flip it back to the front by calling</p>
-      <pre>$("#card").flip(false);</pre>
+      <pre class="prettyprint">$("#card").flip(false);</pre>
       <h4>Example with options</h4>
       <div class="row">
         <div class="col-md-6">
@@ -94,7 +95,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <pre>$("#card").flip({
+          <pre class="prettyprint">$("#card").flip({
   axis: 'x',
   trigger: 'hover'
 });</pre>
@@ -113,17 +114,17 @@
           </div>
         </div>
         <div class="col-md-6">
-          <pre>$("#card").flip({
+          <pre class="prettyprint">$("#card").flip({
   trigger: 'manual'
 });</pre>
 
           <button class="btn btn-primary" id="flip-btn">Click to flip</button>
           <div class="margin-top">
-            <pre>$("#card").flip(true);</pre>
+            <pre class="prettyprint">$("#card").flip(true);</pre>
           </div>
           <button class="btn btn-primary" id="unflip-btn">Click to unflip</button>
           <div class="margin-top">
-            <pre>$("#card").flip(false);</pre>
+            <pre class="prettyprint">$("#card").flip(false);</pre>
           </div>
         </div>
       </div>
@@ -134,10 +135,12 @@
       </div>
     </footer>
     <script src="asset/js/jquery-1.10.2.min.js"></script>
-    <script src="asset/js/bootstrap.min.js"></script>
+    <script src="asset/js/prettify.js"></script>
     <script src="asset/js/jquery.flip.js"></script>
     <script type="text/javascript">
       $(function(){
+        prettyPrint();
+        
         $("#card-1").flip();
 
         $("#card-2").flip({
