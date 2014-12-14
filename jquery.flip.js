@@ -82,17 +82,20 @@
           transform: flipedRotate
         });
 
-        var toggleFlip = function() {
-          if ($dom.data("fliped")) {
-            unflip($dom);
-          } else {
-            flip($dom, flipedRotate);
-          }
-        };
         if (settings.trigger.toLowerCase() == "click") {
-          $dom.parent().click(toggleFlip);
+          $dom.parent().click(function() {
+            if ($dom.data("fliped")) {
+              unflip($dom);
+            } else {
+              flip($dom, flipedRotate);
+            }
+          });
         } else if (settings.trigger.toLowerCase() == "hover") {
-          $dom.parent().mouseover(toggleFlip);
+          $dom.parent().hover(function() {
+            flip($dom, flipedRotate);
+          }, function() {
+            unflip($dom);
+          });
         }
       }
     });
