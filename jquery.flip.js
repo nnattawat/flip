@@ -19,85 +19,83 @@
     });
   };
   $.fn.flip = function(options) {
-    var jqObj = this;
-    var width = this.width();
-    var height = this.height();
-    var margin = this.css('margin');
-    var prespective;
+    this.each(function(){
+      var $dom = $(this);
+      var width = $dom.width();
+      var height = $dom.height();
+      var margin = $dom.css('margin');
+      var prespective;
 
-    if (options !== undefined && typeof(options) == "boolean") { // Force flip the DOM
-      if (options) {
-        flip(this, this.data("flipedRotate"));
-      } else {
-        unflip(this);
-      }
-    } else { //Init flipable DOM
-      var settings = $.extend({
-        axis: "y",
-        trigger: "click"
-      }, options );
+      if (options !== undefined && typeof(options) == "boolean") { // Force flip the DOM
+        if (options) {
+          flip($dom, $dom.data("flipedRotate"));
+        } else {
+          unflip($dom);
+        }
+      } else { //Init flipable DOM
+        var settings = $.extend({
+          axis: "y",
+          trigger: "click"
+        }, options );
 
-      if (settings.axis.toLowerCase() == "x") {
-        prespective = height*2;
-        // save rotating css to DOM for manual flip
-        this.data("flipedRotate", "rotatex(180deg)");
-      } else {
-        perspective = width*2;
-        this.data("flipedRotate", "rotatey(180deg)");
-      }
-      var flipedRotate = this.data("flipedRotate");
+        if (settings.axis.toLowerCase() == "x") {
+          prespective = height*2;
+          // save rotating css to DOM for manual flip
+          $dom.data("flipedRotate", "rotatex(180deg)");
+        } else {
+          prespective = width*2;
+          $dom.data("flipedRotate", "rotatey(180deg)");
+        }
+        var flipedRotate = $dom.data("flipedRotate");
 
-      this.wrap("<div class='flip'></div>");
+        $dom.wrap("<div class='flip'></div>");
+        $dom.parent().css({
+          perspective: prespective,
+          position: "relative",
+          width: width,
+          height: height,
+          margin: margin
+        });
 
-      this.parent().css({
-        perspective: prespective,
-        position: "relative",
-        width: width,
-        height: height,
-        margin: margin
-      });
+        $dom.css({
+          "transform-style": "preserve-3d",
+          transition: "all 0.5s ease-out"
+        });
 
-      this.css({
-        "transform-style": "preserve-3d",
-        transition: "all 0.5s ease-out"
-      });
+        $dom.find(".front").wrap("<div class='front-wrap'></div>");
+        $dom.find(".back").wrap("<div class='back-wrap'></div>");
 
-      this.find(".front").wrap("<div class='front-wrap'></div>");
-      this.find(".back").wrap("<div class='back-wrap'></div>");
+        $dom.find(".front, .back").css({
+          width: "100%",
+          height: "100%",
+          display: 'inline-table'
+        });
 
-      this.find(".front, .back").css({
-        width: "100%",
-        height: "100%",
-        display: 'inline-table'
-      });
+        $dom.find(".front-wrap, .back-wrap").css({
+          position: "absolute",
+          "backface-visibility": "hidden",
+          width: "100%",
+          height: "100%"
+        });
 
-      this.find(".front-wrap, .back-wrap").css({
-        position: "absolute",
-        "backface-visibility": "hidden",
-        width: "100%",
-        height: "100%"
-      })
+        $dom.find(".back-wrap").css({
+          transform: flipedRotate
+        });
 
-      this.find(".back-wrap").css({
-        transform: flipedRotate
-      })
-
-      if (settings.trigger.toLowerCase() == "click") {
-        this.parent().click(function() {
-          if (jqObj.data("fliped")) {
-            unflip(jqObj);
+        var toggleFlip = function() {
+          if ($dom.data("fliped")) {
+            unflip($dom);
           } else {
-            flip(jqObj, flipedRotate);
+            flip($dom, flipedRotate);
           }
-        });
-      } else if (settings.trigger.toLowerCase() == "hover") {
-        this.parent().hover(function() {
-          flip(jqObj, flipedRotate);
-        }, function() {
-          unflip(jqObj);
-        });
+        };
+        if (settings.trigger.toLowerCase() == "click") {
+          $dom.parent().click(toggleFlip);
+        } else if (settings.trigger.toLowerCase() == "hover") {
+          $dom.parent().mouseover(toggleFlip);
+        }
       }
-    }
+    });
 
     return this;
   };
