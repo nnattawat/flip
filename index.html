@@ -6,9 +6,10 @@
     <script src="jquery.flip.js"></script>
     <title>jQuery plugin</title>
     <style type="text/css">
-      #card, #card2{
+      #card-1, #card-2{
         width: 600px;
         height: 400px;
+        margin-bottom: 20px;
       }
       .front, .back{
         padding: 10px;
@@ -22,10 +23,19 @@
     </style>
   </head>
   <body>
-    <div id="card"> 
-      <div class="front"> 
+    <div id="card-1">
+      <div class="front">
           Front: Cursus aliquet mus et sociis, placerat adipiscing a placerat magnis integer nisi lacus in, turpis porttitor? Lectus nunc dis in porta, montes lacus. Tortor. Pid sit nisi eu nec aenean.
-      </div> 
+      </div>
+      <div class="back">
+          Back: Dolor scelerisque ridiculus! Mus? Augue, montes, montes proin rhoncus vel a parturient dapibus eros? Penatibus nascetur. In turpis nisi elementum nascetur habitasse augue egestas, in ac rhoncus odio porttitor turpis.
+      </div>
+    </div>
+
+    <div id="card-2">
+      <div class="front">
+          Front: Cursus aliquet mus et sociis, placerat adipiscing a placerat magnis integer nisi lacus in, turpis porttitor? Lectus nunc dis in porta, montes lacus. Tortor. Pid sit nisi eu nec aenean.
+      </div>
       <div class="back">
           Back: Dolor scelerisque ridiculus! Mus? Augue, montes, montes proin rhoncus vel a parturient dapibus eros? Penatibus nascetur. In turpis nisi elementum nascetur habitasse augue egestas, in ac rhoncus odio porttitor turpis.
       </div> 
@@ -33,7 +43,11 @@
 
     <script type="text/javascript">
     $(function(){
-      $("#card").flip({
+      $("#card-1").flip({
+        axis: "x",
+        trigger: "click"
+      });
+      $("#card-2").flip({
         axis: "x",
         trigger: "click"
       });
