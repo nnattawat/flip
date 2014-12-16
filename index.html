@@ -43,12 +43,16 @@
 
     <script type="text/javascript">
     $(function(){
-      $(".card").flip();
+      $(".card").flip({
+        to: "front",
+        axisPercent: "0%"
+      });
       
       // $("#card-1").flip({
-      //   axis: "y",
-      //   axisPercent: "0%"
-      //   // trigger: "click"
+      //   axis: "y", // y or x
+      //   axisPercent: "0%" // between -100% and 100%
+      //   to: "back" // front or back
+      //   // trigger: "click" // click or hover
       // });
       // $("#card-2").flip({
       //   axis: "y",
