@@ -35,6 +35,7 @@
       } else { //Init flipable DOM
         var settings = $.extend({
           axis: "y",
+          axisPercent: "50%",
           trigger: "click"
         }, options );
 
@@ -42,9 +43,19 @@
           prespective = height*2;
           // save rotating css to DOM for manual flip
           $dom.data("flipedRotate", "rotatex(180deg)");
+          if(settings.axisPercent != "50%") {
+            $dom.css({
+              "-webkit-transform-origin": "0%" + settings.axisPercent
+            });
+          }
         } else {
           prespective = width*2;
           $dom.data("flipedRotate", "rotatey(180deg)");
+          if(settings.axisPercent != "50%") {
+            $dom.css({
+              "-webkit-transform-origin": settings.axisPercent + " 0%"
+            });
+          }
         }
         var flipedRotate = $dom.data("flipedRotate");
 
