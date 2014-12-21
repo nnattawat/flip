@@ -92,7 +92,12 @@
             <td><code>click</code></td>
             <td>Event that activates the flip action. Using <code>manual</code> means that you have to activate it via javascript.</td>
           </tr>
-          <tr></tr>
+          <tr>
+            <td>reverse</td>
+            <td><code>true</code>, <code>false</code></td>
+            <td><code>false</code></td>
+            <td>Set to <code>true</code> if you want to reverse the direction of the flip.</td>
+          </tr>
         </tbody>
       </table>
       <h4>Using via javascript</h4>
@@ -133,6 +138,26 @@
         </div>
         <div class="col-md-6">
           <pre class="prettyprint">$("#card").flip({
+  axis: 'x',
+  trigger: 'hover',
+  reverse: true
+});</pre>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="card-4" class="card"> 
+            <div class="front"> 
+              <img src="asset/img/ls-3.jpg">
+            </div> 
+            <div class="back">
+              Image from www.wallko.com
+            </div> 
+          </div>
+        </div>
+        <div class="col-md-6">
+          <pre class="prettyprint">$("#card").flip({
   trigger: 'manual'
 });</pre>
 
@@ -167,15 +192,21 @@
         });
 
         $("#card-3").flip({
+          axis: 'x',
+          trigger: 'hover',
+          reverse: true
+        });
+
+        $("#card-4").flip({
           trigger: 'manual'
         });
 
         $("#flip-btn").click(function(){
-          $("#card-3").flip(true);
+          $("#card-4").flip(true);
         });
 
         $("#unflip-btn").click(function(){
-          $("#card-3").flip(false);
+          $("#card-4").flip(false);
         });
       });
     </script>
