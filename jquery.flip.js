@@ -12,20 +12,17 @@
       transform: flipedRotate
     });
   };
+
   var unflip = function(dom) {
     dom.data("fliped", false);
     dom.css({
       transform: "rotatex(0deg)"
     });
   };
+
   $.fn.flip = function(options) {
     this.each(function(){
       var $dom = $(this);
-      var width = $dom.width();
-      var height = $dom.height();
-      var margin = $dom.css('margin');
-      var prespective;
-      var to;
 
       if (options !== undefined && typeof(options) == "boolean") { // Force flip the DOM
         if (options) {
@@ -36,23 +33,20 @@
       } else { //Init flipable DOM
         var settings = $.extend({
           axis: "y",
-          to: "back",
+          reverse: false,
           trigger: "click"
         }, options );
 
-        if (settings.to.toLowerCase() == "front") {
-          to = "-";
-        } else {
-          to = "";
-        }
+        var prespective;
+        var direction = settings.reverse? "-180deg" : "180deg";
         
         if (settings.axis.toLowerCase() == "x") {
-          prespective = height*2;
+          prespective = $dom.height() * 2;
           // save rotating css to DOM for manual flip
-          $dom.data("flipedRotate", "rotatex(" + to + "180deg)");
+          $dom.data("flipedRotate", "rotatex(" + direction + ")");
         } else {
-          prespective = width*2;
-          $dom.data("flipedRotate", "rotatey(" + to + "180deg)");
+          prespective = $dom.width() * 2;
+          $dom.data("flipedRotate", "rotatey(" + direction + ")");
         }
         var flipedRotate = $dom.data("flipedRotate");
 
@@ -60,9 +54,9 @@
         $dom.parent().css({
           perspective: prespective,
           position: "relative",
-          width: width,
-          height: height,
-          margin: margin
+          width: $dom.width(),
+          height: $dom.height(),
+          margin: $dom.css('margin')
         });
 
         $dom.css({

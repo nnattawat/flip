@@ -46,13 +46,13 @@
       // $(".card").flip();
       
       $("#card-1").flip({
-        axis: "x", // y or x
-        to: "back", // front or back
+        axis: "y", // y or x
+        reverse: false, // true and false
         trigger: "hover" // click or hover
       });
       $("#card-2").flip({
-        axis: "x",
-        to: "front",
+        axis: "y",
+        reverse: true,
         trigger: "hover"
       });
     });
