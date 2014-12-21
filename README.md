@@ -1,10 +1,8 @@
-jQuery Plugin - flip
-====
+# jQuery Plugin - flip
 
 A lightweight jQuery plugin to create 3d flip animation. Learn more on [github.io](http://nnattawat.github.io/flip/)
 
-[Getting Started
-=====
+## Getting Started
 
 Download the [jquery.flip.js][file].
 
@@ -32,7 +30,6 @@ $(function($) {
 </script>
 ```
 
-Documentation and Example
-=====
+## Documentation and Example
 
 Please refer to [github.io](http://nnattawat.github.io/fixedBG/)
