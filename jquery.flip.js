@@ -6,22 +6,22 @@
  */
 
 (function( $ ) {
-  var flip = function(dom, flipedRotate) {
+  var flip = function (dom, flipedRotate) {
     dom.data("fliped", true);
     dom.css({
       transform: flipedRotate
     });
   };
 
-  var unflip = function(dom) {
+  var unflip = function (dom) {
     dom.data("fliped", false);
     dom.css({
       transform: "rotatex(0deg)"
     });
   };
 
-  $.fn.flip = function(options) {
-    this.each(function(){
+  $.fn.flip = function (options) {
+    this.each(function (){
       var $dom = $(this);
 
       if (options !== undefined && typeof(options) == "boolean") { // Force flip the DOM
@@ -85,7 +85,11 @@
         });
 
         if (settings.trigger.toLowerCase() == "click") {
-          $dom.parent().click(function() {
+          $dom.find('button, a, input[type="submit"]').click(function (event) {
+            event.stopPropagation();
+          });
+
+          $dom.parent().click(function () {
             if ($dom.data("fliped")) {
               unflip($dom);
             } else {
@@ -93,7 +97,7 @@
             }
           });
         } else if (settings.trigger.toLowerCase() == "hover") {
-          $dom.parent().hover(function() {
+          $dom.parent().hover(function () {
             flip($dom, flipedRotate);
           }, function() {
             unflip($dom);
