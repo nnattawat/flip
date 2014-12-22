@@ -55,7 +55,7 @@
           perspective: prespective,
           position: "relative",
           width: $dom.width(),
-          height: $dom.height(),
+          height: Math.max($dom.find(".front").height(), $dom.find(".back").height()),
           margin: $dom.css('margin')
         });
 
