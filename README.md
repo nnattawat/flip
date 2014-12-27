@@ -32,4 +32,4 @@ $(function($) {
 
 ## Documentation and Example
 
-Please refer to [github.io](http://nnattawat.github.io/fixedBG/)
+Please refer to [github.io](http://nnattawat.github.io/flip/)
