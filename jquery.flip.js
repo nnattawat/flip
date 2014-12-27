@@ -68,8 +68,8 @@
         $dom.find(".front").wrap("<div class='front-wrap'></div>");
         $dom.find(".back").wrap("<div class='back-wrap'></div>");
 
-        $dom.find(".front, .back, .front-wrap, .back-wrap").innerHeight(height);
-        $dom.find(".front, .back, .front-wrap, .back-wrap").innerWidth(width);
+        $dom.find(".front, .back, .front-wrap, .back-wrap").outerHeight(height);
+        $dom.find(".front, .back, .front-wrap, .back-wrap").outerWidth(width);
 
         $dom.find(".front-wrap, .back-wrap").css({
           position: "absolute",
