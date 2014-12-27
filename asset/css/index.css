@@ -19,6 +19,35 @@ footer{
 	height: 300px;
 }
 
+.card-grid {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+}
+
+#grid-containter {
+	height: 300px;
+}
+
+#grid-containter .flip {
+  float: left;
+}
+
+.card-grid .front, .card-grid .back {
+  padding: 10px;
+  text-align: center;
+  border: 1px #333 solid;
+}
+
+.card-grid .front {
+  background-color: #eee;
+}
+
+.card-grid .back {
+  background-color: #333;
+  color: white;
+}
+
 .card .front{
 	text-align: center;
 	font-size: 30px;

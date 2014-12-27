@@ -100,12 +100,12 @@
           </tr>
         </tbody>
       </table>
-      <h4>Using via javascript</h4>
+      <h3>Using via javascript</h3>
       <p>You can flip to the back by calling</p>
       <pre class="prettyprint">$("#card").flip(true);</pre>
       <p>And flip it back to the front by calling</p>
       <pre class="prettyprint">$("#card").flip(false);</pre>
-      <h4>Example with options</h4>
+      <h3>Example with options</h3>
       <div class="row">
         <div class="col-md-6">
           <div id="card-2" class="card"> 
@@ -171,6 +171,78 @@
           </div>
         </div>
       </div>
+      <h3>Grid Style Example</h3>
+      <div id="grid-containter">
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+      </div>
+      <p>Each DOM initiating <code>.flip()</code> is wrapped within new div <code>.flip</code>. You need to set style at this dom (<code>.flip</code>) to make the grid style as the example above.</p>
+      <pre class="prettyprint">
+.flip {
+  float: left;
+}</pre>
     </div>
     <footer>
       <div class="container">
@@ -184,6 +256,10 @@
       $(function(){
         prettyPrint();
         
+        $(".card-grid").flip({
+          trigger: 'hover'
+        });
+
         $("#card-1").flip();
 
         $("#card-2").flip({
