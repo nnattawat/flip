@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../jquery-1.10.2.min.js"></script>
+    <script src="jquery.flip.js"></script>
+    <title>jQuery plugin</title>
+    <style type="text/css">
+      body {
+        margin: 0 100px;
+      }
+      .card {
+        width: 100px;
+        height: 100px;
+        margin: 20px;
+        border: 2px gray solid;
+      }
+      .flip {
+        float: left;
+      }
+      .front, .back {
+        padding: 10px;
+      }
+      .front {
+        background-color: #ccc;
+      }
+      .back {
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="card-1" class="card">
+      <div class="front">
+          Front
+      </div>
+      <div class="back">
+          Back
+      </div>
+    </div>
+
+    <div id="card-2" class="card">
+      <div class="front">
+          Front
+      </div>
+      <div class="back">
+          Back
+      </div> 
+    </div>
+
+    <div class="card">
+      <div class="front">
+          Front
+      </div>
+      <div class="back">
+          Back
+      </div> 
+    </div>
+
+    <div class="card">
+      <div class="front">
+          Front
+      </div>
+      <div class="back">
+          Back
+      </div> 
+    </div>
+
+    <div class="card">
+      <div class="front">
+          Front
+      </div>
+      <div class="back">
+          Back
+      </div> 
+    </div>
+
+    <div class="card">
+      <div class="front">
+          Front
+      </div>
+      <div class="back">
+          Back
+      </div> 
+    </div>
+
+    <div class="card">
+      <div class="front">
+          Front
+      </div>
+      <div class="back">
+          Back
+      </div> 
+    </div>
+
+    <div class="card">
+      <div class="front">
+          Front
+      </div>
+      <div class="back">
+          Back
+      </div> 
+    </div>
+
+    <div class="card">
+      <div class="front">
+          Front
+      </div>
+      <div class="back">
+          Back
+      </div> 
+    </div>
+
+    <div class="card">
+      <div class="front">
+          Front
+      </div>
+      <div class="back">
+          Back
+      </div> 
+    </div>
+
+    <div class="card">
+      <div class="front">
+          Front
+      </div>
+      <div class="back">
+          Back
+      </div> 
+    </div>
+
+    <div class="card">
+      <div class="front">
+          Front
+      </div>
+      <div class="back">
+          Back
+      </div> 
+    </div>
+
+    <div class="card">
+      <div class="front">
+          Front
+      </div>
+      <div class="back">
+          Back
+      </div> 
+    </div>
+    <script type="text/javascript">
+    $(function(){
+      $(".card").flip({
+        trigger: "hover"
+      });
+    });
+    </script>
+  </body>
+</html>

@@ -55,9 +55,7 @@
         $dom.wrap("<div class='flip'></div>");
         $dom.parent().css({
           perspective: prespective,
-          position: "relative",
-          width: width,
-          height: height
+          position: "relative"
         });
 
         $dom.css({
@@ -81,7 +79,7 @@
         });
 
         if (settings.trigger.toLowerCase() == "click") {
-          $dom.parent().click(function() {
+          $dom.click(function() {
             if ($dom.data("fliped")) {
               unflip($dom);
             } else {
@@ -89,7 +87,7 @@
             }
           });
         } else if (settings.trigger.toLowerCase() == "hover") {
-          $dom.parent().hover(function() {
+          $dom.hover(function() {
             flip($dom, flipedRotate);
           }, function() {
             unflip($dom);
