@@ -68,16 +68,12 @@
         $dom.find(".back").wrap("<div class='back-wrap'></div>");
 
         $dom.find(".front, .back").css({
-          width: "100%",
-          height: "100%",
           display: 'inline-table'
         });
 
         $dom.find(".front-wrap, .back-wrap").css({
           position: "absolute",
-          "backface-visibility": "hidden",
-          width: "100%",
-          height: "100%"
+          "backface-visibility": "hidden"
         });
 
         $dom.find(".back-wrap").css({
