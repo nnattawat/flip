@@ -69,8 +69,7 @@
 
         $dom.find(".front, .back").css({
           width: "100%",
-          height: "100%",
-          display: 'inline-table'
+          height: "100%"
         });
 
         $dom.find(".front-wrap, .back-wrap").css({
