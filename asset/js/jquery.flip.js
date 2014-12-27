@@ -49,14 +49,15 @@
           $dom.data("flipedRotate", "rotatey(" + direction + ")");
         }
         var flipedRotate = $dom.data("flipedRotate");
+        var height = $dom.height();
+        var width = $dom.width();
 
         $dom.wrap("<div class='flip'></div>");
         $dom.parent().css({
           perspective: prespective,
           position: "relative",
-          width: $dom.width(),
-          height: $dom.height(),
-          margin: $dom.css('margin')
+          width: width,
+          height: height
         });
 
         $dom.css({
@@ -67,16 +68,12 @@
         $dom.find(".front").wrap("<div class='front-wrap'></div>");
         $dom.find(".back").wrap("<div class='back-wrap'></div>");
 
-        $dom.find(".front, .back").css({
-          width: "100%",
-          height: "100%"
-        });
+        $dom.find(".front, .back, .front-wrap, .back-wrap").outerHeight(height);
+        $dom.find(".front, .back, .front-wrap, .back-wrap").outerWidth(width);
 
         $dom.find(".front-wrap, .back-wrap").css({
           position: "absolute",
-          "backface-visibility": "hidden",
-          width: "100%",
-          height: "100%"
+          "backface-visibility": "hidden"
         });
 
         $dom.find(".back-wrap").css({
