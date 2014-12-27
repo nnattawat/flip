@@ -6,22 +6,22 @@
  */
 
 (function( $ ) {
-  var flip = function (dom, flipedRotate) {
+  var flip = function(dom, flipedRotate) {
     dom.data("fliped", true);
     dom.css({
       transform: flipedRotate
     });
   };
 
-  var unflip = function (dom) {
+  var unflip = function(dom) {
     dom.data("fliped", false);
     dom.css({
       transform: "rotatex(0deg)"
     });
   };
 
-  $.fn.flip = function (options) {
-    this.each(function (){
+  $.fn.flip = function(options) {
+    this.each(function(){
       var $dom = $(this);
 
       if (options !== undefined && typeof(options) == "boolean") { // Force flip the DOM
@@ -49,14 +49,15 @@
           $dom.data("flipedRotate", "rotatey(" + direction + ")");
         }
         var flipedRotate = $dom.data("flipedRotate");
+        var height = $dom.height();
+        var width = $dom.width();
 
         $dom.wrap("<div class='flip'></div>");
         $dom.parent().css({
           perspective: prespective,
           position: "relative",
-          width: $dom.width(),
-          height: $dom.height(),
-          margin: $dom.css('margin')
+          width: width,
+          height: height
         });
 
         $dom.css({
@@ -67,9 +68,8 @@
         $dom.find(".front").wrap("<div class='front-wrap'></div>");
         $dom.find(".back").wrap("<div class='back-wrap'></div>");
 
-        $dom.find(".front, .back").css({
-          display: 'inline-table'
-        });
+        $dom.find(".front, .back, .front-wrap, .back-wrap").innerHeight(height);
+        $dom.find(".front, .back, .front-wrap, .back-wrap").innerWidth(width);
 
         $dom.find(".front-wrap, .back-wrap").css({
           position: "absolute",
@@ -81,11 +81,7 @@
         });
 
         if (settings.trigger.toLowerCase() == "click") {
-          $dom.find('button, a, input[type="submit"]').click(function (event) {
-            event.stopPropagation();
-          });
-
-          $dom.parent().click(function () {
+          $dom.parent().click(function() {
             if ($dom.data("fliped")) {
               unflip($dom);
             } else {
@@ -93,7 +89,7 @@
             }
           });
         } else if (settings.trigger.toLowerCase() == "hover") {
-          $dom.parent().hover(function () {
+          $dom.parent().hover(function() {
             flip($dom, flipedRotate);
           }, function() {
             unflip($dom);
