@@ -4,9 +4,10 @@ A lightweight jQuery plugin to create 3d flip animation. Learn more on [github.i
 
 ## Getting Started
 
-Download the [jquery.flip.js][file].
+Download the [production version][min] or the [development version][max].
 
-[file]: https://raw.githubusercontent.com/nnattawat/flip/master/jquery.flip.js
+[min]: https://raw.github.com/nnattawat/flip/master/dist/jquery.flip.min.js
+[max]: https://raw.github.com/nnattawat/flip/master/dist/jquery.flip.js
 
 In your web page:
 
@@ -33,3 +34,17 @@ $(function($) {
 ## Documentation and Example
 
 Please refer to [github.io](http://nnattawat.github.io/flip/)
+
+## Development
+Ensure that you have the latest [Node.js](http://nodejs.org/) and [npm](http://npmjs.org/) installed.
+
+Test that Grunt's CLI and Bower are installed by running `grunt --version` and `bower --version`.  If the commands aren't found, run `npm install -g grunt-cli bower`.  For more information about installing the tools, see the [getting started with Grunt guide](http://gruntjs.com/getting-started) or [bower.io](http://bower.io/) respectively.
+
+To run the demo locally, do the following.
+<pre>
+npm install
+bower install
+</pre>
+
+And run grunt command to create files in /dist folder.
+<pre>grunt</pre>
