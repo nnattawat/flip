@@ -9,6 +9,10 @@ Download the [production version][min] or the [development version][max].
 [min]: https://raw.github.com/nnattawat/flip/master/dist/jquery.flip.min.js
 [max]: https://raw.github.com/nnattawat/flip/master/dist/jquery.flip.js
 
+or install using bower
+
+<pre>bower install flip</pre>
+
 In your web page:
 
 ```html
