@@ -25,12 +25,8 @@ footer{
   margin: 20px;
 }
 
-#grid-containter {
-	height: 300px;
-}
-
 #grid-containter .flip {
-  float: left;
+  display: inline-block;
 }
 
 .card-grid .front, .card-grid .back {

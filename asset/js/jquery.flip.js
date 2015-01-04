@@ -34,7 +34,8 @@
         var settings = $.extend({
           axis: "y",
           reverse: false,
-          trigger: "click"
+          trigger: "click",
+          speed: 500
         }, options );
 
         var prespective;
@@ -58,9 +59,10 @@
           position: "relative"
         });
 
+        var speedInSec = settings.speed/1000 || 0.5;
         $dom.css({
           "transform-style": "preserve-3d",
-          transition: "all 0.5s ease-out"
+          transition: "all " + speedInSec + "s ease-out"
         });
 
         $dom.find(".front").wrap("<div class='front-wrap'></div>");
@@ -79,6 +81,10 @@
         });
 
         if (settings.trigger.toLowerCase() == "click") {
+          $dom.find('button, a, input[type="submit"]').click(function (event) {
+            event.stopPropagation();
+          });
+
           $dom.click(function() {
             if ($dom.data("fliped")) {
               unflip($dom);
@@ -87,11 +93,25 @@
             }
           });
         } else if (settings.trigger.toLowerCase() == "hover") {
-          $dom.hover(function() {
+          var performFlip = function() {
+            $dom.unbind('mouseleave', performUnflip);
+
             flip($dom, flipedRotate);
-          }, function() {
+
+            setTimeout(function() {
+              $dom.bind('mouseleave', performUnflip);
+              if (!$dom.is(":hover")) {
+                unflip($dom);
+              }
+            }, settings.speed);
+          };
+
+          var performUnflip = function() {
             unflip($dom);
-          });
+          };
+
+          $dom.mouseenter(performFlip);
+          $dom.mouseleave(performUnflip);
         }
       }
     });
