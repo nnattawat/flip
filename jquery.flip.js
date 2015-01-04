@@ -79,6 +79,10 @@
         });
 
         if (settings.trigger.toLowerCase() == "click") {
+          $dom.find('button, a, input[type="submit"]').click(function (event) {
+            event.stopPropagation();
+          });
+
           $dom.click(function() {
             if ($dom.data("fliped")) {
               unflip($dom);
