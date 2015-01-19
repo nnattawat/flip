@@ -1,4 +1,4 @@
-/*! flip - v1.0.0 - 2015-01-04
+/*! flip - v1.0.0 - 2015-01-19
 * https://github.com/nnattawat/flip
 * Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 /*!
@@ -45,41 +45,43 @@
         var direction = settings.reverse? "-180deg" : "180deg";
         
         if (settings.axis.toLowerCase() == "x") {
-          prespective = $dom.height() * 2;
+          prespective = $dom.outerHeight() * 2;
           // save rotating css to DOM for manual flip
           $dom.data("flipedRotate", "rotatex(" + direction + ")");
         } else {
-          prespective = $dom.width() * 2;
+          prespective = $dom.outerWidth() * 2;
           $dom.data("flipedRotate", "rotatey(" + direction + ")");
         }
         var flipedRotate = $dom.data("flipedRotate");
-        var height = $dom.height();
-        var width = $dom.width();
 
         $dom.wrap("<div class='flip'></div>");
         $dom.parent().css({
           perspective: prespective,
-          position: "relative"
+          position: "relative",
+          "margin-top": $dom.css("margin-top"),
+          "margin-bottom": $dom.css("margin-bottom"),
+          "margin-left": $dom.css("margin-left"),
+          "margin-right": $dom.css("margin-right"),
+          width: $dom.outerWidth(),
+          height: $dom.outerHeight()
         });
 
         var speedInSec = settings.speed/1000 || 0.5;
         $dom.css({
           "transform-style": "preserve-3d",
-          transition: "all " + speedInSec + "s ease-out"
+          transition: "all " + speedInSec + "s ease-out",
+          margin: '0px'
         });
 
-        $dom.find(".front").wrap("<div class='front-wrap'></div>");
-        $dom.find(".back").wrap("<div class='back-wrap'></div>");
+        $dom.find(".front, .back").outerHeight($dom.height());
+        $dom.find(".front, .back").outerWidth($dom.width());
 
-        $dom.find(".front, .back, .front-wrap, .back-wrap").outerHeight(height);
-        $dom.find(".front, .back, .front-wrap, .back-wrap").outerWidth(width);
-
-        $dom.find(".front-wrap, .back-wrap").css({
+        $dom.find(".front, .back").css({
           position: "absolute",
           "backface-visibility": "hidden"
         });
 
-        $dom.find(".back-wrap").css({
+        $dom.find(".back").css({
           transform: flipedRotate
         });
 
