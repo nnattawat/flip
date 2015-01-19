@@ -1,7 +1,6 @@
 /*! flip - v1.0.0 - 2015-01-19
 * https://github.com/nnattawat/flip
 * Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
-
 (function( $ ) {
   var flip = function(dom, flipedRotate) {
     dom.data("fliped", true);
@@ -102,7 +101,7 @@
               if (!$dom.is(":hover")) {
                 unflip($dom);
               }
-            }, settings.speed);
+            }, (settings.speed+ 150));
           };
 
           var performUnflip = function() {

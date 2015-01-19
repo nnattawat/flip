@@ -1,10 +1,3 @@
-/*!
- * jQuery 3D Flip v1.0
- * https://github.com/nnattawat/flip
- *
- * Copyright 2014, Nattawat Nonsung
- */
-
 (function( $ ) {
   var flip = function(dom, flipedRotate) {
     dom.data("fliped", true);
@@ -105,7 +98,7 @@
               if (!$dom.is(":hover")) {
                 unflip($dom);
               }
-            }, settings.speed);
+            }, (settings.speed+ 150));
           };
 
           var performUnflip = function() {
