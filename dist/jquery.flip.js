@@ -1,12 +1,6 @@
 /*! flip - v1.0.0 - 2015-01-19
 * https://github.com/nnattawat/flip
 * Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
-/*!
- * jQuery 3D Flip v1.0
- * https://github.com/nnattawat/flip
- *
- * Copyright 2014, Nattawat Nonsung
- */
 
 (function( $ ) {
   var flip = function(dom, flipedRotate) {
