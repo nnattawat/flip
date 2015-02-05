@@ -2,14 +2,16 @@
   var flip = function(dom, flipedRotate) {
     dom.data("fliped", true);
     dom.css({
-      transform: flipedRotate
+      transform: flipedRotate,
+      '-webkit-transform': flipedRotate
     });
   };
 
   var unflip = function(dom) {
     dom.data("fliped", false);
     dom.css({
-      transform: "rotatex(0deg)"
+      transform: "rotatex(0deg)",
+      '-webkit-transform': "rotatex(0deg)"
     });
   };
 
@@ -33,7 +35,7 @@
 
         var prespective;
         var direction = settings.reverse? "-180deg" : "180deg";
-        
+
         if (settings.axis.toLowerCase() == "x") {
           prespective = $dom.outerHeight() * 2;
           // save rotating css to DOM for manual flip
@@ -59,6 +61,7 @@
         var speedInSec = settings.speed/1000 || 0.5;
         $dom.css({
           "transform-style": "preserve-3d",
+          "-webkit-transform-style": "preserve-3d",
           transition: "all " + speedInSec + "s ease-out",
           margin: '0px'
         });
@@ -68,11 +71,13 @@
 
         $dom.find(".front, .back").css({
           position: "absolute",
-          "backface-visibility": "hidden"
+          "backface-visibility": "hidden",
+          "-webkit-backface-visibility": "hidden"
         });
 
         $dom.find(".back").css({
-          transform: flipedRotate
+          transform: flipedRotate,
+          '-webkit-transform': flipedRotate
         });
 
         if (settings.trigger.toLowerCase() == "click") {
@@ -113,5 +118,5 @@
 
     return this;
   };
- 
+
 }( jQuery ));
