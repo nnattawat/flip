@@ -10,6 +10,15 @@
     $dom.find(".back").css({
       transform: rotateAxis + "(0deg)"
     });
+
+    if ($dom.find(".animate")) {
+        $dom.find(".front .animate").css({
+            display: "none"
+        });
+        $dom.find(".back .animate").css({
+            display: "inline"
+        });
+    } 
   };
 
   var unflip = function($dom) {
@@ -23,6 +32,15 @@
     $dom.find(".back").css({
       transform: rotateAxis + ($dom.data("reverse") ? "(180deg)" : "(-180deg)")
     });
+
+    if ($dom.find(".animate")) {
+        $dom.find(".back .animate").css({
+            display: "none"
+        });
+        $dom.find(".front .animate").css({
+            display: "inline"
+        });
+    }  
   };
 
   $.fn.flip = function(options) {
