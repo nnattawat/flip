@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.swipebox/1.3.0.2/css/swipebox.min.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="card">
+		<div class="front">
+			<h2>Flip with Swipebox</h2>
+			<section>
+				<a class="thumb" rel="gallery-1" href="http://swipebox.csag.co/images/image-1.jpg" title="Fog">
+					<img src="http://swipebox.csag.co/images/image-1.jpg" alt="image">
+				</a>
+				<a class="thumb" rel="gallery-1" href="http://swipebox.csag.co/images/image-2.jpg" title="City">
+					<img src="http://swipebox.csag.co/images/image-2.jpg" alt="image">
+				</a>
+				<a class="thumb" rel="gallery-1" href="http://swipebox.csag.co/images/image-3.jpg" title="Street">
+					<img src="http://swipebox.csag.co/images/image-3.jpg" alt="image">
+				</a>
+				<a class="thumb" rel="gallery-1" href="http://swipebox.csag.co/images/image-4.jpg" title="Mustache Guy">
+					<img src="http://swipebox.csag.co/images/image-4.jpg" alt="image">
+				</a>
+			</section>
+			<p>When a <a href="http://brutaldesign.github.io/swipebox/">Swipebox</a> is used on 
+				a card animated with Flip, the Swipebox fails, as can be seen in this demo when 
+				we use version 1.0.1 of Flip. If we apply the patch the issue is fixed.</p>
+			<p>Click on the thumbnails. A Swipebox <i>should</i> open.</p>
+				
+		</div>
+		<div class="back">
+			<h2>Flip with Swipebox</h2>
+			<p>The problem is caused by Flip disabling the bubbling of click
+			events on any links that are contained inside the element to be flipped, 
+			as can be seen in lines 80-82 of the
+			<a href="https://github.com/nnattawat/flip/blob/v1.0.1/src/flip.js">source code</a>.</p>
+			<p>This code was written to prevent the card from flipping when buttons and
+			links on the card are pressed. However, preventing event bubling is 
+			<a href="https://css-tricks.com/dangers-stopping-event-propagation/">dangerous</a>.</p>
+			<p>The better solution is to ignore those events that you are not interested in.</p> 
+		</div>
+	</div>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.swipebox/1.3.0.2/js/jquery.swipebox.min.js"></script>
+	<script src="../../dist/jquery.flip.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('.card a').swipebox();
+			$('.card').flip();
+		});
+	</script>
+</body>
+</html>

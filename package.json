@@ -1,6 +1,6 @@
 {
   "name": "flip",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "jQuery Plugin - 3d Flip Content",
   "keywords": [
     "jquery-plugin"
@@ -12,6 +12,18 @@
     "email": "armmer1@gmail.com",
     "url": "https://github.com/nnattawat"
   },
+  "contributors": [
+    {
+      "name": "Carlos Fagiani Junior",
+      "email": "fagianijunior@gmail.com",
+      "url": "https://github.com/fagianijunior"
+    },
+    {
+      "name": "Stijn de Witt",
+      "email": "StijnDeWitt@hotmail.com",
+      "url": "http://StijnDeWitt.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/nnattawat/flip.git"

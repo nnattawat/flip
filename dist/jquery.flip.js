@@ -1,4 +1,4 @@
-/*! flip - v1.0.0 - 2015-04-04
+/*! flip - v1.0.2 - 2015-05-11
 * https://github.com/nnattawat/flip
 * Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
@@ -80,11 +80,10 @@
 
 
         if (settings.trigger.toLowerCase() == "click") {
-          $dom.find('button, a, input[type="submit"]').click(function (event) {
-            event.stopPropagation();
-          });
-
           $dom.click(function() {
+            if ($dom.find($(event.target).closest('button, a, input[type="submit"]')).length) 
+              return;
+
             if ($dom.data("fliped")) {
               unflip($dom);
             } else {
