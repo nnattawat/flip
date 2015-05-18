@@ -44,7 +44,9 @@
           axis: "y",
           reverse: false,
           trigger: "click",
-          speed: 500
+          speed: 500,
+          forceHeight: false,
+          forceWidth: false
         }, options );
         
         // save reverse and axis css to DOM for performing flip
@@ -69,17 +71,31 @@
         });
 
         var speedInSec = settings.speed / 1000 || 0.5;
-        $dom.find(".front, .back")
-          .outerHeight($dom.height())
-          .outerWidth($dom.width())
-          .css({
-            "transform-style": "preserve-3d",
-            position: "absolute",
-            transition: "all " + speedInSec + "s ease-out",
-            "backface-visibility": "hidden"
+        var faces = $dom.find(".front, .back"); 
+        if (settings.forceHeight) faces.outerHeight($dom.height());
+        if (settings.forceWidth) faces.outerWidth($dom.width())
+        faces.css({
+          "backface-visibility": "hidden",
+          "transform-style": "preserve-3d",
+          position: "absolute",
+          "z-index": "1"
+        });
+        $dom.find(".back").css({
+          transform: rotateAxis + "(" + (settings.reverse? "180deg" : "-180deg") + ")",
+          "z-index": "0"
+        });
+        // not forcing width/height may cause an initial flip to show up on
+        // page load when we apply the style to reverse the backface... 
+        // To prevent this we first apply the basic styles and then give the
+        // browser a moment to apply them. Only afterwards do we add the transition.
+        setTimeout(function(){
+          // By now the browser should have applied the styles, so the transition
+          // will only affect subsequent flips.
+          faces.css({
+            transition: "all " + speedInSec + "s ease-out"
           });
-
-
+        }, 0);
+        
         if (settings.trigger.toLowerCase() == "click") {
           $dom.click(function() {
             if ($dom.find($(event.target).closest('button, a, input[type="submit"]')).length) 
@@ -91,7 +107,8 @@
               flip($dom);
             }
           });
-        } else if (settings.trigger.toLowerCase() == "hover") {
+        }
+        else if (settings.trigger.toLowerCase() == "hover") {
           var performFlip = function() {
             $dom.unbind('mouseleave', performUnflip);
 

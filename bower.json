@@ -1,6 +1,6 @@
 {
   "name": "flip",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "dependencies": {},
   "devDependencies": {
     "jquery": "~2.1.1"
