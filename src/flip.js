@@ -4,11 +4,13 @@
 
     var rotateAxis = "rotate" + $dom.data("axis");
     $dom.find(".front").css({
-      transform: rotateAxis + ($dom.data("reverse") ? "(-180deg)" : "(180deg)")
+      transform: rotateAxis + ($dom.data("reverse") ? "(-180deg)" : "(180deg)"),
+      "z-index": "0"
     });
 
     $dom.find(".back").css({
-      transform: rotateAxis + "(0deg)"
+      transform: rotateAxis + "(0deg)",
+      "z-index": "1"
     });
   };
 
@@ -17,11 +19,13 @@
 
     var rotateAxis = "rotate" + $dom.data("axis");
     $dom.find(".front").css({
-      transform: rotateAxis + "(0deg)"
+      transform: rotateAxis + "(0deg)",
+      "z-index": "1"
     });
 
     $dom.find(".back").css({
-      transform: rotateAxis + ($dom.data("reverse") ? "(180deg)" : "(-180deg)")
+      transform: rotateAxis + ($dom.data("reverse") ? "(180deg)" : "(-180deg)"),
+      "z-index": "0"
     });
   };
 
