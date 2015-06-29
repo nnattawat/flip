@@ -1,4 +1,4 @@
-/*! flip - v1.0.0 - 2015-04-04
+/*! flip - v1.0.0 - 2015-06-29
 * https://github.com/nnattawat/flip
 * Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
@@ -74,7 +74,11 @@
           .css({
             "transform-style": "preserve-3d",
             position: "absolute",
-            transition: "all " + speedInSec + "s ease-out",
+            "-webkit-transition":  "-webkit-transform " + speedInSec + "s ease-out",
+            "-moz-transition":     "-moz-transform " + speedInSec + "s ease-out",
+            "-o-transition":       "-o-transform " + speedInSec + "s ease-out",
+            "-ms-transition":      "-ms-transform " + speedInSec + "s ease-out",
+            "transition":          "transform " + speedInSec + "s ease-out",
             "backface-visibility": "hidden"
           });
 
