@@ -71,7 +71,11 @@
           .css({
             "transform-style": "preserve-3d",
             position: "absolute",
-            transition: "all " + speedInSec + "s ease-out",
+            "-webkit-transition":  "-webkit-transform " + speedInSec + "s ease-out",
+            "-moz-transition":     "-moz-transform " + speedInSec + "s ease-out",
+            "-o-transition":       "-o-transform " + speedInSec + "s ease-out",
+            "-ms-transition":      "-ms-transform " + speedInSec + "s ease-out",
+            "transition":          "transform " + speedInSec + "s ease-out",
             "backface-visibility": "hidden"
           });
 
