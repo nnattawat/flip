@@ -29,7 +29,10 @@
     this.each(function(){
       var $dom = $(this);
 
-      if (options !== undefined && typeof(options) == "boolean") { // Force flip the DOM
+      if (options !== undefined && (typeof(options) == "boolean" || typeof(options) == "string")) { // Force flip the DOM
+        if (options == "toggle"){
+          options = !$dom.data("fliped");
+        }
         if (options) {
           flip($dom);
         } else {
@@ -114,5 +117,45 @@
 
     return this;
   };
- 
+  $.fn.setAxis = function(axis,callback){
+    var $dom = $(this);
+    if ($dom.data("axis") != axis.toLowerCase()){
+      //Only setting the axis if it needs to be
+
+      axis = axis.toLowerCase();
+      $dom.data("axis", axis);
+
+      //This sets up the first flip in the new direction automatically
+      var rotateAxis = "rotate" + axis;
+      if ($dom.data("fliped")){
+        $dom.find(".front").css({
+          transform: rotateAxis + ($dom.data("reverse") ? "(-180deg)" : "(180deg)"),
+        });
+      }else{
+        $dom.find(".back").css({
+          transform: rotateAxis + "(" + ($dom.data("reverse")? "180deg" : "-180deg") + ")",
+        });
+      }
+
+      //Providing a nicely wrapped up callback because transform is essentially async
+      if (callback !== undefined){
+       $dom.on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
+        callback();
+        $dom.off("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd");
+       });
+      }
+    }else{
+      //If we didnt have to set the axis we can just call back.
+      if (callback !== undefined){
+        callback();
+      }
+    }
+  };
+  //Short cut function for setting a new axis and toggling automatically
+  $.fn.setAndFlip = function(axis){
+    var $dom = $(this);
+    $dom.setAxis(axis,function(){
+      $dom.flip("toggle");
+    });
+  };
 }( jQuery ));
