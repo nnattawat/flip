@@ -3,11 +3,11 @@
     $dom.data("fliped", true);
 
     var rotateAxis = "rotate" + $dom.data("axis");
-    $dom.find(".front").css({
+    $dom.find($dom.data("front")).css({
       transform: rotateAxis + ($dom.data("reverse") ? "(-180deg)" : "(180deg)")
     });
 
-    $dom.find(".back").css({
+    $dom.find($dom.data("back")).css({
       transform: rotateAxis + "(0deg)"
     });
   };
@@ -16,11 +16,11 @@
     $dom.data("fliped", false);
 
     var rotateAxis = "rotate" + $dom.data("axis");
-    $dom.find(".front").css({
+    $dom.find($dom.data("front")).css({
       transform: rotateAxis + "(0deg)"
     });
 
-    $dom.find(".back").css({
+    $dom.find($dom.data("back")).css({
       transform: rotateAxis + ($dom.data("reverse") ? "(180deg)" : "(-180deg)")
     });
   };
@@ -40,12 +40,22 @@
           axis: "y",
           reverse: false,
           trigger: "click",
-          speed: 500
+          speed: 500,
+          front: 'auto',
+          back: 'auto'
         }, options );
-        
+        //By defualt we will just automatically choose the first and 2nd div
+        if (settings.front == "auto"){
+          settings.front = $dom.children('div')[0];
+        }
+        if (settings.back == "auto"){
+          settings.back = $dom.children('div')[1];
+        }
         // save reverse and axis css to DOM for performing flip
         $dom.data("reverse", settings.reverse);
         $dom.data("axis", settings.axis);
+        $dom.data("front", settings.front);
+        $dom.data("back", settings.back);
 
         if (settings.axis.toLowerCase() == "x") {
           var prespective = $dom.outerHeight() * 2;
@@ -55,7 +65,7 @@
           var rotateAxis = "rotatey";
         }
 
-        $dom.find(".back").css({
+        $dom.find(settings.back).css({
           transform: rotateAxis + "(" + (settings.reverse? "180deg" : "-180deg") + ")"
         });
 
@@ -65,7 +75,7 @@
         });
 
         var speedInSec = settings.speed / 1000 || 0.5;
-        $dom.find(".front, .back")
+        $dom.find(settings.front).add(settings.back)
           .outerHeight($dom.height())
           .outerWidth($dom.width())
           .css({
