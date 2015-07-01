@@ -178,8 +178,9 @@
   };
   //Short cut function for setting a new axis and toggling automatically
   $.fn.setAndFlip = function(axis){
-    $('#card').setAxis(axis,function(){
-      $('#card').flip("toggle");
+    var $dom = $(this);
+    $dom.setAxis(axis,function(){
+      $dom.flip("toggle");
     });
   };
 }( jQuery ));
