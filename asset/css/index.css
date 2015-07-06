@@ -67,3 +67,9 @@ footer{
 .margin-top{
 	margin-top: 10px;
 }
+
+.col-md-6 button.btn-primary {
+  float: left;
+  width: 30%;
+  margin: 2px 8px 0 0;
+}

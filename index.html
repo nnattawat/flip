@@ -5,31 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>jQuery - Flip</title>
-    <link href="asset/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <link href="asset/css/prettify.css" rel="stylesheet">
     <link href="asset/css/index.css" rel="stylesheet">
 
   </head>
   <body>
-    <script type="text/javascript">
-      dataLayer = [{
-        "event": "gtm.js",
-        "trackingId": "UA-50628297-1"
-      }];
-    </script>
-    <!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5BVPRB"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5BVPRB');
-    </script>
-    <!-- End Google Tag Manager -->
-
-    <a href="https://github.com/nnattawat/flip"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 1000;" src="https://github-camo.global.ssl.fastly.net/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+    <a href="https://github.com/download/flip"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 1000;" src="https://github-camo.global.ssl.fastly.net/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
     <div class="jumbotron">
       <div class="container">
         <h2>Flip</h2>
@@ -37,9 +19,9 @@
       </div>
     </div>
     <div class="download">
-      <a href="https://github.com/nnattawat/flip/zipball/master" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .zip</a>
-      <a href="https://github.com/nnattawat/flip/tarball/master" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .tar</a>
-      <a href="https://github.com/nnattawat/flip" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span> View on Github</a>
+      <a href="https://github.com/download/flip/zipball/master" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .zip</a>
+      <a href="https://github.com/download/flip/tarball/master" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .tar</a>
+      <a href="https://github.com/download/flip" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span> View on Github</a>
     </div>
     <div class="container">
       <h3>Example</h3>
@@ -55,11 +37,16 @@
           </div> 
         </div>
       </div>
+
       <h3>How to include</h3>
-      <p>Simply include jquery.js and jquery.flip.js you have downloaded</p>
-      <pre class="prettyprint">&lt;script src="http://code.jquery.com/jquery-[latest].min.js"&gt;<br/>&lt;script src="jquery.flip.js"&gt;</pre>
-      <p>Or install using bower</p>
-        <pre class="prettyprint">bower install flip</pre>
+      <p>Simply include jquery.flip.js on your page. jQuery Flip has a dependency on <a href="https://jquery.com/">jQuery</a> so make sure to include that first.</p>
+	  <h4>From CDN</h4>
+	  <p>Use both jQuery and jQuery Flip directly from CDN. No need to download anything:</p>
+      <pre class="prettyprint">&lt;script src="https://code.jquery.com/jquery-2.1.4.min.js"&gt;<br/>&lt;script src="https://cdn.rawgit.com/download/flip/v1.0.7/dist/jquery.flip.min.js"&gt;</pre>
+	  <h4>Download</h4>
+      <pre class="prettyprint">&lt;script src="jquery-2.1.4.min.js"&gt;<br/>&lt;script src="jquery.flip.js"&gt;</pre>
+	  <h4>Or install using bower</h4>
+      <pre class="prettyprint">bower install download/flip --save</pre>
 
       <h3>How to use</h3>
       <p>In HTML file, create a <code>&lt;div&gt;</code> with two <code>&lt;div&gt;</code> inside with class <code>.front</code> and <code>.back</code></p>
@@ -79,6 +66,7 @@
           For the best layout, <code>margin</code> should be added to <code>.card</code> and padding should be added to <code>.front</code> and <code>.back</code>
         </div>
       </div
+
       <h3>Options</h3>
       <table class="table table-bordered">
         <thead>
@@ -114,12 +102,16 @@
           </tr>
         </tbody>
       </table>
+
       <h3>Using via javascript</h3>
       <p>You can flip to the back by calling</p>
       <pre class="prettyprint">$("#card").flip(true);</pre>
       <p>And flip it back to the front by calling</p>
       <pre class="prettyprint">$("#card").flip(false);</pre>
-      <h3>Example with options</h3>
+      <p>Toggle front and back by calling</p>
+      <pre class="prettyprint">$("#card").flip('toggle');</pre>
+
+      <h3>Examples with corresponding options</h3>
       <div class="row">
         <div class="col-md-6">
           <div id="card-2" class="card"> 
@@ -183,8 +175,41 @@
           <div class="margin-top">
             <pre class="prettyprint">$("#card").flip(false);</pre>
           </div>
+          <button class="btn btn-primary" id="toggle-btn">Click to toggle</button>
+          <div class="margin-top">
+            <pre class="prettyprint">$("#card").flip('toggle');</pre>
+          </div>
         </div>
       </div>
+      <br/>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="card-5" class="card"> 
+            <div class="front"> 
+              <img src="asset/img/ls-4.jpg">
+            </div> 
+            <div class="back">
+              Image from flickr.com/photos/neilspicys/
+            </div> 
+          </div>
+        </div>
+        <div class="col-md-6">
+          <pre class="prettyprint">$("#card").flip({
+  axis: 'y',
+  trigger: 'click'
+});</pre>
+
+          <button class="btn btn-primary" id="axis-x-btn">Click to set axis to 'x'</button>
+          <div class="margin-top">
+            <pre class="prettyprint">$("#card").flip({axis: 'x'});</pre>
+          </div>
+          <button class="btn btn-primary" id="axis-y-btn">Click to set axis to 'y'</button>
+          <div class="margin-top">
+            <pre class="prettyprint">$("#card").flip({axis: 'y'});</pre>
+          </div>
+        </div>
+      </div>
+      <br/>
       <h3>Grid Style Example</h3>
       <div id="grid-containter">
         <div class="card-grid">
@@ -252,15 +277,47 @@
           <div class="back">Back</div>
         </div>
       </div>
+      <br/>
+      <h3>Fluid example</h3>
+	  <p>Try to resize your browser window. The card in this example will resize with it.</p>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="card-fluid" class="card"> 
+            <div class="front"> 
+              <img src="asset/img/ls-5.jpg">
+            </div> 
+            <div class="back">
+              Image from commons.wikimedia.org<br>
+			  user Nevit Dilmen
+            </div> 
+          </div>
+        </div>
+        <div class="col-md-6">
+          <pre class="prettyprint">$("#card").flip({
+  axis: 'y',
+  trigger: 'click',
+  forceWidth: false,
+  forceHeight: false
+}).find('.front, .back').css({
+  'width': '100%',
+  'height': '100%'
+});</pre>
+
+        </div>
+      </div>
     </div>
+	<br>
     <footer>
       <div class="container">
-      jQeury flip is maintained by <a href="https://github.com/nnattawat">nnattawat</a>
+      jQeury flip is being maintained by 
+		<a href="https://github.com/nnattawat">Nattawat Nonsung (author)</a>, 
+		<a href="http://jkjones.me/">Jemar Jones</a> and 
+		<a href="http://StijnDeWitt.com/">Stijn de Witt</a>.
       </div>
     </footer>
-    <script src="asset/js/jquery-1.10.2.min.js"></script>
-    <script src="asset/js/prettify.js"></script>
-    <script src="asset/js/jquery.flip.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+    <script src="https://cdn.rawgit.com/download/flip/v1.0.7/dist/jquery.flip.min.js"></script>
     <script type="text/javascript">
       $(function(){
         prettyPrint();
@@ -269,7 +326,7 @@
           trigger: 'hover'
         });
 
-        $("#card-1").flip();
+        $("#card-1").flip({forceWidth: true, forceHeight: true});
 
         $("#card-2").flip({
           axis: 'x',
@@ -293,7 +350,33 @@
         $("#unflip-btn").click(function(){
           $("#card-4").flip(false);
         });
+
+        $("#toggle-btn").click(function(){
+          $("#card-4").flip('toggle');
+        });
+		
+        $("#card-5").flip({
+          axis: 'y',
+          trigger: 'click'
+        });
+        $("#axis-x-btn").click(function(){
+          $("#card-5").flip({axis: 'x'});
+        });
+        $("#axis-y-btn").click(function(){
+          $("#card-5").flip({axis: 'y'});
+        });
+		
+        $("#card-fluid").flip({
+          axis: 'y',
+          trigger: 'click',
+		  forceWidth: false,
+		  forceHeight: false
+        }).find('.front, .back').css({
+			'width': '100%',
+			'height': '100%'
+		});
       });
+	  
     </script>
   </body>
 </html>
