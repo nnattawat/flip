@@ -58,8 +58,9 @@
             reverse: false,
             trigger: "click",
             speed: 500,
-            forceHeight: true,
-            forceWidth: true
+            forceHeight: false,
+            forceWidth: false,
+            autoSize: true
           }, options );
 
           // save reverse and axis css to DOM for performing flip
@@ -80,8 +81,8 @@
 
           var speedInSec = settings.speed / 1000 || 0.5;
           var faces = $dom.find(".front, .back");
-          if (settings.forceHeight) {faces.outerHeight($dom.height());}
-          if (settings.forceWidth) {faces.outerWidth($dom.width());}
+          if (settings.forceHeight) {faces.outerHeight($dom.height());} else if (settings.autoSize) {faces.css({'height': '100%'});}
+          if (settings.forceWidth) {faces.outerWidth($dom.width());} else if (settings.autoSize) {faces.css({'width': '100%'});}
           faces.css({
             "backface-visibility": "hidden",
             "transform-style": "preserve-3d",
