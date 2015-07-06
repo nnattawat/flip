@@ -1,18 +1,31 @@
 # jQuery Plugin - flip
 
-A lightweight jQuery plugin to create 3d flip animation. Learn more on [github.io](http://nnattawat.github.io/flip/)
+A lightweight jQuery plugin to create 3d flip animation. 
+Forked from [github.io](http://nnattawat.github.io/flip/)
+
+## What's new
+Flip v1.0.6 as maintained in this fork adds new features and fixes some issues compared to the original flip:
+* [Added support for flippable content with dynamic height/width #17](https://github.com/nnattawat/flip/issues/17)
+* [Added ability to change axis arbitrarily #1](https://github.com/download/flip/pull/1)
+* [Flip prevents bubbling of click on 'button, a, input[type="submit"], breaking e.g. Swipebox #14](https://github.com/nnattawat/flip/issues/14)
+* [Flickering animations of elements in flipped content. #16](https://github.com/nnattawat/flip/issues/16)
+ 
 
 ## Getting Started
 
-Download the [production version][min] or the [development version][max].
+### CDN
+    https://cdn.rawgit.com/download/flip/v1.0.6/dist/jquery.flip.min.js
 
-[min]: https://raw.github.com/nnattawat/flip/master/dist/jquery.flip.min.js
-[max]: https://raw.github.com/nnattawat/flip/master/dist/jquery.flip.js
+### Download 
+* [jquery.flip.min.js][min] (production version, minified ~3Kb, gzipped ~2Kb)
+* [jquery.flip.js][max] (development version, commented ~7Kb)
+[min]: https://cdn.rawgit.com/download/flip/v1.0.6/dist/jquery.flip.min.js
+[max]: https://cdn.rawgit.com/download/flip/v1.0.6/dist/jquery.flip.js
 
-or install using bower
-
+### Bower
 <pre>bower install flip</pre>
 
+### Usage
 In your web page:
 
 ```html
