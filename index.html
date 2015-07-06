@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery - Flip</title>
+    <link href="asset/css/bootstrap.min.css" rel="stylesheet">
+    <link href="asset/css/prettify.css" rel="stylesheet">
+    <link href="asset/css/index.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <script type="text/javascript">
+      dataLayer = [{
+        "event": "gtm.js",
+        "trackingId": "UA-50628297-1"
+      }];
+    </script>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5BVPRB"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5BVPRB');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <a href="https://github.com/nnattawat/flip"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 1000;" src="https://github-camo.global.ssl.fastly.net/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+    <div class="jumbotron">
+      <div class="container">
+        <h2>Flip</h2>
+        <p>A jQuery plugin to flip content with 3D animation</p>
+      </div>
+    </div>
+    <div class="download">
+      <a href="https://github.com/nnattawat/flip/zipball/master" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .zip</a>
+      <a href="https://github.com/nnattawat/flip/tarball/master" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .tar</a>
+      <a href="https://github.com/nnattawat/flip" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span> View on Github</a>
+    </div>
+    <div class="container">
+      <h3>Example</h3>
+      <div class="example">
+        <div id="card-1" class="card"> 
+          <div class="front alert alert-info"> 
+            <strong>Front<br/></strong>
+            Click to flip me!
+          </div> 
+          <div class="back well well-lg">
+            <strong>Back<br/></strong>
+            Click to flip me back!
+          </div> 
+        </div>
+      </div>
+      <h3>How to include</h3>
+      <p>Simply include jquery.js and jquery.flip.js you have downloaded</p>
+      <pre class="prettyprint">&lt;script src="http://code.jquery.com/jquery-[latest].min.js"&gt;<br/>&lt;script src="jquery.flip.js"&gt;</pre>
+      <p>Or install using bower</p>
+        <pre class="prettyprint">bower install flip</pre>
+
+      <h3>How to use</h3>
+      <p>In HTML file, create a <code>&lt;div&gt;</code> with two <code>&lt;div&gt;</code> inside with class <code>.front</code> and <code>.back</code></p>
+      <pre class="prettyprint">&lt;div id="card"&gt; 
+  &lt;div class="front"&gt; 
+    Front content
+  &lt;/div&gt; 
+  &lt;div class="back"&gt;
+    Back content
+  &lt;/div&gt; 
+&lt;/div&gt;</pre>
+      <p>Then, call jQuery <code>flip()</code> on a DOM</p>
+      <pre class="prettyprint">$("#card").flip();</pre>
+      <div class="panel panel-info">
+        <div class="panel-heading">CSS guide</div>
+        <div class="panel-body">
+          For the best layout, <code>margin</code> should be added to <code>.card</code> and padding should be added to <code>.front</code> and <code>.back</code>
+        </div>
+      </div
+      <h3>Options</h3>
+      <table class="table table-bordered">
+        <thead>
+          <th>Attribute</th>
+          <th>Possible value</th>
+          <th>Default</th>
+          <th>Description</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>axis</td>
+            <td><code>y</code>, <code>x</code></td>
+            <td><code>y</code></td>
+            <td>The axis that you want to rotate around</td>
+          </tr>
+          <tr>
+            <td>trigger</td>
+            <td><code>click</code>, <code>hover</code>, <code>manual</code></td>
+            <td><code>click</code></td>
+            <td>Event that activates the flip action. Using <code>manual</code> means that you have to activate it via javascript.</td>
+          </tr>
+          <tr>
+            <td>reverse</td>
+            <td><code>true</code>, <code>false</code></td>
+            <td><code>false</code></td>
+            <td>Set to <code>true</code> if you want to reverse the direction of the flip.</td>
+          </tr>
+          <tr>
+            <td>speed</td>
+            <td>any integer</td>
+            <td><code>500</code></td>
+            <td>Duration in milisecond for flipping dom</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Using via javascript</h3>
+      <p>You can flip to the back by calling</p>
+      <pre class="prettyprint">$("#card").flip(true);</pre>
+      <p>And flip it back to the front by calling</p>
+      <pre class="prettyprint">$("#card").flip(false);</pre>
+      <h3>Example with options</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="card-2" class="card"> 
+            <div class="front"> 
+              <img src="asset/img/ls-1.jpg">
+            </div> 
+            <div class="back">
+              Image from www.w8themes.com
+            </div> 
+          </div>
+        </div>
+        <div class="col-md-6">
+          <pre class="prettyprint">$("#card").flip({
+  axis: 'x',
+  trigger: 'hover'
+});</pre>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="card-3" class="card"> 
+            <div class="front"> 
+              <img src="asset/img/ls-2.jpg">
+            </div> 
+            <div class="back">
+              Image from www.autoimagesize.com
+            </div> 
+          </div>
+        </div>
+        <div class="col-md-6">
+          <pre class="prettyprint">$("#card").flip({
+  axis: 'x',
+  trigger: 'hover',
+  reverse: true
+});</pre>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="card-4" class="card"> 
+            <div class="front"> 
+              <img src="asset/img/ls-3.jpg">
+            </div> 
+            <div class="back">
+              Image from www.wallko.com
+            </div> 
+          </div>
+        </div>
+        <div class="col-md-6">
+          <pre class="prettyprint">$("#card").flip({
+  trigger: 'manual'
+});</pre>
+
+          <button class="btn btn-primary" id="flip-btn">Click to flip</button>
+          <div class="margin-top">
+            <pre class="prettyprint">$("#card").flip(true);</pre>
+          </div>
+          <button class="btn btn-primary" id="unflip-btn">Click to unflip</button>
+          <div class="margin-top">
+            <pre class="prettyprint">$("#card").flip(false);</pre>
+          </div>
+        </div>
+      </div>
+      <h3>Grid Style Example</h3>
+      <div id="grid-containter">
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+        <div class="card-grid">
+          <div class="front">Front</div>
+          <div class="back">Back</div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="container">
+      jQeury flip is maintained by <a href="https://github.com/nnattawat">nnattawat</a>
+      </div>
+    </footer>
+    <script src="asset/js/jquery-1.10.2.min.js"></script>
+    <script src="asset/js/prettify.js"></script>
+    <script src="asset/js/jquery.flip.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        prettyPrint();
+        
+        $(".card-grid").flip({
+          trigger: 'hover'
+        });
+
+        $("#card-1").flip();
+
+        $("#card-2").flip({
+          axis: 'x',
+          trigger: 'hover'
+        });
+
+        $("#card-3").flip({
+          axis: 'x',
+          trigger: 'hover',
+          reverse: true
+        });
+
+        $("#card-4").flip({
+          trigger: 'manual'
+        });
+
+        $("#flip-btn").click(function(){
+          $("#card-4").flip(true);
+        });
+
+        $("#unflip-btn").click(function(){
+          $("#card-4").flip(false);
+        });
+      });
+    </script>
+  </body>
+</html>

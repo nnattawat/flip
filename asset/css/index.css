@@ -1,0 +1,69 @@
+.jumbotron{
+	margin-bottom: 0px;
+}
+
+.download{
+	text-align: center;
+}
+
+footer{
+	padding: 20px;
+	margin-top: 30px;
+	background-color: #eee;
+	color: #333;
+	border-top: 1px #ccc solid;
+}
+
+.card {
+	width: 100%;
+	height: 300px;
+}
+
+.card-grid {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  display: inline-block;
+}
+
+.card-grid .front, .card-grid .back {
+  padding: 10px;
+  text-align: center;
+  border: 1px #333 solid;
+}
+
+.card-grid .front {
+  background-color: #eee;
+}
+
+.card-grid .back {
+  background-color: #333;
+  color: white;
+}
+
+.card .front{
+	text-align: center;
+	font-size: 30px;
+	font-weight: 200;
+}
+
+.card .back{
+	text-align: center;
+	font-size: 30px;
+	font-weight: 200;
+	background-color: #eee;
+}
+
+.download{
+	background-color: #252525;
+	padding: 20px;
+}
+
+.card img{
+	width: 100%;
+	height: 100%;
+}
+
+.margin-top{
+	margin-top: 10px;
+}
