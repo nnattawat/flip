@@ -66,26 +66,22 @@
           $dom.data("reverse", settings.reverse);
           $dom.data("axis", settings.axis);
 
-          if (settings.axis.toLowerCase() == "x") {
-            var prespective = $dom.outerHeight() * 2;
-            var rotateAxis = "rotatex";
-          } else {
-            var prespective = $dom.outerWidth() * 2;
-            var rotateAxis = "rotatey";
-          }
+          var rotateAxis = "rotate" + (settings.axis.toLowerCase() == "x" ? "x" : "y"), 
+              perspective = $dom["outer" + (rotateAxis == "rotatex" ? "Height" : "Width")]() * 2;
+
           $dom.find(".back").css({
             transform: rotateAxis + "(" + (settings.reverse? "180deg" : "-180deg") + ")"
           });
 
           $dom.css({
-            perspective: prespective,
+            perspective: perspective,
             position: "relative"
           });
 
           var speedInSec = settings.speed / 1000 || 0.5;
           var faces = $dom.find(".front, .back");
-          if (settings.forceHeight) faces.outerHeight($dom.height());
-          if (settings.forceWidth) faces.outerWidth($dom.width())
+          if (settings.forceHeight) {faces.outerHeight($dom.height());}
+          if (settings.forceWidth) {faces.outerWidth($dom.width());}
           faces.css({
             "backface-visibility": "hidden",
             "transform-style": "preserve-3d",
@@ -110,8 +106,9 @@
 
           if (settings.trigger.toLowerCase() == "click") {
             $dom.click(function() {
-              if ($dom.find($(event.target).closest('button, a, input[type="submit"]')).length)
+              if ($dom.find($(event.target).closest('button, a, input[type="submit"]')).length) {
                 return;
+              }
 
               if ($dom.data("flipped")) {
                 unflip($dom);
