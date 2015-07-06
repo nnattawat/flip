@@ -106,7 +106,7 @@
           }, 0);
 
           if (settings.trigger.toLowerCase() == "click") {
-            $dom.click(function() {
+            $dom.on($.fn.tap ? "tap" : "click", function() {
               if ($dom.find($(event.target).closest('button, a, input[type="submit"]')).length) {
                 return;
               }
