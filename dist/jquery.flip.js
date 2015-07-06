@@ -1,4 +1,4 @@
-/*! flip - v1.0.7 - 2015-07-06
+/*! flip - v1.0.8 - 2015-07-06
 * https://github.com/download/flip
 * Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
@@ -61,8 +61,9 @@
             reverse: false,
             trigger: "click",
             speed: 500,
-            forceHeight: true,
-            forceWidth: true
+            forceHeight: false,
+            forceWidth: false,
+            autoSize: true
           }, options );
 
           // save reverse and axis css to DOM for performing flip
@@ -83,8 +84,8 @@
 
           var speedInSec = settings.speed / 1000 || 0.5;
           var faces = $dom.find(".front, .back");
-          if (settings.forceHeight) {faces.outerHeight($dom.height());}
-          if (settings.forceWidth) {faces.outerWidth($dom.width());}
+          if (settings.forceHeight) {faces.outerHeight($dom.height());} else if (settings.autoSize) {faces.css({'height': '100%'});}
+          if (settings.forceWidth) {faces.outerWidth($dom.width());} else if (settings.autoSize) {faces.css({'width': '100%'});}
           faces.css({
             "backface-visibility": "hidden",
             "transform-style": "preserve-3d",
@@ -108,7 +109,7 @@
           }, 0);
 
           if (settings.trigger.toLowerCase() == "click") {
-            $dom.click(function() {
+            $dom.on($.fn.tap ? "tap" : "click", function() {
               if ($dom.find($(event.target).closest('button, a, input[type="submit"]')).length) {
                 return;
               }

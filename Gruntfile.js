@@ -37,6 +37,8 @@ module.exports = function (grunt) {
     },
     uglify: {
       options: {
+        sourceMap: 'dist/jquery.<%= pkg.name %>.min.js.map',
+		sourceMappingURL : 'jquery.<%= pkg.name %>.min.js.map',
         banner: '<%= banner %>'
       },
       dist: {

@@ -4,29 +4,39 @@
 See the [project page](http://download.github.io/flip/)
 
 This project was forked from [nnattawat/flip](http://nnattawat.github.io/flip/).
+It's last release was v1.0.1. This project is maintaining backward compatibility 
+with it and our version numbers reflect that.
 
 ## What's new
-Flip v1.0.7 
-* [Improved backward compatibility](https://github.com/Download/flip/commit/b27588b1e5340ec2a6bfc5afca80a6e52b6f833f)
+* **Flip v1.0.8**
+  * [Added support for the mobile `tap` event](https://github.com/nnattawat/flip/issues/26)
+  * [Dynamic sized content by default while maintaining backward compatibility](https://github.com/Download/flip/commit/8a6d1b3626a3c1e0e5d71fb4786c44244bf33eac)
 
-Flip v1.0.6 
-This version adds new features and fixes some issues compared to the original flip:
-* [Added support for flippable content with dynamic height/width #17](https://github.com/nnattawat/flip/issues/17)
-* [Added ability to change axis arbitrarily #1](https://github.com/download/flip/pull/1)
-* [Flip prevents bubbling of click on 'button, a, input[type="submit"], breaking e.g. Swipebox #14](https://github.com/nnattawat/flip/issues/14)
-* [Flickering animations of elements in flipped content. #16](https://github.com/nnattawat/flip/issues/16)
+* **Flip v1.0.7**
+  * [Improved backward compatibility](https://github.com/Download/flip/commit/b27588b1e5340ec2a6bfc5afca80a6e52b6f833f)
+
+* **Flip v1.0.6**
+  This version adds new features and fixes some issues compared to the original flip:
+  * [Added support for flippable content with dynamic height/width #17](https://github.com/nnattawat/flip/issues/17)
+  * [Added ability to change axis arbitrarily #1](https://github.com/download/flip/pull/1)
+  * [Flip prevents bubbling of click on 'button, a, input[type="submit"], breaking e.g. Swipebox #14](https://github.com/nnattawat/flip/issues/14)
+  * [Flickering animations of elements in flipped content. #16](https://github.com/nnattawat/flip/issues/16)
  
+* **Flip v1.0.2 - v1.0.5**
+  Chaotic period of development culminating in v1.0.6 see above.
 
 ## Getting Started
 
 ### CDN
-    https://cdn.rawgit.com/download/flip/v1.0.7/dist/jquery.flip.min.js
+    https://cdn.rawgit.com/download/flip/v1.0.8/dist/jquery.flip.min.js
 
 ### Download 
-* [jquery.flip.min.js][min] (production version, minified ~3Kb, gzipped ~2Kb)
-* [jquery.flip.js][max] (development version, commented ~7Kb)
-[min]: https://cdn.rawgit.com/download/flip/v1.0.7/dist/jquery.flip.min.js
-[max]: https://cdn.rawgit.com/download/flip/v1.0.7/dist/jquery.flip.js
+* [jquery.flip.js][max] (development version, commented ~7kB)
+* [jquery.flip.min.js][min] (production version, minified ~3kB, gzipped ~2kB)
+* [jquery.flip.min.js.map][map] (source map, ~4kB)
+[max]: https://cdn.rawgit.com/download/flip/v1.0.8/dist/jquery.flip.js
+[min]: https://cdn.rawgit.com/download/flip/v1.0.8/dist/jquery.flip.min.js
+[map]: https://cdn.rawgit.com/download/flip/v1.0.8/dist/jquery.flip.min.js.map
 
 ### Bower
 <pre>bower install flip</pre>
@@ -56,7 +66,7 @@ $(function($) {
 
 ## Documentation and Example
 
-Please refer to [github.io](http://nnattawat.github.io/flip/)
+Please refer to [the project website](http://download.github.io/flip/)
 
 ## Development
 Ensure that you have the latest [Node.js](http://nodejs.org/) and [npm](http://npmjs.org/) installed.
