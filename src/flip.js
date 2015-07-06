@@ -58,8 +58,8 @@
             reverse: false,
             trigger: "click",
             speed: 500,
-            forceHeight: false,
-            forceWidth: false
+            forceHeight: true,
+            forceWidth: true
           }, options );
 
           // save reverse and axis css to DOM for performing flip
