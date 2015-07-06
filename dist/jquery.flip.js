@@ -1,4 +1,4 @@
-/*! flip - v1.0.6 - 2015-07-06
+/*! flip - v1.0.7 - 2015-07-06
 * https://github.com/download/flip
 * Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
@@ -61,8 +61,8 @@
             reverse: false,
             trigger: "click",
             speed: 500,
-            forceHeight: false,
-            forceWidth: false
+            forceHeight: true,
+            forceWidth: true
           }, options );
 
           // save reverse and axis css to DOM for performing flip
