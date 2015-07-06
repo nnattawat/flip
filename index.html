@@ -37,19 +37,26 @@
           </div> 
         </div>
       </div>
+      <br>
 
       <h3>How to include</h3>
       <p>Simply include jquery.flip.js on your page. jQuery Flip has a dependency on <a href="https://jquery.com/">jQuery</a> so make sure to include that first.</p>
-	  <h4>From CDN</h4>
-	  <p>Use both jQuery and jQuery Flip directly from CDN. No need to download anything:</p>
-      <pre class="prettyprint">&lt;script src="https://code.jquery.com/jquery-2.1.4.min.js"&gt;<br/>&lt;script src="https://cdn.rawgit.com/download/flip/v1.0.7/dist/jquery.flip.min.js"&gt;</pre>
-	  <h4>Download</h4>
+      <h4>From CDN</h4>
+      <p>Use both jQuery and jQuery Flip directly from CDN. No need to download anything:</p>
+      <pre class="prettyprint">&lt;script src="https://code.jquery.com/jquery-2.1.4.min.js"&gt;<br/>&lt;script src="https://cdn.rawgit.com/download/flip/v1.0.8/dist/jquery.flip.min.js"&gt;</pre>
+      <h4>Download</h4>
+      <ul>
+        <li><a href="https://cdn.rawgit.com/download/flip/v1.0.8/dist/jquery.flip.js">jquery.flip.js</a> (development version, commented ~7Kb)</li>
+        <li><a href="https://cdn.rawgit.com/download/flip/v1.0.8/dist/jquery.flip.min.js">jquery.flip.min.js</a> (production version, minified ~3Kb, gzipped ~2Kb)</li>
+        <li><a href="https://cdn.rawgit.com/download/flip/v1.0.8/dist/jquery.flip.min.js.map">jquery.flip.min.js.map</a> (source map, ~4Kb)</li>
+      </ul>
       <pre class="prettyprint">&lt;script src="jquery-2.1.4.min.js"&gt;<br/>&lt;script src="jquery.flip.js"&gt;</pre>
-	  <h4>Or install using bower</h4>
+      <h4>Or install using bower</h4>
       <pre class="prettyprint">bower install download/flip --save</pre>
+      <br>
 
       <h3>How to use</h3>
-      <p>In HTML file, create a <code>&lt;div&gt;</code> with two <code>&lt;div&gt;</code> inside with class <code>.front</code> and <code>.back</code></p>
+      <p>In your HTML file, create a <code>&lt;div&gt;</code> with two <code>&lt;div&gt;</code>s inside with class <code>.front</code> and <code>.back</code>:</p>
       <pre class="prettyprint">&lt;div id="card"&gt; 
   &lt;div class="front"&gt; 
     Front content
@@ -58,16 +65,17 @@
     Back content
   &lt;/div&gt; 
 &lt;/div&gt;</pre>
-      <p>Then, call jQuery <code>flip()</code> on a DOM</p>
+      <p>Then, call jQuery <code>flip()</code> on it:</p>
       <pre class="prettyprint">$("#card").flip();</pre>
       <div class="panel panel-info">
         <div class="panel-heading">CSS guide</div>
         <div class="panel-body">
           For the best layout, <code>margin</code> should be added to <code>.card</code> and padding should be added to <code>.front</code> and <code>.back</code>
         </div>
-      </div
+      </div>
+      <br>
 
-      <h3>Options</h3>
+	  <h3>Options</h3>
       <table class="table table-bordered">
         <thead>
           <th>Attribute</th>
@@ -86,7 +94,15 @@
             <td>trigger</td>
             <td><code>click</code>, <code>hover</code>, <code>manual</code></td>
             <td><code>click</code></td>
-            <td>Event that activates the flip action. Using <code>manual</code> means that you have to activate it via javascript.</td>
+            <td>Event that activates the flip action. Using <code>manual</code> means that 
+                you have to activate it via javascript. When this is set to <code>click</code> 
+                and the <code>tap</code> event is available <small>(through e.g. 
+                <a href="https://jquerymobile.com/">jQuery Mobile</a> or 
+                <a href="https://github.com/benmajor/jQuery-Touch-Events">jQuery Touch Events</a>)</small>, 
+                flip will bind to that instead of to <code>click</code> as a regular click will also
+                instantaneously trigger a <code>tap</code> event, but not vice-versa. This gets rid
+                of the <a href="http://blog.ionic.io/hybrid-apps-and-the-curse-of-the-300ms-delay/">300ms 
+                click delay</a> on mobile browsers.</td>
           </tr>
           <tr>
             <td>reverse</td>
@@ -98,10 +114,29 @@
             <td>speed</td>
             <td>any integer</td>
             <td><code>500</code></td>
-            <td>Duration in milisecond for flipping dom</td>
+            <td>Duration of the flipping animation in miliseconds. Higher means slower.</td>
+          </tr>
+          <tr>
+            <td>autoSize</td>
+            <td><code>true</code>, <code>false</code></td>
+            <td><code>true</code></td>
+            <td>Whether the front and back panels should be automatically sized to fit the container. Will make flip add styles <code>width:100%</code> and <code>height:100%</code> to them. Works well in fluid containers.</td>
+          </tr>
+          <tr>
+            <td>forceWidth</td>
+            <td><code>true</code>, <code>false</code></td>
+            <td><code>false</code></td>
+            <td>Whether the front and back panels should be forced to the width of the container. Will make flip add style <code>width:<i>xx</i>px</code> to them (where <i>xx</i> is the container's <i>outerWidth</i>). Does not work well with fluid containers.</td>
+          </tr>
+          <tr>
+            <td>forceHeight</td>
+            <td><code>true</code>, <code>false</code></td>
+            <td><code>false</code></td>
+            <td>Whether the front and back panels should be forced to the height of the container. Will make flip add style <code>height:<i>yy</i>px</code> to them (where <i>yy</i> is the container's <i>outerHeight</i>). Does not work well with fluid containers.</td>
           </tr>
         </tbody>
       </table>
+      <br>
 
       <h3>Using via javascript</h3>
       <p>You can flip to the back by calling</p>
@@ -110,6 +145,9 @@
       <pre class="prettyprint">$("#card").flip(false);</pre>
       <p>Toggle front and back by calling</p>
       <pre class="prettyprint">$("#card").flip('toggle');</pre>
+      <p>Change the axis orientation on the fly:</p>
+      <pre class="prettyprint">$("#card").flip({axis: 'x'});</pre>
+      <br>
 
       <h3>Examples with corresponding options</h3>
       <div class="row">
@@ -194,11 +232,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <pre class="prettyprint">$("#card").flip({
-  axis: 'y',
-  trigger: 'click'
-});</pre>
-
+          <pre class="prettyprint">$("#card").flip();</pre>
           <button class="btn btn-primary" id="axis-x-btn">Click to set axis to 'x'</button>
           <div class="margin-top">
             <pre class="prettyprint">$("#card").flip({axis: 'x'});</pre>
@@ -210,6 +244,7 @@
         </div>
       </div>
       <br/>
+
       <h3>Grid Style Example</h3>
       <div id="grid-containter">
         <div class="card-grid">
@@ -278,8 +313,9 @@
         </div>
       </div>
       <br/>
+
       <h3>Fluid example</h3>
-	  <p>Try to resize your browser window. The card in this example will resize with it.</p>
+      <p>Try to resize your browser window. The card in this example will resize with it.</p>
       <div class="row">
         <div class="col-md-6">
           <div id="card-fluid" class="card"> 
@@ -288,25 +324,17 @@
             </div> 
             <div class="back">
               Image from commons.wikimedia.org<br>
-			  user Nevit Dilmen
+              user Nevit Dilmen
             </div> 
           </div>
         </div>
         <div class="col-md-6">
-          <pre class="prettyprint">$("#card").flip({
-  axis: 'y',
-  trigger: 'click',
-  forceWidth: false,
-  forceHeight: false
-}).find('.front, .back').css({
-  'width': '100%',
-  'height': '100%'
-});</pre>
-
+          <pre class="prettyprint">$("#card").flip();</pre>
         </div>
       </div>
     </div>
-	<br>
+    <br>
+    <br>
     <footer>
       <div class="container">
       jQeury flip is being maintained by 
@@ -317,7 +345,9 @@
     </footer>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
-    <script src="https://cdn.rawgit.com/download/flip/v1.0.7/dist/jquery.flip.min.js"></script>
+	<script src="https://cdn.rawgit.com/download/jQuery-Touch-Events/0.9.0/src/jquery.mobile-events.min.js"></script>
+    <script src="https://cdn.rawgit.com/download/flip/v1.0.8/dist/jquery.flip.min.js"></script>
+    <script src="../flip/src/flip.js"></script>
     <script type="text/javascript">
       $(function(){
         prettyPrint();
