@@ -19,6 +19,12 @@ module.exports = function (grunt) {
     clean: {
       files: ['dist']
     },
+	jshint: {
+		options : {
+			jshintrc : '.jshintrc'
+		},
+		all: [ 'src/<%= pkg.name %>.js' ]
+	},
     concat: {
       options: {
         banner: '<%= banner %>',
@@ -49,5 +55,5 @@ module.exports = function (grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', ['connect', 'clean', 'concat', 'uglify']);
+  grunt.registerTask('default', ['connect', 'clean', 'jshint', 'concat', 'uglify']);
 };
