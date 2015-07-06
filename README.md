@@ -11,6 +11,7 @@ with it and our version numbers reflect that.
 * **Flip v1.0.8**
   * [Added support for the mobile `tap` event](https://github.com/nnattawat/flip/issues/26)
   * [Dynamic sized content by default while maintaining backward compatibility](https://github.com/Download/flip/commit/8a6d1b3626a3c1e0e5d71fb4786c44244bf33eac)
+  * Now available with [source map](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/) for better debugging support.
 
 * **Flip v1.0.7**
   * [Improved backward compatibility](https://github.com/Download/flip/commit/b27588b1e5340ec2a6bfc5afca80a6e52b6f833f)
