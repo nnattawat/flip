@@ -1,12 +1,12 @@
 {
   "name": "flip",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "jQuery Plugin - 3d Flip Content",
   "keywords": [
     "jquery-plugin"
   ],
-  "homepage": "https://github.com/nnattawat/flip",
-  "bugs": "https://github.com/nnattawat/flip/issues",
+  "homepage": "https://github.com/download/flip",
+  "bugs": "https://github.com/download/flip/issues",
   "author": {
     "name": "Nattawat Nonsung",
     "email": "armmer1@gmail.com",
@@ -19,6 +19,11 @@
       "url": "https://github.com/fagianijunior"
     },
     {
+      "name": "Jemar Jones",
+      "email": "jemarkjones@gmail.com",
+      "url": "http://jkjones.me/"
+    },
+    {
       "name": "Stijn de Witt",
       "email": "StijnDeWitt@hotmail.com",
       "url": "http://StijnDeWitt.com"
@@ -26,7 +31,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/nnattawat/flip.git"
+    "url": "https://github.com/download/flip.git"
   },
   "licenses": [
     {
@@ -41,7 +46,8 @@
     "grunt-contrib-connect": "~0.5.0",
     "time-grunt": "~0.2.3",
     "load-grunt-tasks": "~0.2.0",
-    "grunt": "~0.4.2"
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.11.2"
   },
   "scripts": {
     "test": "grunt test"
