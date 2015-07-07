@@ -68,9 +68,14 @@
           //if they arent there we fall back to auto selecting the first and second div
           if (settings.front == "auto"){
             settings.front = ($dom.find('.front').length > 0)? '.front' : 'div:first-child';
+          }else if (settings.front == "autostrict"){
+            settings.front = 'div:first-child';
           }
           if (settings.back == "auto"){
+            //Note, we must use the old 'div:first-child + div' for IE compatibility
             settings.back = ($dom.find('.back').length > 0)? '.back' : 'div:first-child + div';
+          }else if (settings.back == "autostrict"){
+            settings.back = 'div:first-child + div';
           }
           console.log(settings);
           // save reverse and axis css to DOM for performing flip
