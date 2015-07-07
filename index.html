@@ -14,7 +14,7 @@
     <a href="https://github.com/download/flip"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 1000;" src="https://github-camo.global.ssl.fastly.net/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
     <div class="jumbotron">
       <div class="container">
-        <h2>Flip</h2>
+        <h2>jQuery Flip <small>v1.0.9</small></h2>
         <p>A jQuery plugin to flip content with 3D animation</p>
       </div>
     </div>
@@ -24,7 +24,7 @@
       <a href="https://github.com/download/flip" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span> View on Github</a>
     </div>
     <div class="container">
-      <h3>Example</h3>
+      <h3><a id="Example"></a>Example</h3>
       <div class="example">
         <div id="card-1" class="card"> 
           <div class="front alert alert-info"> 
@@ -39,23 +39,23 @@
       </div>
       <br>
 
-      <h3>How to include</h3>
+      <h3><a id="How-to-include"></a>How to include</h3>
       <p>Simply include jquery.flip.js on your page. jQuery Flip has a dependency on <a href="https://jquery.com/">jQuery</a> so make sure to include that first.</p>
       <h4>From CDN</h4>
       <p>Use both jQuery and jQuery Flip directly from CDN. No need to download anything:</p>
-      <pre class="prettyprint">&lt;script src="https://code.jquery.com/jquery-2.1.4.min.js"&gt;<br/>&lt;script src="https://cdn.rawgit.com/download/flip/v1.0.8/dist/jquery.flip.min.js"&gt;</pre>
+      <pre class="prettyprint">&lt;script src="https://code.jquery.com/jquery-2.1.4.min.js"&gt;<br/>&lt;script src="https://cdn.rawgit.com/download/flip/v1.0.9/dist/jquery.flip.min.js"&gt;</pre>
       <h4>Download</h4>
       <ul>
-        <li><a href="https://cdn.rawgit.com/download/flip/v1.0.8/dist/jquery.flip.js">jquery.flip.js</a> (development version, commented ~7Kb)</li>
-        <li><a href="https://cdn.rawgit.com/download/flip/v1.0.8/dist/jquery.flip.min.js">jquery.flip.min.js</a> (production version, minified ~3Kb, gzipped ~2Kb)</li>
-        <li><a href="https://cdn.rawgit.com/download/flip/v1.0.8/dist/jquery.flip.min.js.map">jquery.flip.min.js.map</a> (source map, ~4Kb)</li>
+        <li><a href="https://cdn.rawgit.com/download/flip/v1.0.9/dist/jquery.flip.js">jquery.flip.js</a> (development version, commented ~7Kb)</li>
+        <li><a href="https://cdn.rawgit.com/download/flip/v1.0.9/dist/jquery.flip.min.js">jquery.flip.min.js</a> (production version, minified ~3Kb, gzipped ~2Kb)</li>
+        <li><a href="https://cdn.rawgit.com/download/flip/v1.0.9/dist/jquery.flip.min.js.map">jquery.flip.min.js.map</a> (source map, ~4Kb)</li>
       </ul>
       <pre class="prettyprint">&lt;script src="jquery-2.1.4.min.js"&gt;<br/>&lt;script src="jquery.flip.js"&gt;</pre>
       <h4>Or install using bower</h4>
       <pre class="prettyprint">bower install download/flip --save</pre>
       <br>
 
-      <h3>How to use</h3>
+      <h3><a id="How-to-use"></a>How to use</h3>
       <p>In your HTML file, create a <code>&lt;div&gt;</code> with two <code>&lt;div&gt;</code>s inside with class <code>.front</code> and <code>.back</code>:</p>
       <pre class="prettyprint">&lt;div id="card"&gt; 
   &lt;div class="front"&gt; 
@@ -67,6 +67,9 @@
 &lt;/div&gt;</pre>
       <p>Then, call jQuery <code>flip()</code> on it:</p>
       <pre class="prettyprint">$("#card").flip();</pre>
+	  <p>You can specify other selectors instead of <code>.front</code> and <code>.back</code> by setting 
+         the options <a href="#front"><tt>front</tt></a> and <a href="#back"><tt>back</tt></a>
+         when instantiating flip.</p>
       <div class="panel panel-info">
         <div class="panel-heading">CSS guide</div>
         <div class="panel-body">
@@ -75,7 +78,7 @@
       </div>
       <br>
 
-	  <h3>Options</h3>
+	  <h3><a id="Options"></a>Options</h3>
       <table class="table table-bordered">
         <thead>
           <th>Attribute</th>
@@ -85,13 +88,13 @@
         </thead>
         <tbody>
           <tr>
-            <td>axis</td>
+            <td><a id="axis"></a>axis</td>
             <td><code>y</code>, <code>x</code></td>
             <td><code>y</code></td>
             <td>The axis that you want to rotate around</td>
           </tr>
           <tr>
-            <td>trigger</td>
+            <td><a id="trigger"></a>trigger</td>
             <td><code>click</code>, <code>hover</code>, <code>manual</code></td>
             <td><code>click</code></td>
             <td>Event that activates the flip action. Using <code>manual</code> means that 
@@ -105,31 +108,53 @@
                 click delay</a> on mobile browsers.</td>
           </tr>
           <tr>
-            <td>reverse</td>
+            <td><a id="reverse"></a>reverse</td>
             <td><code>true</code>, <code>false</code></td>
             <td><code>false</code></td>
             <td>Set to <code>true</code> if you want to reverse the direction of the flip.</td>
           </tr>
           <tr>
-            <td>speed</td>
+            <td><a id="speed"></a>speed</td>
             <td>any integer</td>
             <td><code>500</code></td>
             <td>Duration of the flipping animation in miliseconds. Higher means slower.</td>
           </tr>
           <tr>
-            <td>autoSize</td>
+            <td><a id="front"></a>front</td>
+            <td><code><i>[selector]</i></code>, <code>auto</code>, <code>autostrict</code></td>
+            <td><code>auto</code></td>
+            <td>The selector that flip will use to find the front face of the flippable content.
+                When set to <code>auto</code>, flip will try to find a face using the default
+				selector <code>.front</code>. If it does not find a face that way, it will fall
+				back to using the first child <code>div</code> it finds. When set to <code>autostrict</code>
+				it will not first attempt to use the default selector, but instead always pick the
+				first child <code>div</code>.</td>
+          </tr>
+          <tr>
+            <td><a id="back"></a>back</td>
+            <td><code><i>[selector]</i></code>, <code>auto</code>, <code>autostrict</code></td>
+            <td><code>auto</code></td>
+            <td>The selector that flip will use to find the back face of the flippable content.
+                When set to <code>auto</code>, flip will try to find a face using the default
+				selector <code>.back</code>. If it does not find a face that way, it will fall
+				back to using the second child <code>div</code> it finds. When set to <code>autostrict</code>
+				it will not first attempt to use the default selector, but instead always pick the
+				second child <code>div</code>.</td>
+          </tr>
+          <tr>
+            <td><a id="autoSize"></a>autoSize</td>
             <td><code>true</code>, <code>false</code></td>
             <td><code>true</code></td>
             <td>Whether the front and back panels should be automatically sized to fit the container. Will make flip add styles <code>width:100%</code> and <code>height:100%</code> to them. Works well in fluid containers.</td>
           </tr>
           <tr>
-            <td>forceWidth</td>
+            <td><a id="forceWidth"></a>forceWidth</td>
             <td><code>true</code>, <code>false</code></td>
             <td><code>false</code></td>
             <td>Whether the front and back panels should be forced to the width of the container. Will make flip add style <code>width:<i>xx</i>px</code> to them (where <i>xx</i> is the container's <i>outerWidth</i>). Does not work well with fluid containers.</td>
           </tr>
           <tr>
-            <td>forceHeight</td>
+            <td><a id="forceHeight"></a>forceHeight</td>
             <td><code>true</code>, <code>false</code></td>
             <td><code>false</code></td>
             <td>Whether the front and back panels should be forced to the height of the container. Will make flip add style <code>height:<i>yy</i>px</code> to them (where <i>yy</i> is the container's <i>outerHeight</i>). Does not work well with fluid containers.</td>
@@ -138,7 +163,7 @@
       </table>
       <br>
 
-      <h3>Using via javascript</h3>
+      <h3><a id="Using-via-javascript"></a>Using via javascript</h3>
       <p>You can flip to the back by calling</p>
       <pre class="prettyprint">$("#card").flip(true);</pre>
       <p>And flip it back to the front by calling</p>
@@ -149,7 +174,7 @@
       <pre class="prettyprint">$("#card").flip({axis: 'x'});</pre>
       <br>
 
-      <h3>Examples with corresponding options</h3>
+      <h3><a id="Examples-with-corresponding-options"></a>Examples with corresponding options</h3>
       <div class="row">
         <div class="col-md-6">
           <div id="card-2" class="card"> 
@@ -245,7 +270,7 @@
       </div>
       <br/>
 
-      <h3>Grid Style Example</h3>
+      <h3><a id="Grid-style-example"></a>Grid style example</h3>
       <div id="grid-containter">
         <div class="card-grid">
           <div class="front">Front</div>
@@ -314,7 +339,7 @@
       </div>
       <br/>
 
-      <h3>Fluid example</h3>
+      <h3><a id="Fluid-example"></a>Fluid example</h3>
       <p>Try to resize your browser window. The card in this example will resize with it.</p>
       <div class="row">
         <div class="col-md-6">
@@ -346,7 +371,7 @@
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
 	<script src="https://cdn.rawgit.com/download/jQuery-Touch-Events/0.9.0/src/jquery.mobile-events.min.js"></script>
-    <script src="https://cdn.rawgit.com/download/flip/v1.0.8/dist/jquery.flip.min.js"></script>
+    <script src="https://cdn.rawgit.com/download/flip/v1.0.9/dist/jquery.flip.min.js"></script>
     <script src="../flip/src/flip.js"></script>
     <script type="text/javascript">
       $(function(){
