@@ -3,12 +3,12 @@
     $dom.data("flipped", true);
 
     var rotateAxis = "rotate" + $dom.data("axis");
-    $dom.find(".front").css({
+    $dom.find($dom.data("front")).css({
       transform: rotateAxis + ($dom.data("reverse") ? "(-180deg)" : "(180deg)"),
       "z-index": "0"
     });
 
-    $dom.find(".back").css({
+    $dom.find($dom.data("back")).css({
       transform: rotateAxis + "(0deg)",
       "z-index": "1"
     });
@@ -18,17 +18,16 @@
     $dom.data("flipped", false);
 
     var rotateAxis = "rotate" + $dom.data("axis");
-    $dom.find(".front").css({
+    $dom.find($dom.data("front")).css({
       transform: rotateAxis + "(0deg)",
       "z-index": "1"
     });
 
-    $dom.find(".back").css({
+    $dom.find($dom.data("back")).css({
       transform: rotateAxis + ($dom.data("reverse") ? "(180deg)" : "(-180deg)"),
       "z-index": "0"
     });
   };
-
   $.fn.flip = function(options, callback) {
     if (typeof options == 'function'){
       //This allows flip to be called for setup with only a callback (default settings)
@@ -60,17 +59,30 @@
             speed: 500,
             forceHeight: false,
             forceWidth: false,
-            autoSize: true
+            autoSize: true,
+            front: 'auto',
+            back: 'auto'
           }, options );
 
+          //By defualt we first check for the old front and back selectors for backward compatibility
+          //if they arent there we fall back to auto selecting the first and second div
+          if (settings.front == "auto"){
+            settings.front = ($dom.find('.front').length > 0)? '.front' : 'div:first-child';
+          }
+          if (settings.back == "auto"){
+            settings.back = ($dom.find('.back').length > 0)? '.back' : 'div:first-child + div';
+          }
+          console.log(settings);
           // save reverse and axis css to DOM for performing flip
           $dom.data("reverse", settings.reverse);
           $dom.data("axis", settings.axis);
+          $dom.data("front", settings.front);
+          $dom.data("back", settings.back);
 
           var rotateAxis = "rotate" + (settings.axis.toLowerCase() == "x" ? "x" : "y"), 
               perspective = $dom["outer" + (rotateAxis == "rotatex" ? "Height" : "Width")]() * 2;
 
-          $dom.find(".back").css({
+          $dom.find($dom.data("back")).css({
             transform: rotateAxis + "(" + (settings.reverse? "180deg" : "-180deg") + ")"
           });
 
@@ -80,7 +92,7 @@
           });
 
           var speedInSec = settings.speed / 1000 || 0.5;
-          var faces = $dom.find(".front, .back");
+          var faces = $dom.find(settings.front).add(settings.back, $dom);
           if (settings.forceHeight) {faces.outerHeight($dom.height());} else if (settings.autoSize) {faces.css({'height': '100%'});}
           if (settings.forceWidth) {faces.outerWidth($dom.width());} else if (settings.autoSize) {faces.css({'width': '100%'});}
           faces.css({
@@ -89,7 +101,7 @@
             position: "absolute",
             "z-index": "1"
           });
-          $dom.find(".back").css({
+          $dom.find($dom.data("back")).css({
             transform: rotateAxis + "(" + (settings.reverse? "180deg" : "-180deg") + ")",
             "z-index": "0"
           });
@@ -162,12 +174,12 @@
       //This sets up the first flip in the new direction automatically
       var rotateAxis = "rotate" + axis;
       if ($(this).data("flipped")){
-        $(this).find(".front").css({
+        $(this).find($(this).data("front")).css({
           transform: rotateAxis + ($(this).data("reverse") ? "(-180deg)" : "(180deg)"),
           "z-index": "0"
         });
       }else{
-        $(this).find(".back").css({
+        $(this).find($(this).data("back")).css({
           transform: rotateAxis + "(" + ($(this).data("reverse")? "180deg" : "-180deg") + ")",
           "z-index": "0"
         });
