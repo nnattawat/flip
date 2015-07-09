@@ -1,4 +1,4 @@
-/*! flip - v1.0.9 - 2015-07-07
+/*! flip - v1.0.10 - 2015-07-09
 * https://github.com/download/flip
 * Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
@@ -80,7 +80,6 @@
           }else if (settings.back == "autostrict"){
             settings.back = 'div:first-child + div';
           }
-          console.log(settings);
           // save reverse and axis css to DOM for performing flip
           $dom.data("reverse", settings.reverse);
           $dom.data("axis", settings.axis);
