@@ -1,4 +1,4 @@
-# jQuery Flip v1.0.10
+# jQuery Flip <small>v1.0.10</small>
 
 **A lightweight jQuery plugin to create 3d flip animation.** 
 See the [project page](http://download.github.io/flip/)
