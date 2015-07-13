@@ -1,5 +1,5 @@
 /*! flip - v1.0.11 - 2015-07-13
-* https://github.com/download/flip
+* https://github.com/nnattawat/flip
 * Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
   var flip = function($dom) {
