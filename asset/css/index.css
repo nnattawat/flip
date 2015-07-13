@@ -2,6 +2,12 @@
 	margin-bottom: 0px;
 }
 
+.jumbotron .logo {
+	width: 15%;
+	margin-top: -1.5%;
+	float: left;
+}
+
 .download{
 	text-align: center;
 }
