@@ -28,6 +28,24 @@
       "z-index": "0"
     });
   };
+  // Function from David Walsh: http://davidwalsh.name/css-animation-callback licensed with http://opensource.org/licenses/MIT
+  var whichTransitionEvent = function(){
+    var t,
+        el = document.createElement("fakeelement");
+
+    var transitions = {
+      "transition"      : "transitionend",
+      "OTransition"     : "oTransitionEnd",
+      "MozTransition"   : "transitionend",
+      "WebkitTransition": "webkitTransitionEnd"
+    }
+
+    for (t in transitions){
+      if (el.style[t] !== undefined){
+        return transitions[t];
+      }
+    }
+  }
   $.fn.flip = function(options, callback) {
     if (typeof options == 'function'){
       //This allows flip to be called for setup with only a callback (default settings)
@@ -45,9 +63,11 @@
           } else {
             unflip($dom);
           }
-          //Temp callback until we figure out how to actually callback from this
+          //Providing a nicely wrapped up callback because transform is essentially async
           if (callback !== undefined){
-            setTimeout(callback.bind(this), 0);
+           $(this).one(whichTransitionEvent(), function(){
+            callback.call(this);
+           });
           }
         } else if (!$dom.data("initiated")){ //Init flipable DOM
           $dom.data("initiated", true);
@@ -119,7 +139,13 @@
             faces.css({
               transition: "all " + speedInSec + "s ease-out"
             });
-          }, 0);
+            if (callback !== undefined){
+              callback.call(this);
+            }
+          //While this used to work with a setTimeout of zero, at some point that became
+          //unstable and the initial flip returned. The reason for this is unknown but we
+          //will temporarily use a short delay of 20 to mitigate this issue. 
+          }, 20);
 
           if (settings.trigger.toLowerCase() == "click") {
             $dom.on($.fn.tap ? "tap" : "click", function() {
@@ -155,9 +181,6 @@
             $dom.mouseenter(performFlip);
             $dom.mouseleave(performUnflip);
           }
-          if (callback !== undefined){
-            setTimeout(callback.bind(this), 0);
-          }
         }else{
           //The element has been initiated, all we have to do is change applicable settings
           if (options.axis !== undefined){
@@ -170,6 +193,11 @@
   };
   var setAxis = function(axis,callback){
     if ($(this).data("axis") != axis.toLowerCase()){
+      var faces = $(this).find($(this).data("front")).add($(this).data("back"), $(this));
+      var savedTrans = faces.css("transition");
+      faces.css({
+        transition: "none"
+      });
       //Only setting the axis if it needs to be
 
       axis = axis.toLowerCase();
@@ -188,14 +216,13 @@
           "z-index": "0"
         });
       }
-
       //Providing a nicely wrapped up callback because transform is essentially async
-      if (callback !== undefined){
-       $(this).on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
+      setTimeout(function(){
+        faces.css({
+          transition: savedTrans
+        });
         callback.call(this);
-        $(this).off("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd");
-       });
-      }
+      },0);
     }else{
       //If we didnt have to set the axis we can just call back.
       if (callback !== undefined){
