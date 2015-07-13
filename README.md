@@ -1,7 +1,7 @@
 # jQuery Flip <sub><sup>v1.0.11</sup></sub>
 
 **A lightweight jQuery plugin to create 3d flip animation.** 
-See the [project page](http://download.github.io/flip/)
+See the [project page](http://nnattawat.github.io/flip/)
 
 This project was forked from [nnattawat/flip](http://nnattawat.github.io/flip/).
 It's last release was v1.0.1. This project is maintaining backward compatibility 
@@ -40,15 +40,15 @@ with it and our version numbers reflect that.
 ## Getting Started
 
 ### CDN
-    https://cdn.rawgit.com/download/flip/v1.0.11/dist/jquery.flip.min.js
+    https://cdn.rawgit.com/nnattawat/flip/v1.0.11/dist/jquery.flip.min.js
 
 ### Download 
-* [jquery.flip.js][max] (development version, commented ~7kB)
-* [jquery.flip.min.js][min] (production version, minified ~3kB, gzipped ~2kB)
-* [jquery.flip.min.js.map][map] (source map, ~4kB)
-[max]: https://cdn.rawgit.com/download/flip/v1.0.11/dist/jquery.flip.js
-[min]: https://cdn.rawgit.com/download/flip/v1.0.11/dist/jquery.flip.min.js
-[map]: https://cdn.rawgit.com/download/flip/v1.0.11/dist/jquery.flip.min.js.map
+* [jquery.flip.js][max] (development version, commented ~9kB)
+* [jquery.flip.min.js][min] (production version, minified ~4kB, gzipped ~2kB)
+* [jquery.flip.min.js.map][map] (source map, ~5kB)
+[max]: https://cdn.rawgit.com/nnattawat/flip/v1.0.11/dist/jquery.flip.js
+[min]: https://cdn.rawgit.com/nnattawat/flip/v1.0.11/dist/jquery.flip.min.js
+[map]: https://cdn.rawgit.com/nnattawat/flip/v1.0.11/dist/jquery.flip.min.js.map
 
 ### Bower
 <pre>bower install flip</pre>
@@ -78,7 +78,7 @@ $(function($) {
 
 ## Documentation and Example
 
-Please refer to [the project website](http://download.github.io/flip/)
+Please refer to [the project website](http://nnattawat.github.io/flip/)
 
 ## Development
 Ensure that you have the latest [Node.js](http://nodejs.org/) and [npm](http://npmjs.org/) installed.

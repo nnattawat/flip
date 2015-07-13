@@ -5,8 +5,8 @@
   "keywords": [
     "jquery-plugin"
   ],
-  "homepage": "https://github.com/download/flip",
-  "bugs": "https://github.com/download/flip/issues",
+  "homepage": "https://github.com/nnattawat/flip",
+  "bugs": "https://github.com/nnattawat/flip/issues",
   "author": {
     "name": "Nattawat Nonsung",
     "email": "armmer1@gmail.com",
@@ -31,7 +31,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/download/flip.git"
+    "url": "https://github.com/nnattawat/flip.git"
   },
   "licenses": [
     {
