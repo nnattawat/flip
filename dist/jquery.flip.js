@@ -1,4 +1,4 @@
-/*! flip - v1.0.10 - 2015-07-09
+/*! flip - v1.0.11 - 2015-07-13
 * https://github.com/download/flip
 * Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
@@ -34,21 +34,20 @@
   // Function from David Walsh: http://davidwalsh.name/css-animation-callback licensed with http://opensource.org/licenses/MIT
   var whichTransitionEvent = function(){
     var t,
-        el = document.createElement("fakeelement");
-
-    var transitions = {
+        el = document.createElement("fakeelement"),
+		transitions = {
       "transition"      : "transitionend",
       "OTransition"     : "oTransitionEnd",
       "MozTransition"   : "transitionend",
       "WebkitTransition": "webkitTransitionEnd"
-    }
+    };
 
     for (t in transitions){
       if (el.style[t] !== undefined){
         return transitions[t];
       }
     }
-  }
+  };
   $.fn.flip = function(options, callback) {
     if (typeof options == 'function'){
       //This allows flip to be called for setup with only a callback (default settings)

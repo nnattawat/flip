@@ -31,21 +31,20 @@
   // Function from David Walsh: http://davidwalsh.name/css-animation-callback licensed with http://opensource.org/licenses/MIT
   var whichTransitionEvent = function(){
     var t,
-        el = document.createElement("fakeelement");
-
-    var transitions = {
+        el = document.createElement("fakeelement"),
+		transitions = {
       "transition"      : "transitionend",
       "OTransition"     : "oTransitionEnd",
       "MozTransition"   : "transitionend",
       "WebkitTransition": "webkitTransitionEnd"
-    }
+    };
 
     for (t in transitions){
       if (el.style[t] !== undefined){
         return transitions[t];
       }
     }
-  }
+  };
   $.fn.flip = function(options, callback) {
     if (typeof options == 'function'){
       //This allows flip to be called for setup with only a callback (default settings)

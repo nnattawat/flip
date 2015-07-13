@@ -1,4 +1,4 @@
-# jQuery Flip <sub><sup>v1.0.10</sup></sub>
+# jQuery Flip <sub><sup>v1.0.11</sup></sub>
 
 **A lightweight jQuery plugin to create 3d flip animation.** 
 See the [project page](http://download.github.io/flip/)
@@ -8,11 +8,14 @@ It's last release was v1.0.1. This project is maintaining backward compatibility
 with it and our version numbers reflect that.
 
 ## What's new
+* **Flip v1.0.11**
+  * [Added a callback that fires when flip animation is finished](https://github.com/Download/flip/commit/61b57a3d6c9a8f0dd116ca5b4444cb5356374702)
+
 * **Flip v1.0.10**
   * [Removed log statement](https://github.com/Download/flip/commit/60a0df340b17036978a9b26b23be71204755c928)
   * [Updated license and credits](https://github.com/Download/flip/commit/9b8d218506f6b279d04a52642a8ca2fd9455d9b4)
   * [Fixed indentation](https://github.com/Download/flip/commit/acc64f52e176e7fdb5124b797b4d28cdc5bedf95)
-	
+
 * **Flip v1.0.9**
   * [Added support for custom front/back face selectors #27](https://github.com/nnattawat/flip/issues/27)
 
@@ -37,15 +40,15 @@ with it and our version numbers reflect that.
 ## Getting Started
 
 ### CDN
-    https://cdn.rawgit.com/download/flip/v1.0.10/dist/jquery.flip.min.js
+    https://cdn.rawgit.com/download/flip/v1.0.11/dist/jquery.flip.min.js
 
 ### Download 
 * [jquery.flip.js][max] (development version, commented ~7kB)
 * [jquery.flip.min.js][min] (production version, minified ~3kB, gzipped ~2kB)
 * [jquery.flip.min.js.map][map] (source map, ~4kB)
-[max]: https://cdn.rawgit.com/download/flip/v1.0.10/dist/jquery.flip.js
-[min]: https://cdn.rawgit.com/download/flip/v1.0.10/dist/jquery.flip.min.js
-[map]: https://cdn.rawgit.com/download/flip/v1.0.10/dist/jquery.flip.min.js.map
+[max]: https://cdn.rawgit.com/download/flip/v1.0.11/dist/jquery.flip.js
+[min]: https://cdn.rawgit.com/download/flip/v1.0.11/dist/jquery.flip.min.js
+[map]: https://cdn.rawgit.com/download/flip/v1.0.11/dist/jquery.flip.min.js.map
 
 ### Bower
 <pre>bower install flip</pre>
