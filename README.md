@@ -3,10 +3,6 @@
 **A lightweight jQuery plugin to create 3d flip animation.** 
 See the [project page](http://nnattawat.github.io/flip/)
 
-> This project was forked from [nnattawat/flip](https://github.com/nnatawat/flip) and has since
-> been merged back into that project. Please use the original project.
-	
-
 ## What's new
 * **Flip v1.0.11**
   * [Added a callback that fires when flip animation is finished](https://github.com/Download/flip/commit/61b57a3d6c9a8f0dd116ca5b4444cb5356374702)
