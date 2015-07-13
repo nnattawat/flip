@@ -221,7 +221,9 @@
         faces.css({
           transition: savedTrans
         });
-        callback.call(this);
+        if (callback !== undefined){
+          callback.call(this);
+        }
       },0);
     }else{
       //If we didnt have to set the axis we can just call back.
