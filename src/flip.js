@@ -12,6 +12,15 @@
       transform: rotateAxis + "(0deg)",
       "z-index": "1"
     });
+
+    if ($dom.find(".animate")) {
+        $dom.find(".front .animate").css({
+            display: "none"
+        });
+        $dom.find(".back .animate").css({
+            display: "inline"
+        });
+    } 
   };
 
   var unflip = function($dom) {
@@ -27,6 +36,15 @@
       transform: rotateAxis + ($dom.data("reverse") ? "(180deg)" : "(-180deg)"),
       "z-index": "0"
     });
+
+    if ($dom.find(".animate")) {
+        $dom.find(".back .animate").css({
+            display: "none"
+        });
+        $dom.find(".front .animate").css({
+            display: "inline"
+        });
+    }  
   };
   // Function from David Walsh: http://davidwalsh.name/css-animation-callback licensed with http://opensource.org/licenses/MIT
   var whichTransitionEvent = function(){
