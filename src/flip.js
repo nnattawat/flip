@@ -145,7 +145,8 @@
           }, 20);
 
           if (settings.trigger.toLowerCase() == "click") {
-            $dom.on($.fn.tap ? "tap" : "click", function() {
+            $dom.on($.fn.tap ? "tap" : "click", function(event) {
+              if( !event ) event = window.event; 
               if ($dom.find($(event.target).closest('button, a, input[type="submit"]')).length) {
                 return;
               }
