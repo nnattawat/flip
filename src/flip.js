@@ -64,9 +64,7 @@
           }
           //Providing a nicely wrapped up callback because transform is essentially async
           if (callback !== undefined){
-           $(this).one(whichTransitionEvent(), function(){
-            callback.call(this);
-           });
+           $(this).one(whichTransitionEvent(), callback);
           }
         } else if (!$dom.data("initiated")){ //Init flipable DOM
           $dom.data("initiated", true);
@@ -147,7 +145,8 @@
           }, 20);
 
           if (settings.trigger.toLowerCase() == "click") {
-            $dom.on($.fn.tap ? "tap" : "click", function() {
+            $dom.on($.fn.tap ? "tap" : "click", function(event) {
+              if( !event ) event = window.event; 
               if ($dom.find($(event.target).closest('button, a, input[type="submit"]')).length) {
                 return;
               }
