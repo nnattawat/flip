@@ -181,16 +181,25 @@
           }
         }else{
           //The element has been initiated, all we have to do is change applicable settings
-          if (options.axis !== undefined){
-            setAxis.call(this,options.axis,callback);
+          if (options.axis !== undefined || options.reverse !== undefined){
+            changeSettings.call(this,options,callback);
           }
       }
     });
 
     return this;
   };
-  var setAxis = function(axis,callback){
-    if ($(this).data("axis") != axis.toLowerCase()){
+  var changeSettings = function(options,callback){
+    var changeNeeded = false;
+    if (options.axis !== undefined && $(this).data("axis") != options.axis.toLowerCase()){
+      $(this).data("axis", options.axis.toLowerCase());
+      changeNeeded = true;
+    }
+    if (options.reverse !== undefined && $(this).data("reverse") != options.reverse){
+      $(this).data("reverse", options.reverse);
+      changeNeeded = true;
+    }
+    if (changeNeeded){
       var faces = $(this).find($(this).data("front")).add($(this).data("back"), $(this));
       var savedTrans = faces.css("transition");
       faces.css({
@@ -198,11 +207,11 @@
       });
       //Only setting the axis if it needs to be
 
-      axis = axis.toLowerCase();
-      $(this).data("axis", axis);
+      //options.axis = options.axis.toLowerCase();
+      //$(this).data("axis", options.axis);
 
       //This sets up the first flip in the new direction automatically
-      var rotateAxis = "rotate" + axis;
+      var rotateAxis = "rotate" + $(this).data("axis");
       if ($(this).data("flipped")){
         $(this).find($(this).data("front")).css({
           transform: rotateAxis + ($(this).data("reverse") ? "(-180deg)" : "(180deg)"),
