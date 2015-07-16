@@ -5,7 +5,7 @@ See the [project page](http://nnattawat.github.io/flip/)
 
 ## What's new
 * **Flip v1.0.13**
-  * 
+  * [Added ability to change 'reverse' dynamically](https://github.com/nnattawat/flip/commit/a047b24569abd3e5357255a6b143781f91356af0)
 
 * **Flip v1.0.12**
   * [v1.0.11 Not working in Firefox](https://github.com/nnattawat/flip/issues/28)
