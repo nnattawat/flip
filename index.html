@@ -33,13 +33,13 @@
     <div class="jumbotron">
       <img class="logo" src="asset/img/jquery-flip.png" />
       <div class="container">
-        <h2>jQuery Flip <small>v1.0.12</small></h2>
+        <h2>jQuery Flip <small>v1.0.13</small></h2>
         <p>A jQuery plugin to flip content with 3D animation</p>
       </div>
     </div>
     <div class="download">
-      <a href="https://github.com/nnattawat/flip/archive/v1.0.12.zip" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .zip</a>
-      <a href="https://github.com/nnattawat/flip/archive/v1.0.12.tar.gz" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .tar</a>
+      <a href="https://github.com/nnattawat/flip/archive/v1.0.13.zip" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .zip</a>
+      <a href="https://github.com/nnattawat/flip/archive/v1.0.13.tar.gz" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .tar</a>
       <a href="https://github.com/nnattawat/flip" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span> View on Github</a>
     </div>
     <div class="container">
@@ -62,12 +62,12 @@
       <p>Simply include jquery.flip.js on your page. jQuery Flip has a dependency on <a href="https://jquery.com/">jQuery</a> so make sure to include that first.</p>
       <h4>From CDN</h4>
       <p>Use both jQuery and jQuery Flip directly from CDN. No need to download anything:</p>
-      <pre class="prettyprint">&lt;script src="https://code.jquery.com/jquery-2.1.4.min.js"&gt;<br/>&lt;script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.12/dist/jquery.flip.min.js"&gt;</pre>
+      <pre class="prettyprint">&lt;script src="https://code.jquery.com/jquery-2.1.4.min.js"&gt;<br/>&lt;script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.13/dist/jquery.flip.min.js"&gt;</pre>
       <h4>Download</h4>
       <ul>
-        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.12/dist/jquery.flip.js">jquery.flip.js</a> (development version, commented ~9Kb)</li>
-        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.12/dist/jquery.flip.min.js">jquery.flip.min.js</a> (production version, minified ~4Kb, gzipped ~2Kb)</li>
-        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.12/dist/jquery.flip.min.js.map">jquery.flip.min.js.map</a> (source map, ~5Kb)</li>
+        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.13/dist/jquery.flip.js">jquery.flip.js</a> (development version, commented ~9Kb)</li>
+        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.13/dist/jquery.flip.min.js">jquery.flip.min.js</a> (production version, minified ~4Kb, gzipped ~2Kb)</li>
+        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.13/dist/jquery.flip.min.js.map">jquery.flip.min.js.map</a> (source map, ~5Kb)</li>
       </ul>
       <pre class="prettyprint">&lt;script src="jquery-2.1.4.min.js"&gt;<br/>&lt;script src="jquery.flip.js"&gt;</pre>
       <h4>Or install using bower</h4>
@@ -86,7 +86,7 @@
 &lt;/div&gt;</pre>
       <p>Then, call jQuery <code>flip()</code> on it:</p>
       <pre class="prettyprint">$("#card").flip();</pre>
-	  <p>You can specify other selectors instead of <code>.front</code> and <code>.back</code> by setting 
+    <p>You can specify other selectors instead of <code>.front</code> and <code>.back</code> by setting 
          the options <a href="#front"><tt>front</tt></a> and <a href="#back"><tt>back</tt></a>
          when instantiating flip.</p>
       <div class="panel panel-info">
@@ -97,7 +97,7 @@
       </div>
       <br>
 
-	  <h3><a id="Options"></a>Options</h3>
+    <h3><a id="Options"></a>Options</h3>
       <table class="table table-bordered">
         <thead>
           <th>Attribute</th>
@@ -144,10 +144,10 @@
             <td><code>auto</code></td>
             <td>The selector that flip will use to find the front face of the flippable content.
                 When set to <code>auto</code>, flip will try to find a face using the default
-				selector <code>.front</code>. If it does not find a face that way, it will fall
-				back to using the first child <code>div</code> it finds. When set to <code>autostrict</code>
-				it will not first attempt to use the default selector, but instead always pick the
-				first child <code>div</code>.</td>
+        selector <code>.front</code>. If it does not find a face that way, it will fall
+        back to using the first child <code>div</code> it finds. When set to <code>autostrict</code>
+        it will not first attempt to use the default selector, but instead always pick the
+        first child <code>div</code>.</td>
           </tr>
           <tr>
             <td><a id="back"></a>back</td>
@@ -155,10 +155,10 @@
             <td><code>auto</code></td>
             <td>The selector that flip will use to find the back face of the flippable content.
                 When set to <code>auto</code>, flip will try to find a face using the default
-				selector <code>.back</code>. If it does not find a face that way, it will fall
-				back to using the second child <code>div</code> it finds. When set to <code>autostrict</code>
-				it will not first attempt to use the default selector, but instead always pick the
-				second child <code>div</code>.</td>
+        selector <code>.back</code>. If it does not find a face that way, it will fall
+        back to using the second child <code>div</code> it finds. When set to <code>autostrict</code>
+        it will not first attempt to use the default selector, but instead always pick the
+        second child <code>div</code>.</td>
           </tr>
           <tr>
             <td><a id="autoSize"></a>autoSize</td>
@@ -191,6 +191,8 @@
       <pre class="prettyprint">$("#card").flip('toggle');</pre>
       <p>Change the axis orientation on the fly:</p>
       <pre class="prettyprint">$("#card").flip({axis: 'x'});</pre>
+      <p>Similarly for reverse:</p>
+      <pre class="prettyprint">$("#card").flip({reverse: true});</pre>
       <br>
 
       <h3><a id="Examples-with-corresponding-options"></a>Examples with corresponding options</h3>
@@ -284,6 +286,14 @@
           <button class="btn btn-primary" id="axis-y-btn">Click to set axis to 'y'</button>
           <div class="margin-top">
             <pre class="prettyprint">$("#card").flip({axis: 'y'});</pre>
+          </div>
+          <button class="btn btn-primary" id="reverse-true-btn">Click to set reverse to true</button>
+          <div class="margin-top">
+            <pre class="prettyprint">$("#card").flip({reverse: true});</pre>
+          </div>
+          <button class="btn btn-primary" id="reverse-false-btn">Click to set reverse to false</button>
+          <div class="margin-top">
+            <pre class="prettyprint">$("#card").flip({reverse: false});</pre>
           </div>
         </div>
       </div>
@@ -382,15 +392,15 @@
     <footer>
       <div class="container">
       jQeury flip is being maintained by 
-		<a href="https://github.com/nnattawat">Nattawat Nonsung (author)</a>, 
-		<a href="http://jkjones.me/">Jemar Jones</a> and 
-		<a href="http://StijnDeWitt.com/">Stijn de Witt</a>.
+    <a href="https://github.com/nnattawat">Nattawat Nonsung (author)</a>, 
+    <a href="http://jkjones.me/">Jemar Jones</a> and 
+    <a href="http://StijnDeWitt.com/">Stijn de Witt</a>.
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
-	<script src="https://cdn.rawgit.com/download/jQuery-Touch-Events/0.9.0/src/jquery.mobile-events.min.js"></script>
-    <script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.12/dist/jquery.flip.min.js"></script>
+  <script src="https://cdn.rawgit.com/download/jQuery-Touch-Events/0.9.0/src/jquery.mobile-events.min.js"></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.13/dist/jquery.flip.min.js"></script>
     <script src="../flip/src/flip.js"></script>
     <script type="text/javascript">
       $(function(){
@@ -428,7 +438,7 @@
         $("#toggle-btn").click(function(){
           $("#card-4").flip('toggle');
         });
-		
+    
         $("#card-5").flip({
           axis: 'y',
           trigger: 'click'
@@ -439,16 +449,22 @@
         $("#axis-y-btn").click(function(){
           $("#card-5").flip({axis: 'y'});
         });
-		
+        $("#reverse-true-btn").click(function(){
+          $("#card-5").flip({reverse: true});
+        });
+        $("#reverse-false-btn").click(function(){
+          $("#card-5").flip({reverse: false});
+        });
+
         $("#card-fluid").flip({
           axis: 'y',
           trigger: 'click',
-		  forceWidth: false,
-		  forceHeight: false
+      forceWidth: false,
+      forceHeight: false
         }).find('.front, .back').css({
-			'width': '100%',
-			'height': '100%'
-		});
+      'width': '100%',
+      'height': '100%'
+    });
       });
     </script>
   </body>
