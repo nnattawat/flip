@@ -5,6 +5,10 @@ See the [project page](http://nnattawat.github.io/flip/)
 
 ## What's new
 * **Flip v1.0.13**
+  * [Fixed scoping issues](https://github.com/nnattawat/flip/commit/f1ce8f6a313fe905193cae22668dbced0d246451)
+  * [Added support for jquery event](https://github.com/nnattawat/flip/commit/780ab0322862a3626ca7732461423e67c76569d1)
+
+* **Flip v1.0.13**
   * [Added ability to change 'reverse' dynamically](https://github.com/nnattawat/flip/commit/a047b24569abd3e5357255a6b143781f91356af0)
 
 * **Flip v1.0.12**

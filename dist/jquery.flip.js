@@ -1,4 +1,4 @@
-/*! flip - v1.0.13 - 2015-07-16
+/*! flip - v1.0.14 - 2015-07-16
 * https://github.com/nnattawat/flip
 * Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
@@ -35,7 +35,7 @@
   var whichTransitionEvent = function(){
     var t,
         el = document.createElement("fakeelement"),
-		transitions = {
+    transitions = {
       "transition"      : "transitionend",
       "OTransition"     : "oTransitionEnd",
       "MozTransition"   : "transitionend",
@@ -66,9 +66,12 @@
             unflip($dom);
           }
           //Providing a nicely wrapped up callback because transform is essentially async
-          if (callback !== undefined){
-           $(this).one(whichTransitionEvent(), callback);
-          }
+           $(this).one(whichTransitionEvent(), function(){
+              $(this).trigger('flip:done');
+              if (callback !== undefined){
+                callback.call(this);
+              }
+            });
         } else if (!$dom.data("initiated")){ //Init flipable DOM
           $dom.data("initiated", true);
 
@@ -185,7 +188,12 @@
         }else{
           //The element has been initiated, all we have to do is change applicable settings
           if (options.axis !== undefined || options.reverse !== undefined){
-            changeSettings.call(this,options,callback);
+            changeSettings.call(this,options,function(){
+              $dom.trigger('flip:change');
+              if (callback !== undefined){
+                callback.call(this);
+              }
+            });
           }
       }
     });
@@ -231,15 +239,11 @@
         faces.css({
           transition: savedTrans
         });
-        if (callback !== undefined){
           callback.call(this);
-        }
-      },0);
+      }.bind(this),0);
     }else{
       //If we didnt have to set the axis we can just call back.
-      if (callback !== undefined){
         setTimeout(callback.bind(this), 0);
-      }
     }
   };
 }( jQuery ));
