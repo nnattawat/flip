@@ -47,15 +47,15 @@ See the [project page](http://nnattawat.github.io/flip/)
 ## Getting Started
 
 ### CDN
-    https://cdn.rawgit.com/nnattawat/flip/v1.0.13/dist/jquery.flip.min.js
+    https://cdn.rawgit.com/nnattawat/flip/v1.0.14/dist/jquery.flip.min.js
 
 ### Download 
 * [jquery.flip.js][max] (development version, commented ~9kB)
 * [jquery.flip.min.js][min] (production version, minified ~4kB, gzipped ~2kB)
 * [jquery.flip.min.js.map][map] (source map, ~5kB)
-[max]: https://cdn.rawgit.com/nnattawat/flip/v1.0.13/dist/jquery.flip.js
-[min]: https://cdn.rawgit.com/nnattawat/flip/v1.0.13/dist/jquery.flip.min.js
-[map]: https://cdn.rawgit.com/nnattawat/flip/v1.0.13/dist/jquery.flip.min.js.map
+[max]: https://cdn.rawgit.com/nnattawat/flip/v1.0.14/dist/jquery.flip.js
+[min]: https://cdn.rawgit.com/nnattawat/flip/v1.0.14/dist/jquery.flip.min.js
+[map]: https://cdn.rawgit.com/nnattawat/flip/v1.0.14/dist/jquery.flip.min.js.map
 
 ### Bower
 <pre>bower install flip</pre>
