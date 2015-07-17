@@ -66,7 +66,7 @@
            $(this).one(whichTransitionEvent(), function(){
               $(this).trigger('flip:done');
               if (callback !== undefined){
-                callback.bind(this);
+                callback.call(this);
               }
             });
         } else if (!$dom.data("initiated")){ //Init flipable DOM
@@ -186,9 +186,9 @@
           //The element has been initiated, all we have to do is change applicable settings
           if (options.axis !== undefined || options.reverse !== undefined){
             changeSettings.call(this,options,function(){
-              $(this).trigger('flip:change');
+              $dom.trigger('flip:change');
               if (callback !== undefined){
-                callback.bind(this);
+                callback.call(this);
               }
             });
           }
@@ -237,7 +237,7 @@
           transition: savedTrans
         });
           callback.call(this);
-      },0);
+      }.bind(this),0);
     }else{
       //If we didnt have to set the axis we can just call back.
         setTimeout(callback.bind(this), 0);
