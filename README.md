@@ -1,10 +1,10 @@
-# jQuery Flip <sub><sup>v1.0.13</sup></sub>
+# jQuery Flip <sub><sup>v1.0.14</sup></sub>
 
 **A lightweight jQuery plugin to create 3d flip animation.** 
 See the [project page](http://nnattawat.github.io/flip/)
 
 ## What's new
-* **Flip v1.0.13**
+* **Flip v1.0.14**
   * [Fixed scoping issues](https://github.com/nnattawat/flip/commit/f1ce8f6a313fe905193cae22668dbced0d246451)
   * [Added support for jquery event](https://github.com/nnattawat/flip/commit/780ab0322862a3626ca7732461423e67c76569d1)
 
