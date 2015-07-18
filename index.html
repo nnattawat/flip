@@ -33,13 +33,13 @@
     <div class="jumbotron">
       <img class="logo" src="asset/img/jquery-flip.png" />
       <div class="container">
-        <h2>jQuery Flip <small>v1.0.13</small></h2>
+        <h2>jQuery Flip <small>v1.0.14</small></h2>
         <p>A jQuery plugin to flip content with 3D animation</p>
       </div>
     </div>
     <div class="download">
-      <a href="https://github.com/nnattawat/flip/archive/v1.0.13.zip" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .zip</a>
-      <a href="https://github.com/nnattawat/flip/archive/v1.0.13.tar.gz" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .tar</a>
+      <a href="https://github.com/nnattawat/flip/archive/v1.0.14.zip" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .zip</a>
+      <a href="https://github.com/nnattawat/flip/archive/v1.0.14.tar.gz" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .tar</a>
       <a href="https://github.com/nnattawat/flip" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span> View on Github</a>
     </div>
     <div class="container">
@@ -62,12 +62,12 @@
       <p>Simply include jquery.flip.js on your page. jQuery Flip has a dependency on <a href="https://jquery.com/">jQuery</a> so make sure to include that first.</p>
       <h4>From CDN</h4>
       <p>Use both jQuery and jQuery Flip directly from CDN. No need to download anything:</p>
-      <pre class="prettyprint">&lt;script src="https://code.jquery.com/jquery-2.1.4.min.js"&gt;<br/>&lt;script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.13/dist/jquery.flip.min.js"&gt;</pre>
+      <pre class="prettyprint">&lt;script src="https://code.jquery.com/jquery-2.1.4.min.js"&gt;<br/>&lt;script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.14/dist/jquery.flip.min.js"&gt;</pre>
       <h4>Download</h4>
       <ul>
-        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.13/dist/jquery.flip.js">jquery.flip.js</a> (development version, commented ~9Kb)</li>
-        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.13/dist/jquery.flip.min.js">jquery.flip.min.js</a> (production version, minified ~4Kb, gzipped ~2Kb)</li>
-        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.13/dist/jquery.flip.min.js.map">jquery.flip.min.js.map</a> (source map, ~5Kb)</li>
+        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.14/dist/jquery.flip.js">jquery.flip.js</a> (development version, commented ~9Kb)</li>
+        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.14/dist/jquery.flip.min.js">jquery.flip.min.js</a> (production version, minified ~4Kb, gzipped ~2Kb)</li>
+        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.14/dist/jquery.flip.min.js.map">jquery.flip.min.js.map</a> (source map, ~5Kb)</li>
       </ul>
       <pre class="prettyprint">&lt;script src="jquery-2.1.4.min.js"&gt;<br/>&lt;script src="jquery.flip.js"&gt;</pre>
       <h4>Or install using bower</h4>
@@ -105,26 +105,48 @@
         </div>
       </div>
       <br>
-
+    <h3><a id="flip"></a>.flip()</h3>
+      <table class="table table-bordered">
+        <thead>
+          <th>Attribute</th>
+          <th>Possible value</th>
+          <th>Description</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a id="flipoptions"></a>[Options]</td>
+            <td><a href="#Options"><code>Object</code>(see below)</a>,<code>true</code>, <code>false</code>, <code>'toggle'</code></td>
+            <td>If an object, the settings to apply to the flip element. Otherwise, a value representing <a href="#Using-via-javascript">how</a> the object should be immediately flipped.</td>
+          </tr>
+          <tr>
+            <td><a id="callback"></a>[callback]</td>
+            <td>function</td>
+            <td>A function to be called upon the completion of this call to flip.</td>
+          </tr>
+        </tbody>
+      </table>
     <h3><a id="Options"></a>Options</h3>
       <table class="table table-bordered">
         <thead>
           <th>Attribute</th>
           <th>Possible value</th>
           <th>Default</th>
+          <th>Availability</th>
           <th>Description</th>
         </thead>
         <tbody>
           <tr>
             <td><a id="axis"></a>axis</td>
-            <td><code>y</code>, <code>x</code></td>
-            <td><code>y</code></td>
+            <td><code>'y'</code>, <code>'x'</code></td>
+            <td><code>'y'</code></td>
+            <td>Always</td>
             <td>The axis that you want to rotate around</td>
           </tr>
           <tr>
             <td><a id="trigger"></a>trigger</td>
-            <td><code>click</code>, <code>hover</code>, <code>manual</code></td>
-            <td><code>click</code></td>
+            <td><code>'click'</code>, <code>'hover'</code>, <code>'manual'</code></td>
+            <td><code>'click'</code></td>
+            <td>Init only</td>
             <td>Event that activates the flip action. Using <code>manual</code> means that 
                 you have to activate it via javascript. When this is set to <code>click</code> 
                 and the <code>tap</code> event is available <small>(through e.g. 
@@ -139,18 +161,21 @@
             <td><a id="reverse"></a>reverse</td>
             <td><code>true</code>, <code>false</code></td>
             <td><code>false</code></td>
+            <td>Always</td>
             <td>Set to <code>true</code> if you want to reverse the direction of the flip.</td>
           </tr>
           <tr>
             <td><a id="speed"></a>speed</td>
             <td>any integer</td>
             <td><code>500</code></td>
+            <td>Init only</td>
             <td>Duration of the flipping animation in miliseconds. Higher means slower.</td>
           </tr>
           <tr>
             <td><a id="front"></a>front</td>
-            <td><code><i>[selector]</i></code>, <code>auto</code>, <code>autostrict</code></td>
-            <td><code>auto</code></td>
+            <td><code><i>[selector]</i></code>, <code>'auto'</code>, <code>'autostrict'</code></td>
+            <td><code>'auto'</code></td>
+            <td>Init only</td>
             <td>The selector that flip will use to find the front face of the flippable content.
                 When set to <code>auto</code>, flip will try to find a face using the default
         selector <code>.front</code>. If it does not find a face that way, it will fall
@@ -160,8 +185,9 @@
           </tr>
           <tr>
             <td><a id="back"></a>back</td>
-            <td><code><i>[selector]</i></code>, <code>auto</code>, <code>autostrict</code></td>
-            <td><code>auto</code></td>
+            <td><code><i>[selector]</i></code>, <code>'auto'</code>, <code>'autostrict'</code></td>
+            <td><code>'auto'</code></td>
+            <td>Init only</td>
             <td>The selector that flip will use to find the back face of the flippable content.
                 When set to <code>auto</code>, flip will try to find a face using the default
         selector <code>.back</code>. If it does not find a face that way, it will fall
@@ -173,19 +199,39 @@
             <td><a id="autoSize"></a>autoSize</td>
             <td><code>true</code>, <code>false</code></td>
             <td><code>true</code></td>
+            <td>Init only</td>
             <td>Whether the front and back panels should be automatically sized to fit the container. Will make flip add styles <code>width:100%</code> and <code>height:100%</code> to them. Works well in fluid containers.</td>
           </tr>
           <tr>
             <td><a id="forceWidth"></a>forceWidth</td>
             <td><code>true</code>, <code>false</code></td>
             <td><code>false</code></td>
+            <td>Init only</td>
             <td>Whether the front and back panels should be forced to the width of the container. Will make flip add style <code>width:<i>xx</i>px</code> to them (where <i>xx</i> is the container's <i>outerWidth</i>). Does not work well with fluid containers.</td>
           </tr>
           <tr>
             <td><a id="forceHeight"></a>forceHeight</td>
             <td><code>true</code>, <code>false</code></td>
             <td><code>false</code></td>
+            <td>Init only</td>
             <td>Whether the front and back panels should be forced to the height of the container. Will make flip add style <code>height:<i>yy</i>px</code> to them (where <i>yy</i> is the container's <i>outerHeight</i>). Does not work well with fluid containers.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a id="events"></a>Events</h3>
+      <table class="table table-bordered">
+        <thead>
+          <th>Event</th>
+          <th>Description</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a id="flipdone"></a>flip:done</td>
+            <td>Triggered on the completion of a flip.</td>
+          </tr>
+          <tr>
+            <td><a id="flipchange"></a>flip:change</td>
+            <td>Triggered once flip is done updating the settings of an element.</td>
           </tr>
         </tbody>
       </table>
@@ -287,7 +333,10 @@
           </div>
         </div>
         <div class="col-md-6">
-          <pre class="prettyprint">$("#card").flip();</pre>
+          <pre class="prettyprint">$("#card").flip({
+  axis: 'y',
+  trigger: 'click'
+});</pre>
           <button class="btn btn-primary" id="axis-x-btn">Click to set axis to 'x'</button>
           <div class="margin-top">
             <pre class="prettyprint">$("#card").flip({axis: 'x'});</pre>
@@ -307,7 +356,30 @@
         </div>
       </div>
       <br/>
-
+      <div class="row">
+        <div class="col-md-6">
+          <div id="card-6" class="card"> 
+            <div class="front"> 
+              <img src="asset/img/ls-6.jpg">
+            </div> 
+            <div class="back">
+              Image from pixabay.com/en/lake-macquarie-sunset-water-71208/
+            </div> 
+          </div>
+        </div>
+        <div class="col-md-6">
+          <pre class="prettyprint">$("#card").flip({
+  trigger: 'click'
+});</pre>
+          <button class="btn btn-primary" id="assign-done">Click to assign</button>
+          <div class="margin-top">
+            <pre class="prettyprint">$("#card").on('flip:done',function(){
+  doCoolFading();
+});</pre>
+          </div>
+        </div>
+      </div>
+      <br/>
       <h3><a id="Grid-style-example"></a>Grid style example</h3>
       <div id="grid-containter">
         <div class="card-grid">
@@ -409,8 +481,10 @@
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
   <script src="https://cdn.rawgit.com/download/jQuery-Touch-Events/0.9.0/src/jquery.mobile-events.min.js"></script>
-    <script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.13/dist/jquery.flip.min.js"></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.14/dist/jquery.flip.min.js"></script>
     <script type="text/javascript">
+    !function(a){var b=function(a){a.data("flipped",!0);var b="rotate"+a.data("axis");a.find(a.data("front")).css({transform:b+(a.data("reverse")?"(-180deg)":"(180deg)"),"z-index":"0"}),a.find(a.data("back")).css({transform:b+"(0deg)","z-index":"1"})},c=function(a){a.data("flipped",!1);var b="rotate"+a.data("axis");a.find(a.data("front")).css({transform:b+"(0deg)","z-index":"1"}),a.find(a.data("back")).css({transform:b+(a.data("reverse")?"(180deg)":"(-180deg)"),"z-index":"0"})},d=function(){var a,b=document.createElement("fakeelement"),c={transition:"transitionend",OTransition:"oTransitionEnd",MozTransition:"transitionend",WebkitTransition:"webkitTransitionEnd"};for(a in c)if(void 0!==b.style[a])return c[a]};a.fn.flip=function(f,g){return"function"==typeof f&&(g=f),this.each(function(){var h=a(this);if(void 0===f||"boolean"!=typeof f&&"string"!=typeof f)if(h.data("initiated"))(void 0!==f.axis||void 0!==f.reverse)&&e.call(this,f,function(){h.trigger("flip:change"),void 0!==g&&g.call(this)});else{h.data("initiated",!0);var i=a.extend({axis:"y",reverse:!1,trigger:"click",speed:500,forceHeight:!1,forceWidth:!1,autoSize:!0,front:"auto",back:"auto"},f);"auto"==i.front?i.front=h.find(".front").length>0?".front":"div:first-child":"autostrict"==i.front&&(i.front="div:first-child"),"auto"==i.back?i.back=h.find(".back").length>0?".back":"div:first-child + div":"autostrict"==i.back&&(i.back="div:first-child + div"),h.data("reverse",i.reverse),h.data("axis",i.axis),h.data("front",i.front),h.data("back",i.back);var j="rotate"+("x"==i.axis.toLowerCase()?"x":"y"),k=2*h["outer"+("rotatex"==j?"Height":"Width")]();h.find(h.data("back")).css({transform:j+"("+(i.reverse?"180deg":"-180deg")+")"}),h.css({perspective:k,position:"relative"});var l=i.speed/1e3||.5,m=h.find(i.front).add(i.back,h);if(i.forceHeight?m.outerHeight(h.height()):i.autoSize&&m.css({height:"100%"}),i.forceWidth?m.outerWidth(h.width()):i.autoSize&&m.css({width:"100%"}),m.css({"backface-visibility":"hidden","transform-style":"preserve-3d",position:"absolute","z-index":"1"}),h.find(h.data("back")).css({transform:j+"("+(i.reverse?"180deg":"-180deg")+")","z-index":"0"}),setTimeout(function(){m.css({transition:"all "+l+"s ease-out"}),void 0!==g&&g.call(this)},20),"click"==i.trigger.toLowerCase())h.on(a.fn.tap?"tap":"click",function(d){d||(d=window.event),h.find(a(d.target).closest('button, a, input[type="submit"]')).length||(h.data("flipped")?c(h):b(h))});else if("hover"==i.trigger.toLowerCase()){var n=function(){h.unbind("mouseleave",o),b(h),setTimeout(function(){h.bind("mouseleave",o),h.is(":hover")||c(h)},i.speed+150)},o=function(){c(h)};h.mouseenter(n),h.mouseleave(o)}}else"toggle"==f&&(f=!h.data("flipped")),f?b(h):c(h),a(this).one(d(),function(){a(this).trigger("flip:done"),void 0!==g&&g.call(this)})}),this};var e=function(b,c){var d=!1;if(void 0!==b.axis&&a(this).data("axis")!=b.axis.toLowerCase()&&(a(this).data("axis",b.axis.toLowerCase()),d=!0),void 0!==b.reverse&&a(this).data("reverse")!=b.reverse&&(a(this).data("reverse",b.reverse),d=!0),d){var e=a(this).find(a(this).data("front")).add(a(this).data("back"),a(this)),f=e.css("transition");e.css({transition:"none"});var g="rotate"+a(this).data("axis");a(this).data("flipped")?a(this).find(a(this).data("front")).css({transform:g+(a(this).data("reverse")?"(-180deg)":"(180deg)"),"z-index":"0"}):a(this).find(a(this).data("back")).css({transform:g+"("+(a(this).data("reverse")?"180deg":"-180deg")+")","z-index":"0"}),setTimeout(function(){e.css({transition:f}),c.call(this)}.bind(this),0)}else setTimeout(c.bind(this),0)}}(jQuery);
+
       $(function(){
         prettyPrint();
         
@@ -463,7 +537,17 @@
         $("#reverse-false-btn").click(function(){
           $("#card-5").flip({reverse: false});
         });
-
+        $("#card-6").flip({
+          trigger: 'click'
+        });
+        $('#assign-done').click(function(){
+          $("#card-6").on('flip:done',function(){
+            $(this).fadeOut(400,function(){
+              $(this).fadeIn();
+            });
+          });
+        });
+        $('#card-6')
         $("#card-fluid").flip({
           axis: 'y',
           trigger: 'click',
