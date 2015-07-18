@@ -1,8 +1,8 @@
-/*! flip - v1.0.13 - 2015-07-16
+/*! flip - v1.0.14 - 2015-07-17
 * https://github.com/nnattawat/flip
 * Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
-  var flip = function($dom) {
+  var flip = function($dom, callback) {
     $dom.data("flipped", true);
 
     var rotateAxis = "rotate" + $dom.data("axis");
@@ -15,9 +15,17 @@
       transform: rotateAxis + "(0deg)",
       "z-index": "1"
     });
+
+    //Providing a nicely wrapped up callback because transform is essentially async
+     $dom.one(whichTransitionEvent(), function(){
+        $(this).trigger('flip:done');
+        if (callback !== undefined){
+          callback.call(this);
+        }
+      });
   };
 
-  var unflip = function($dom) {
+  var unflip = function($dom, callback) {
     $dom.data("flipped", false);
 
     var rotateAxis = "rotate" + $dom.data("axis");
@@ -30,12 +38,20 @@
       transform: rotateAxis + ($dom.data("reverse") ? "(180deg)" : "(-180deg)"),
       "z-index": "0"
     });
+
+    //Providing a nicely wrapped up callback because transform is essentially async
+     $dom.one(whichTransitionEvent(), function(){
+        $(this).trigger('flip:done');
+        if (callback !== undefined){
+          callback.call(this);
+        }
+      });
   };
   // Function from David Walsh: http://davidwalsh.name/css-animation-callback licensed with http://opensource.org/licenses/MIT
   var whichTransitionEvent = function(){
     var t,
         el = document.createElement("fakeelement"),
-		transitions = {
+    transitions = {
       "transition"      : "transitionend",
       "OTransition"     : "oTransitionEnd",
       "MozTransition"   : "transitionend",
@@ -61,14 +77,17 @@
             options = !$dom.data("flipped");
           }
           if (options) {
-            flip($dom);
+            flip($dom,callback);
           } else {
-            unflip($dom);
+            unflip($dom,callback);
           }
-          //Providing a nicely wrapped up callback because transform is essentially async
-          if (callback !== undefined){
-           $(this).one(whichTransitionEvent(), callback);
-          }
+          // //Providing a nicely wrapped up callback because transform is essentially async
+          //  $(this).one(whichTransitionEvent(), function(){
+          //     $(this).trigger('flip:done');
+          //     if (callback !== undefined){
+          //       callback.call(this);
+          //     }
+          //   });
         } else if (!$dom.data("initiated")){ //Init flipable DOM
           $dom.data("initiated", true);
 
@@ -185,7 +204,12 @@
         }else{
           //The element has been initiated, all we have to do is change applicable settings
           if (options.axis !== undefined || options.reverse !== undefined){
-            changeSettings.call(this,options,callback);
+            changeSettings.call(this,options,function(){
+              $dom.trigger('flip:change');
+              if (callback !== undefined){
+                callback.call(this);
+              }
+            });
           }
       }
     });
@@ -231,15 +255,11 @@
         faces.css({
           transition: savedTrans
         });
-        if (callback !== undefined){
           callback.call(this);
-        }
-      },0);
+      }.bind(this),0);
     }else{
       //If we didnt have to set the axis we can just call back.
-      if (callback !== undefined){
         setTimeout(callback.bind(this), 0);
-      }
     }
   };
 }( jQuery ));
