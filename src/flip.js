@@ -1,5 +1,5 @@
 (function( $ ) {
-  var flip = function($dom) {
+  var flip = function($dom, callback) {
     $dom.data("flipped", true);
 
     var rotateAxis = "rotate" + $dom.data("axis");
@@ -12,9 +12,17 @@
       transform: rotateAxis + "(0deg)",
       "z-index": "1"
     });
+
+    //Providing a nicely wrapped up callback because transform is essentially async
+     $dom.one(whichTransitionEvent(), function(){
+        $(this).trigger('flip:done');
+        if (callback !== undefined){
+          callback.call(this);
+        }
+      });
   };
 
-  var unflip = function($dom) {
+  var unflip = function($dom, callback) {
     $dom.data("flipped", false);
 
     var rotateAxis = "rotate" + $dom.data("axis");
@@ -27,6 +35,14 @@
       transform: rotateAxis + ($dom.data("reverse") ? "(180deg)" : "(-180deg)"),
       "z-index": "0"
     });
+
+    //Providing a nicely wrapped up callback because transform is essentially async
+     $dom.one(whichTransitionEvent(), function(){
+        $(this).trigger('flip:done');
+        if (callback !== undefined){
+          callback.call(this);
+        }
+      });
   };
   // Function from David Walsh: http://davidwalsh.name/css-animation-callback licensed with http://opensource.org/licenses/MIT
   var whichTransitionEvent = function(){
@@ -58,17 +74,17 @@
             options = !$dom.data("flipped");
           }
           if (options) {
-            flip($dom);
+            flip($dom,callback);
           } else {
-            unflip($dom);
+            unflip($dom,callback);
           }
-          //Providing a nicely wrapped up callback because transform is essentially async
-           $(this).one(whichTransitionEvent(), function(){
-              $(this).trigger('flip:done');
-              if (callback !== undefined){
-                callback.call(this);
-              }
-            });
+          // //Providing a nicely wrapped up callback because transform is essentially async
+          //  $(this).one(whichTransitionEvent(), function(){
+          //     $(this).trigger('flip:done');
+          //     if (callback !== undefined){
+          //       callback.call(this);
+          //     }
+          //   });
         } else if (!$dom.data("initiated")){ //Init flipable DOM
           $dom.data("initiated", true);
 
