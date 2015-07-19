@@ -141,6 +141,9 @@
             position: "absolute",
             "z-index": "1"
           });
+          faces.find('*').css({
+            "backface-visibility": "hidden"
+          });
           $dom.find($dom.data("back")).css({
             transform: rotateAxis + "(" + (settings.reverse? "180deg" : "-180deg") + ")",
             "z-index": "0"
