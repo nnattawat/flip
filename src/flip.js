@@ -107,8 +107,9 @@
             settings.back = 'div:first-child + div';
           }
           // save reverse and axis css to DOM for performing flip
-          $dom.data("reverse", settings.reverse);
           $dom.data("axis", settings.axis);
+          $dom.data("reverse", settings.reverse);
+          $dom.data("trigger", settings.trigger);
           $dom.data("speed", settings.speed);
           $dom.data("front", settings.front);
           $dom.data("back", settings.back);
@@ -160,45 +161,11 @@
           //will temporarily use a short delay of 20 to mitigate this issue. 
           }, 20);
 
-          if (settings.trigger.toLowerCase() == "click") {
-            $dom.on($.fn.tap ? "tap" : "click", function(event) {
-              if (!event) {event = window.event;}
-              if ($dom.find($(event.target).closest('button, a, input[type="submit"]')).length) {
-                return;
-              }
-
-              if ($dom.data("flipped")) {
-                unflip($dom);
-              } else {
-                flip($dom);
-              }
-            });
-          }
-          else if (settings.trigger.toLowerCase() == "hover") {
-            var performFlip = function() {
-              $dom.unbind('mouseleave', performUnflip);
-
-              flip($dom);
-
-              setTimeout(function() {
-                $dom.bind('mouseleave', performUnflip);
-                if (!$dom.is(":hover")) {
-                  unflip($dom);
-                }
-              }, (settings.speed + 150));
-            };
-
-            var performUnflip = function() {
-              unflip($dom);
-            };
-
-            $dom.mouseenter(performFlip);
-            $dom.mouseleave(performUnflip);
-          }
+          assignTrigger.call(this,settings.trigger);
         }else{
           //The element has been initiated, all we have to do is change applicable settings
           if (options.axis !== undefined || options.reverse !== undefined 
-              || options.speed !== undefined){
+              || options.speed !== undefined || options.trigger !== undefined){
             changeSettings.call(this,options,function(){
               $dom.trigger('flip:change');
               if (callback !== undefined){
@@ -270,5 +237,48 @@
       //If we didnt have to set the axis we can just call back.
         setTimeout(callback.bind(this), 0);
     }
+    if (options.trigger !== undefined && $(this).data("trigger") != options.trigger){
+      $(this).off('mouseenter', performHoverFlip);
+      $(this).off('mouseleave', performHoverUnflip);
+      $(this).off('$.fn.tap ? "tap" : "click"', clickHandler);
+      assignTrigger.call(this,options.trigger);
+    }
+  };
+
+  var assignTrigger = function(trigger){
+    if (trigger.toLowerCase() == "click") {
+      $(this).on($.fn.tap ? "tap" : "click", clickHandler);
+    }
+    else if (trigger.toLowerCase() == "hover") {
+      $(this).mouseenter(performHoverFlip);
+      $(this).mouseleave(performHoverUnflip);
+    }
+  };
+  var clickHandler = function(event) {
+    if (!event) {event = window.event;}
+    if ($(this).find($(event.target).closest('button, a, input[type="submit"]')).length) {
+      return;
+    }
+
+    if ($(this).data("flipped")) {
+      unflip($(this));
+    } else {
+      flip($(this));
+    }
+  };
+  var performHoverFlip = function() {
+    $(this).off('mouseleave', performHoverUnflip);
+
+    flip($(this));
+
+    setTimeout(function() {
+      $(this).on('mouseleave', performHoverUnflip);
+      if (!$(this).is(":hover")) {
+        unflip($(this));
+      }
+    }.bind(this), ($(this).data("speed") + 150));
+  };
+  var performHoverUnflip = function() {
+    unflip($(this));
   };
 }( jQuery ));
