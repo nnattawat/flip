@@ -78,13 +78,6 @@
           } else {
             unflip($dom,callback);
           }
-          // //Providing a nicely wrapped up callback because transform is essentially async
-          //  $(this).one(whichTransitionEvent(), function(){
-          //     $(this).trigger('flip:done');
-          //     if (callback !== undefined){
-          //       callback.call(this);
-          //     }
-          //   });
         } else if (!$dom.data("initiated")){ //Init flipable DOM
           $dom.data("initiated", true);
 
@@ -116,6 +109,7 @@
           // save reverse and axis css to DOM for performing flip
           $dom.data("reverse", settings.reverse);
           $dom.data("axis", settings.axis);
+          $dom.data("speed", settings.speed);
           $dom.data("front", settings.front);
           $dom.data("back", settings.back);
 
@@ -203,7 +197,8 @@
           }
         }else{
           //The element has been initiated, all we have to do is change applicable settings
-          if (options.axis !== undefined || options.reverse !== undefined){
+          if (options.axis !== undefined || options.reverse !== undefined 
+              || options.speed !== undefined){
             changeSettings.call(this,options,function(){
               $dom.trigger('flip:change');
               if (callback !== undefined){
@@ -218,6 +213,7 @@
   };
   var changeSettings = function(options,callback){
     var changeNeeded = false;
+    var speedChange = false;//A change in speed doesn't require a changing of other settings
     if (options.axis !== undefined && $(this).data("axis") != options.axis.toLowerCase()){
       $(this).data("axis", options.axis.toLowerCase());
       changeNeeded = true;
@@ -226,16 +222,23 @@
       $(this).data("reverse", options.reverse);
       changeNeeded = true;
     }
+    if (options.speed !== undefined && $(this).data("speed") != options.speed){
+      $(this).data("speed", options.speed);
+      speedChange = true;
+    }
     if (changeNeeded){
       var faces = $(this).find($(this).data("front")).add($(this).data("back"), $(this));
-      var savedTrans = faces.css("transition");
+      //Saving the expected transition for later and temporarily disabling it
+      var trans = "";
+      if (!speedChange){//If a general change is needed, we can just change the speed at the same time
+        trans = faces.css("transition");
+      }else{
+        var speedInSec = $(this).data("speed") / 1000 || 0.5;
+        trans = "all " + speedInSec + "s ease-out";
+      }
       faces.css({
         transition: "none"
       });
-      //Only setting the axis if it needs to be
-
-      //options.axis = options.axis.toLowerCase();
-      //$(this).data("axis", options.axis);
 
       //This sets up the first flip in the new direction automatically
       var rotateAxis = "rotate" + $(this).data("axis");
@@ -253,10 +256,16 @@
       //Providing a nicely wrapped up callback because transform is essentially async
       setTimeout(function(){
         faces.css({
-          transition: savedTrans
+          transition: trans
         });
-          callback.call(this);
+        callback.call(this);
       }.bind(this),0);
+    }else if (speedChange){
+      var faces = $(this).find($(this).data("front")).add($(this).data("back"), $(this));
+      var speedInSec = $(this).data("speed") / 1000 || 0.5;
+      faces.css({
+        transition: "all " + speedInSec + "s ease-out"
+      });
     }else{
       //If we didnt have to set the axis we can just call back.
         setTimeout(callback.bind(this), 0);
