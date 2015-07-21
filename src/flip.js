@@ -86,11 +86,11 @@
             reverse: false,
             trigger: "click",
             speed: 500,
-            front: 'auto',
-            back: 'auto',
-            autoSize: true,
             forceHeight: false,
-            forceWidth: false
+            forceWidth: false,
+            autoSize: true,
+            front: 'auto',
+            back: 'auto'
           }, options );
 
           //By defualt we first check for the old front and back selectors for backward compatibility
@@ -113,9 +113,6 @@
           $dom.data("speed", settings.speed);
           $dom.data("front", settings.front);
           $dom.data("back", settings.back);
-          $dom.data("autoSize", settings.autoSize);
-          $dom.data("forceHeight", settings.forceHeight);
-          $dom.data("forceWidth", settings.forceWidth);
 
           var rotateAxis = "rotate" + (settings.axis.toLowerCase() == "x" ? "x" : "y"), 
               perspective = $dom["outer" + (rotateAxis == "rotatex" ? "Height" : "Width")]() * 2;
@@ -131,7 +128,8 @@
 
           var speedInSec = settings.speed / 1000 || 0.5;
           var faces = $dom.find(settings.front).add(settings.back, $dom);
-          setDimensions($dom);
+          if (settings.forceHeight) {faces.outerHeight($dom.height());} else if (settings.autoSize) {faces.css({'height': '100%'});}
+          if (settings.forceWidth) {faces.outerWidth($dom.width());} else if (settings.autoSize) {faces.css({'width': '100%'});}
           faces.css({
             "backface-visibility": "hidden",
             "transform-style": "preserve-3d",
@@ -167,9 +165,7 @@
         }else{
           //The element has been initiated, all we have to do is change applicable settings
           if (options.axis !== undefined || options.reverse !== undefined 
-              || options.speed !== undefined || options.trigger !== undefined
-              || options.autoSize !== undefined || options.forceHeight !== undefined
-              || options.forceWidth !== undefined){
+              || options.speed !== undefined || options.trigger !== undefined){
             changeSettings.call(this,options,function(){
               $dom.trigger('flip:change');
               if (callback !== undefined){
@@ -185,8 +181,6 @@
   var changeSettings = function(options,callback){
     var changeNeeded = false;
     var speedChange = false;//A change in speed doesn't require a changing of other settings
-    var dimensionChange = false;
-
     if (options.axis !== undefined && $(this).data("axis") != options.axis.toLowerCase()){
       $(this).data("axis", options.axis.toLowerCase());
       changeNeeded = true;
@@ -198,22 +192,6 @@
     if (options.speed !== undefined && $(this).data("speed") != options.speed){
       $(this).data("speed", options.speed);
       speedChange = true;
-    }
-    if (options.autoSize !== undefined && $(this).data("autoSize") != options.autoSize){
-      $(this).data("autoSize", options.autoSize);
-      dimensionChange = true;
-    }
-    if (options.forceHeight !== undefined && $(this).data("forceHeight") != options.forceHeight){
-      $(this).data("forceHeight", options.forceHeight);
-      dimensionChange = true;
-    }
-    if (options.forceWidth !== undefined && $(this).data("forceWidth") != options.forceWidth){
-      $(this).data("forceWidth", options.forceWidth);
-      dimensionChange = true;
-    }
-    if (dimensionChange){
-      //TODO: Set to initial values first somehow
-      setDimensions($(this));
     }
     if (changeNeeded){
       var faces = $(this).find($(this).data("front")).add($(this).data("back"), $(this));
@@ -266,11 +244,7 @@
       assignTrigger.call(this,options.trigger);
     }
   };
-  var setDimensions = function($dom){
-    var faces = $dom.find($dom.data("front")).add($dom.data("back"), $dom);
-    if ($dom.data("forceHeight")) {faces.outerHeight($dom.height());} else if ($dom.data("autoSize")) {faces.css({'height': '100%'});}
-    if ($dom.data("forceWidth")) {faces.outerWidth($dom.width());} else if ($dom.data("autoSize")) {faces.css({'width': '100%'});}
-  };
+
   var assignTrigger = function(trigger){
     if (trigger.toLowerCase() == "click") {
       $(this).on($.fn.tap ? "tap" : "click", clickHandler);
