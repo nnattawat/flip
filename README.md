@@ -5,7 +5,7 @@ See the [project page](http://nnattawat.github.io/flip/)
 
 ## What's new
 * **Flip v1.0.15**
-  * [Hid backface for all childrn, fixing #31](https://github.com/nnattawat/flip/commit/0ac07a7e2da3d9b096b48810e5dbdf33d041962f)
+  * [Hid backface for all children, fixing #31](https://github.com/nnattawat/flip/commit/0ac07a7e2da3d9b096b48810e5dbdf33d041962f)
   
 * **Flip v1.0.14**
   * [Added missing jQuery dependency](https://github.com/nnattawat/flip/commit/0c913304c2b9f86099cb7a2b7fd6ea408297655c)
