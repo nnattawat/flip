@@ -1,4 +1,4 @@
-/*! flip - v1.0.14 - 2015-07-17
+/*! flip - v1.0.15 - 2015-07-23
 * https://github.com/nnattawat/flip
 * Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
@@ -143,6 +143,9 @@
             "transform-style": "preserve-3d",
             position: "absolute",
             "z-index": "1"
+          });
+          faces.find('*').css({
+            "backface-visibility": "hidden"
           });
           $dom.find($dom.data("back")).css({
             transform: rotateAxis + "(" + (settings.reverse? "180deg" : "-180deg") + ")",
