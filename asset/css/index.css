@@ -79,3 +79,6 @@ footer{
   width: 35%;
   margin: 2px 8px 0 0;
 }
+.table-wrapper{
+	overflow-x: scroll; 
+}
