@@ -1,6 +1,3 @@
-/*! flip - v1.0.15 - 2015-07-23
-* https://github.com/nnattawat/flip
-* Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
   var setclick = function(event) {
     $dom = event.data.dom;
