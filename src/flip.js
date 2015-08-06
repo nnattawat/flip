@@ -26,7 +26,7 @@
     flip(dom);
     setTimeout(function() {
       timeoutFlip(dom,event.data.speed);     
-    }, 0); // set to 0 to pass the current dom otherwise it would use the dom selected when the function it's fired
+    }, 0); // set to 0 to pass the current dom, otherwise it would be targeted the dom selected when the function it's fired  
   };
   var performUnflip = function(event) {  
     unflip(event.data.dom);
