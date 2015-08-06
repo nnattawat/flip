@@ -1,3 +1,6 @@
+/*! flip - v1.0.15 - 2015-07-23
+* https://github.com/nnattawat/flip
+* Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
   var setclick = function(event) {
     $dom = event.data.dom;
@@ -24,9 +27,9 @@
     dom = event.data.dom;
     dom.off('mouseleave', performUnflip);
     flip(dom);
-    setTimeout(function() {
+    //setTimeout(function() {
       timeoutFlip(dom,event.data.speed);     
-    }, 0); // set to 0 to pass the current dom, otherwise it would be targeted the dom selected when the function it's fired  
+    //}, 0); // set to 0 to be sure to pass the current dom, otherwise the dom selected when the function it's fired would be targeted 
   };
   var performUnflip = function(event) {  
     unflip(event.data.dom);
