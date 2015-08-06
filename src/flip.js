@@ -12,28 +12,26 @@
       flip($dom);
     }
   };
-  var timeoutFlip = function (dom){
-  console.log('timeout - '+dom[0].id);
-      dom.mouseleave({dom:dom} ,performUnflip);
-      if(!dom.is(":hover")) {     
-        unflip(dom);
-      }  
+  var timeoutFlip = function (dom,speed){
+  setTimeout(function(){
+    dom.mouseleave({dom:dom} ,performUnflip);
+    if(!dom.is(":hover")) {     
+      unflip(dom);
+    }  
+  },speed + 150);
   };  
   var performFlip = function(event) {
-    $dom = event.data.dom;
-    $dom.off('mouseleave', performUnflip);
-console.log('off - '+$dom[0].id);
-    flip($dom);
-console.log('flip - '+$dom[0].id);
-
+    dom = event.data.dom;
+    dom.off('mouseleave', performUnflip);
+    flip(dom);
     setTimeout(function() {
-      timeoutFlip($dom);
-    }, event.data.speed + 150);
+      timeoutFlip(dom,event.data.speed);     
+    }, 0); // set to 0 to pass the current dom otherwise it would use the dom selected when the function it's fired
   };
   var performUnflip = function(event) {  
     unflip(event.data.dom);
   };    
-  var stopflip = function ($dom, callback){
+  var stopFlip = function ($dom, callback){
     if ($dom.data("trigger")=='click'){
       $dom.off($dom.data("trigger"),setclick);
     }
@@ -124,7 +122,7 @@ console.log('flip - '+$dom[0].id);
             options = !$dom.data("flipped");
           }
           if(options == "stop"){
-            stopflip($dom,callback);
+            stopFlip($dom,callback);
           }
           if (options) {
             flip($dom,callback);
@@ -171,7 +169,7 @@ console.log('flip - '+$dom[0].id);
           $dom.data("axis", settings.axis);
           $dom.data("front", settings.front);
           $dom.data("back", settings.back);
-$dom.data("trigger",settings.trigger);
+          $dom.data("trigger",settings.trigger);
 
           var rotateAxis = "rotate" + (settings.axis.toLowerCase() == "x" ? "x" : "y"), 
               perspective = $dom["outer" + (rotateAxis == "rotatex" ? "Height" : "Width")]() * 2;
