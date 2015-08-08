@@ -202,10 +202,8 @@
             $dom.mouseleave(performUnflip);
           }
         }else{
-          //The element has been initiated.
-          if (options === undefined){
-            throw "AlreadyInitiatedError: Element is already initiated.";
-          }else if (options.axis !== undefined || options.reverse !== undefined){
+          //The element has been initiated, all we have to do is change applicable settings
+          if (options.axis !== undefined || options.reverse !== undefined){
             changeSettings.call(this,options,function(){
               $dom.trigger('flip:change');
               if (callback !== undefined){
