@@ -211,7 +211,7 @@
           }
         }else{
           //The element has been initiated, all we have to do is change applicable settings
-          if (options.axis !== undefined || options.reverse !== undefined){
+          if (options && (options.axis !== undefined || options.reverse !== undefined)){
             changeSettings.call(this,options,function(){
               $dom.trigger('flip:change');
               if (callback !== undefined){
