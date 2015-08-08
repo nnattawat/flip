@@ -148,6 +148,14 @@
             transform: rotateAxis + "(" + (settings.reverse? "180deg" : "-180deg") + ")",
             "z-index": "0"
           });
+		  
+		  // Back face always visible on Chrome #39
+          if ((window.chrome || (window.Intl && Intl.v8BreakIterator)) && 'CSS' in window){
+            //Blink Engine, add preserve-3d to $dom
+			$dom.css({"-webkit-transform-style": "preserve-3d"});
+          }
+		  // /#39
+		  
           // not forcing width/height may cause an initial flip to show up on
           // page load when we apply the style to reverse the backface...
           // To prevent this we first apply the basic styles and then give the

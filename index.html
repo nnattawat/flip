@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="src/flip.js"></script>
+  <title>TEST issue 39</title>
+  <style>
+    #card .back{
+      border:1px solid #ed2d39;
+      background-color:  #212121;
+      width:inherit;
+      overflow: hidden;  
+      color:green;
+    }
+    .front{
+      border:1px solid #ed2d39;
+      background-color:transparent;
+    }
+    #card{
+      height:270px;
+    }
+  </style>
+</head>
+<body>
+  <div id="card"> 
+    <div class="front"> 
+        Front content
+    </div> 
+    <div class="back">
+      BACK CONTENT
+        <div class="children">
+  		<div>
+  			<h1>Children Title</h1>
+          </div>						
+  		<div>
+              <p>Children Text</p>
+          </div>
+  	</div>
+    </div> 
+  </div>   
+  <script>
+    $("#card").flip({
+      axis:'x',
+      speed:1000,
+      trigger: 'click',
+      reverse: false
+    });
+  </script>
+</body>
+</html>
