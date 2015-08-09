@@ -1,12 +1,16 @@
-# jQuery Flip <sub><sup>v1.0.15</sup></sub>
+# jQuery Flip <sub><sup>v1.0.16</sup></sub>
 
 **A lightweight jQuery plugin to create 3d flip animation.** 
 See the [project page](http://nnattawat.github.io/flip/)
 
 ## What's new
+* **Flip v1.0.16**
+  * Made Flip [Idempotent](https://en.wikipedia.org/wiki/Idempotence), meaning it won't hurt if you call it more than once on the same element. Fixes [Not working after ajax refresh #40](https://github.com/nnattawat/flip/issues/40).
+  * Fixed a rendering glitch in Chrome and Opera. [Back face always visible on Chrome #39](https://github.com/nnattawat/flip/issues/39).
+
 * **Flip v1.0.15**
   * [Hid backface for all children, fixing #31](https://github.com/nnattawat/flip/commit/0ac07a7e2da3d9b096b48810e5dbdf33d041962f)
-  
+
 * **Flip v1.0.14**
   * [Added missing jQuery dependency](https://github.com/nnattawat/flip/commit/0c913304c2b9f86099cb7a2b7fd6ea408297655c)
   * [Fixed scoping issues](https://github.com/nnattawat/flip/commit/f1ce8f6a313fe905193cae22668dbced0d246451)
@@ -51,15 +55,15 @@ See the [project page](http://nnattawat.github.io/flip/)
 ## Getting Started
 
 ### CDN
-    https://cdn.rawgit.com/nnattawat/flip/v1.0.15/dist/jquery.flip.min.js
+    https://cdn.rawgit.com/nnattawat/flip/v1.0.16/dist/jquery.flip.min.js
 
 ### Download 
 * [jquery.flip.js][max] (development version, commented ~9kB)
 * [jquery.flip.min.js][min] (production version, minified ~4kB, gzipped ~2kB)
 * [jquery.flip.min.js.map][map] (source map, ~5kB)
-[max]: https://cdn.rawgit.com/nnattawat/flip/v1.0.15/dist/jquery.flip.js
-[min]: https://cdn.rawgit.com/nnattawat/flip/v1.0.15/dist/jquery.flip.min.js
-[map]: https://cdn.rawgit.com/nnattawat/flip/v1.0.15/dist/jquery.flip.min.js.map
+[max]: https://cdn.rawgit.com/nnattawat/flip/v1.0.16/dist/jquery.flip.js
+[min]: https://cdn.rawgit.com/nnattawat/flip/v1.0.16/dist/jquery.flip.min.js
+[map]: https://cdn.rawgit.com/nnattawat/flip/v1.0.16/dist/jquery.flip.min.js.map
 
 ### Bower
 <pre>bower install flip</pre>
