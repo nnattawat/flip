@@ -138,7 +138,8 @@
           faces.css({
             "backface-visibility": "hidden",
             "transform-style": "preserve-3d",
-            position: "absolute",
+			"perspective": "perspective",
+            "position": "absolute",
             "z-index": "1"
           });
           faces.find('*').css({
