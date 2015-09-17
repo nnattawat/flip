@@ -1,6 +1,6 @@
 {
   "name": "flip",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "jQuery Plugin - 3d Flip Content",
   "keywords": [
     "jquery-plugin"
@@ -23,6 +23,10 @@
       "email": "jemarkjones@gmail.com",
       "url": "http://JKJones.me/"
     },
+    {
+      "name": "Razvan Popa",
+      "url": "https://github.com/VholtWCP"
+    }
     {
       "name": "Stijn de Witt",
       "email": "StijnDeWitt@hotmail.com",
