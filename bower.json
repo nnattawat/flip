@@ -2,9 +2,13 @@
   "name": "flip",
   "version": "1.0.16",
   "dependencies": {
-  	"jquery": "~2.1.1"
+  	"jquery": "~2.0"
   	},
   "devDependencies": {
-    "jquery": "~2.1.1"
-  }
+    "jquery": "~2.0"
+  },
+  "main": [
+    "src/flip.js"
+  ],
+  "ignore": []
 }
