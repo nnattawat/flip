@@ -1,9 +1,13 @@
-# jQuery Flip <sub><sup>v1.0.17</sup></sub>
+# jQuery Flip <sub><sup>v1.0.18</sup></sub>
 
 **A lightweight jQuery plugin to create 3d flip animation.** 
 See the [project page](http://nnattawat.github.io/flip/)
 
 ## What's new
+* **Flip v1.0.18**
+  * Fixed [Missing comma in package.json #64](https://github.com/nnattawat/flip/issues/64)
+  * Thanks to [Zlatko Fedor](https://github.com/seeden) for reporting and fixing this!
+
 * **Flip v1.0.17**
   * Fixed [Missing "main" and "ignore" entry in bower.json #50](https://github.com/nnattawat/flip/issues/50)
   * Fixed [Use jQuery ~2.0 in bower.json #51](https://github.com/nnattawat/flip/issues/51)
@@ -60,15 +64,15 @@ See the [project page](http://nnattawat.github.io/flip/)
 ## Getting Started
 
 ### CDN
-    https://cdn.rawgit.com/nnattawat/flip/v1.0.17/dist/jquery.flip.min.js
+    https://cdn.rawgit.com/nnattawat/flip/v1.0.18/dist/jquery.flip.min.js
 
 ### Download 
 * [jquery.flip.js][max] (development version, commented ~9kB)
 * [jquery.flip.min.js][min] (production version, minified ~4kB, gzipped ~2kB)
 * [jquery.flip.min.js.map][map] (source map, ~5kB)
-[max]: https://cdn.rawgit.com/nnattawat/flip/v1.0.17/dist/jquery.flip.js
-[min]: https://cdn.rawgit.com/nnattawat/flip/v1.0.17/dist/jquery.flip.min.js
-[map]: https://cdn.rawgit.com/nnattawat/flip/v1.0.17/dist/jquery.flip.min.js.map
+[max]: https://cdn.rawgit.com/nnattawat/flip/v1.0.18/dist/jquery.flip.js
+[min]: https://cdn.rawgit.com/nnattawat/flip/v1.0.18/dist/jquery.flip.min.js
+[map]: https://cdn.rawgit.com/nnattawat/flip/v1.0.18/dist/jquery.flip.min.js.map
 
 ### Bower
 <pre>bower install flip</pre>

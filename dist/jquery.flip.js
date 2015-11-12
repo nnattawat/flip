@@ -1,4 +1,4 @@
-/*! flip - v1.0.17 - 2015-09-17
+/*! flip - v1.0.18 - 2015-11-12
 * https://github.com/nnattawat/flip
 * Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {

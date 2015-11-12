@@ -1,6 +1,6 @@
 {
   "name": "flip",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "jQuery Plugin - 3d Flip Content",
   "keywords": [
     "jquery-plugin"
@@ -17,6 +17,11 @@
       "name": "Carlos Fagiani Junior",
       "email": "fagianijunior@gmail.com",
       "url": "https://github.com/fagianijunior"
+    },
+    {
+      "name": "Zlatko Fedor",
+      "email": "zfedor@gmail.com",
+      "url": "https://github.com/seeden"
     },
     {
       "name": "Jemar Jones",
