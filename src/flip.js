@@ -1,4 +1,55 @@
+/*! flip - v1.0.15 - 2015-07-23
+* https://github.com/nnattawat/flip
+* Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
+  var setclick = function(event) {
+    $dom = event.data.dom;
+    if (!event) {event = window.event;}
+    if ($dom.find($(event.target).closest('button, a, input[type="submit"]')).length) {
+      return;
+    }
+
+    if ($dom.data("flipped")) {
+      unflip($dom);
+    } else {
+      flip($dom);
+    }
+  };
+  var timeoutFlip = function (dom,speed){
+  setTimeout(function(){
+    dom.mouseleave({dom:dom} ,performUnflip);
+    if(!dom.is(":hover")) {     
+      unflip(dom);
+    }  
+  },speed + 150);
+  };  
+  var performFlip = function(event) {
+    dom = event.data.dom;
+    dom.off('mouseleave', performUnflip);
+    flip(dom);
+    //setTimeout(function() {
+      timeoutFlip(dom,event.data.speed);     
+    //}, 0); // set to 0 to be sure to pass the current dom, otherwise the dom selected when the function it's fired would be targeted 
+  };
+  var performUnflip = function(event) {  
+    unflip(event.data.dom);
+  };    
+  var stopFlip = function ($dom, callback){
+    if ($dom.data("trigger")=='click'){
+      $dom.off($dom.data("trigger"),setclick);
+    }
+    else if ($dom.data("trigger")=='hover'){
+        $dom.off("mouseenter",performFlip);
+        $dom.off("mouseleave",performUnflip);
+    }
+    //Providing a nicely wrapped up callback because transform is essentially async
+    $dom.one(whichTransitionEvent(), function(){
+        $(this).trigger('flip:stop');
+        if (callback !== undefined){
+          callback.call(this);
+        }
+    });    
+  };
   var flip = function($dom, callback) {
     $dom.data("flipped", true);
 
@@ -73,6 +124,9 @@
           if (options == "toggle"){
             options = !$dom.data("flipped");
           }
+          if(options == "stop"){
+            stopFlip($dom,callback);
+          }
           if (options) {
             flip($dom,callback);
           } else {
@@ -118,6 +172,7 @@
           $dom.data("axis", settings.axis);
           $dom.data("front", settings.front);
           $dom.data("back", settings.back);
+          $dom.data("trigger",settings.trigger);
 
           var rotateAxis = "rotate" + (settings.axis.toLowerCase() == "x" ? "x" : "y"), 
               perspective = $dom["outer" + (rotateAxis == "rotatex" ? "Height" : "Width")]() * 2;
@@ -142,8 +197,7 @@
             "z-index": "1"
           });
           faces.find('*').css({
-            "backface-visibility": "hidden"
-          });
+            "backface-visibility": "hidden"});
           $dom.find($dom.data("back")).css({
             transform: rotateAxis + "(" + (settings.reverse? "180deg" : "-180deg") + ")",
             "z-index": "0"
@@ -175,39 +229,12 @@
           }, 20);
 
           if (settings.trigger.toLowerCase() == "click") {
-            $dom.on($.fn.tap ? "tap" : "click", function(event) {
-              if (!event) {event = window.event;}
-              if ($dom.find($(event.target).closest('button, a, input[type="submit"]')).length) {
-                return;
-              }
-
-              if ($dom.data("flipped")) {
-                unflip($dom);
-              } else {
-                flip($dom);
-              }
-            });
+            $dom.on($.fn.tap ? "tap" : "click",{dom:$dom} , setclick);
           }
-          else if (settings.trigger.toLowerCase() == "hover") {
-            var performFlip = function() {
-              $dom.unbind('mouseleave', performUnflip);
+          else if (settings.trigger.toLowerCase() == "hover") {         
 
-              flip($dom);
-
-              setTimeout(function() {
-                $dom.bind('mouseleave', performUnflip);
-                if (!$dom.is(":hover")) {
-                  unflip($dom);
-                }
-              }, (settings.speed + 150));
-            };
-
-            var performUnflip = function() {
-              unflip($dom);
-            };
-
-            $dom.mouseenter(performFlip);
-            $dom.mouseleave(performUnflip);
+            $dom.mouseenter({dom:$dom,speed:settings.speed} ,performFlip);
+            $dom.mouseleave({dom:$dom} ,performUnflip);
           }
         }else{
           //The element has been initiated, all we have to do is change applicable settings
