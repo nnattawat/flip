@@ -1,6 +1,6 @@
-/*! flip - v1.0.18 - 2015-11-12
+/*! flip - v1.0.19 - 2016-01-04
 * https://github.com/nnattawat/flip
-* Copyright (c) 2015 Nattawat Nonsung; Licensed MIT */
+* Copyright (c) 2016 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
   var flip = function($dom, callback) {
     $dom.data("flipped", true);
@@ -155,7 +155,7 @@
 		  // Back face always visible on Chrome #39
           if ((window.chrome || (window.Intl && Intl.v8BreakIterator)) && 'CSS' in window){
             //Blink Engine, add preserve-3d to $dom
-			$dom.css({"-webkit-transform-style": "preserve-3d"});
+            $dom.css({"-webkit-transform-style": "preserve-3d"});
           }
 		  // /#39
 		  
@@ -178,7 +178,7 @@
           }, 20);
 
           if (settings.trigger.toLowerCase() == "click") {
-            $dom.on($.fn.tap ? "tap" : "click", function(event) {
+            $dom.on($.fn.tap ? "tap.flip" : "click.flip", function(event) {
               if (!event) {event = window.event;}
               if ($dom.find($(event.target).closest('button, a, input[type="submit"]')).length) {
                 return;
@@ -193,12 +193,12 @@
           }
           else if (settings.trigger.toLowerCase() == "hover") {
             var performFlip = function() {
-              $dom.unbind('mouseleave', performUnflip);
+              $dom.off('mouseleave.flip');
 
               flip($dom);
 
               setTimeout(function() {
-                $dom.bind('mouseleave', performUnflip);
+                $dom.on('mouseleave.flip', performUnflip);
                 if (!$dom.is(":hover")) {
                   unflip($dom);
                 }
@@ -209,8 +209,8 @@
               unflip($dom);
             };
 
-            $dom.mouseenter(performFlip);
-            $dom.mouseleave(performUnflip);
+            $dom.on('mouseenter.flip', performFlip);
+            $dom.on('mouseleave.flip', performUnflip);
           }
         }else{
           //The element has been initiated, all we have to do is change applicable settings
