@@ -152,7 +152,7 @@
 		  // Back face always visible on Chrome #39
           if ((window.chrome || (window.Intl && Intl.v8BreakIterator)) && 'CSS' in window){
             //Blink Engine, add preserve-3d to $dom
-			$dom.css({"-webkit-transform-style": "preserve-3d"});
+            $dom.css({"-webkit-transform-style": "preserve-3d"});
           }
 		  // /#39
 		  
@@ -175,7 +175,7 @@
           }, 20);
 
           if (settings.trigger.toLowerCase() == "click") {
-            $dom.on($.fn.tap ? "tap" : "click", function(event) {
+            $dom.on($.fn.tap ? "tap.flip" : "click.flip", function(event) {
               if (!event) {event = window.event;}
               if ($dom.find($(event.target).closest('button, a, input[type="submit"]')).length) {
                 return;
@@ -190,12 +190,12 @@
           }
           else if (settings.trigger.toLowerCase() == "hover") {
             var performFlip = function() {
-              $dom.unbind('mouseleave', performUnflip);
+              $dom.off('mouseleave.flip');
 
               flip($dom);
 
               setTimeout(function() {
-                $dom.bind('mouseleave', performUnflip);
+                $dom.on('mouseleave.flip', performUnflip);
                 if (!$dom.is(":hover")) {
                   unflip($dom);
                 }
@@ -206,8 +206,8 @@
               unflip($dom);
             };
 
-            $dom.mouseenter(performFlip);
-            $dom.mouseleave(performUnflip);
+            $dom.on('mouseenter.flip', performFlip);
+            $dom.on('mouseleave.flip', performUnflip);
           }
         }else{
           //The element has been initiated, all we have to do is change applicable settings
