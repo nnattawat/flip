@@ -33,13 +33,13 @@
     <div class="jumbotron">
       <img class="logo" src="asset/img/jquery-flip.png" />
       <div class="container">
-        <h2>jQuery Flip <small>v1.0.18</small></h2>
+        <h2>jQuery Flip <small>v1.0.19</small></h2>
         <p>A jQuery plugin to flip content with 3D animation</p>
       </div>
     </div>
     <div class="download">
-      <a href="https://github.com/nnattawat/flip/archive/v1.0.18.zip" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .zip</a>
-      <a href="https://github.com/nnattawat/flip/archive/v1.0.18.tar.gz" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .tar</a>
+      <a href="https://github.com/nnattawat/flip/archive/v1.0.19.zip" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .zip</a>
+      <a href="https://github.com/nnattawat/flip/archive/v1.0.19.tar.gz" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download .tar</a>
       <a href="https://github.com/nnattawat/flip" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span> View on Github</a>
     </div>
     <div class="container">
@@ -62,12 +62,12 @@
       <p>Simply include jquery.flip.js on your page. jQuery Flip has a dependency on <a href="https://jquery.com/">jQuery</a> so make sure to include that first.</p>
       <h4>From CDN</h4>
       <p>Use both jQuery and jQuery Flip directly from CDN. No need to download anything:</p>
-      <pre class="prettyprint">&lt;script src="https://code.jquery.com/jquery-2.1.4.min.js"&gt;<br/>&lt;script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.18/dist/jquery.flip.min.js"&gt;</pre>
+      <pre class="prettyprint">&lt;script src="https://code.jquery.com/jquery-2.1.4.min.js"&gt;<br/>&lt;script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.19/dist/jquery.flip.min.js"&gt;</pre>
       <h4>Download</h4>
       <ul>
-        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.18/dist/jquery.flip.js">jquery.flip.js</a> (development version, commented ~9Kb)</li>
-        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.18/dist/jquery.flip.min.js">jquery.flip.min.js</a> (production version, minified ~4Kb, gzipped ~2Kb)</li>
-        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.18/dist/jquery.flip.min.js.map">jquery.flip.min.js.map</a> (source map, ~5Kb)</li>
+        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.19/dist/jquery.flip.js">jquery.flip.js</a> (development version, commented ~9Kb)</li>
+        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.19/dist/jquery.flip.min.js">jquery.flip.min.js</a> (production version, minified ~4Kb, gzipped ~2Kb)</li>
+        <li><a href="https://cdn.rawgit.com/nnattawat/flip/v1.0.19/dist/jquery.flip.min.js.map">jquery.flip.min.js.map</a> (source map, ~5Kb)</li>
       </ul>
       <pre class="prettyprint">&lt;script src="jquery-2.1.4.min.js"&gt;<br/>&lt;script src="jquery.flip.js"&gt;</pre>
       <h4>Or install using bower</h4>
@@ -99,7 +99,7 @@
   &lt;/div&gt; 
 &lt;/div&gt;</pre>
       <div class="panel panel-info">
-        <div class="panel-heading">CSS guide</div>
+        <div class="panel-heading"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> CSS guide</div>
         <div class="panel-body">
           For the best layout, <code>margin</code> should be added to <code>.card</code> and padding should be added to <code>.front</code> and <code>.back</code>
         </div>
@@ -223,8 +223,10 @@
       <h3><a id="events"></a>Events</h3>
       <table class="table table-bordered">
         <thead>
-          <th>Event</th>
-          <th>Description</th>
+          <tr>
+            <th>Event</th>
+            <th>Description</th>
+          </tr>
         </thead>
         <tbody>
           <tr>
@@ -237,6 +239,12 @@
           </tr>
         </tbody>
       </table>
+      <div class="panel panel-info">
+        <div class="panel-heading"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Note</div>
+        <div class="panel-body">
+          All jQeury events added by the plugin contain <code>.flip</code> namespace. You can unregister flip by <code>$('#card').off('.flip')</code>
+        </div>
+      </div>
       <br>
 
       <h3><a id="Using-via-javascript"></a>Using via javascript</h3>
@@ -514,7 +522,7 @@
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
   <script src="https://cdn.rawgit.com/download/jQuery-Touch-Events/0.9.0/src/jquery.mobile-events.min.js"></script>
-    <script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.18/dist/jquery.flip.min.js"></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.19/dist/jquery.flip.min.js"></script>
     <script type="text/javascript">
 
 
