@@ -1,4 +1,4 @@
-/*! flip - v1.0.19 - 2016-01-04
+/*! flip - v1.0.20 - 2016-02-14
 * https://github.com/nnattawat/flip
 * Copyright (c) 2016 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
@@ -239,7 +239,7 @@
     }
     if (changeNeeded){
       var faces = $(this).find($(this).data("front")).add($(this).data("back"), $(this));
-      var savedTrans = faces.css("transition");
+      var savedTrans = faces.css(["transition-property", "transition-timing-function", "transition-duration", "transition-delay"]);
       faces.css({
         transition: "none"
       });
@@ -263,9 +263,7 @@
       }
       //Providing a nicely wrapped up callback because transform is essentially async
       setTimeout(function(){
-        faces.css({
-          transition: savedTrans
-        });
+        faces.css(savedTrans);
           callback.call(this);
       }.bind(this),0);
     }else{
