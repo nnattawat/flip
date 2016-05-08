@@ -54,26 +54,8 @@
    */
   $.extend(Flip.prototype, {
 
-    flip: function() {
+    triggerCallback: function() {
       var self = this;
-
-      if (self.isFlipped) {
-        return;
-      }
-
-      self.isFlipped = true;
-
-      var rotateAxis = "rotate" + self.setting.axis;
-      self.frontElement.css({
-        transform: rotateAxis + (self.setting.reverse ? "(-180deg)" : "(180deg)"),
-        "z-index": "0"
-      });
-
-      self.backElement.css({
-        transform: rotateAxis + "(0deg)",
-        "z-index": "1"
-      });
-
       // Providing a nicely wrapped up callback because transform is essentially async
       self.element.one(whichTransitionEvent(), function() {
         self.element.trigger('flip:done');
@@ -83,33 +65,44 @@
       });
     },
 
-    unflip: function() {
-      var self = this;
-
-      if (!self.isFlipped) {
+    flip: function() {
+      if (this.isFlipped) {
         return;
       }
 
-      self.isFlipped = false;
+      this.isFlipped = true;
 
-      var rotateAxis = "rotate" + self.setting.axis;
-      self.frontElement.css({
+      var rotateAxis = "rotate" + this.setting.axis;
+      this.frontElement.css({
+        transform: rotateAxis + (this.setting.reverse ? "(-180deg)" : "(180deg)"),
+        "z-index": "0"
+      });
+
+      this.backElement.css({
+        transform: rotateAxis + "(0deg)",
+        "z-index": "1"
+      });
+      this.triggerCallback();
+    },
+
+    unflip: function() {
+      if (!this.isFlipped) {
+        return;
+      }
+
+      this.isFlipped = false;
+
+      var rotateAxis = "rotate" + this.setting.axis;
+      this.frontElement.css({
         transform: rotateAxis + "(0deg)",
         "z-index": "1"
       });
 
-      self.backElement.css({
-        transform: rotateAxis + (self.setting.reverse ? "(180deg)" : "(-180deg)"),
+      this.backElement.css({
+        transform: rotateAxis + (this.setting.reverse ? "(180deg)" : "(-180deg)"),
         "z-index": "0"
       });
-
-      // Providing a nicely wrapped up callback because transform is essentially async
-      self.element.one(whichTransitionEvent(), function(){
-        self.element.trigger('flip:done');
-        if (self.callback !== undefined){
-          self.callback.call(self.element);
-        }
-      });
+      this.triggerCallback();
     },
 
     getFrontElement: function() {
