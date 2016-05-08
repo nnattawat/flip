@@ -1,53 +1,11 @@
 (function( $ ) {
-  var flip = function($dom, callback) {
-    $dom.data("flipped", true);
+  /*
+   * Private attributes and method
+   */
 
-    var rotateAxis = "rotate" + $dom.data("axis");
-    $dom.find($dom.data("front")).css({
-      transform: rotateAxis + ($dom.data("reverse") ? "(-180deg)" : "(180deg)"),
-      "z-index": "0"
-    });
-
-    $dom.find($dom.data("back")).css({
-      transform: rotateAxis + "(0deg)",
-      "z-index": "1"
-    });
-
-    //Providing a nicely wrapped up callback because transform is essentially async
-     $dom.one(whichTransitionEvent(), function(){
-        $(this).trigger('flip:done');
-        if (callback !== undefined){
-          callback.call(this);
-        }
-      });
-  };
-
-  var unflip = function($dom, callback) {
-    $dom.data("flipped", false);
-
-    var rotateAxis = "rotate" + $dom.data("axis");
-    $dom.find($dom.data("front")).css({
-      transform: rotateAxis + "(0deg)",
-      "z-index": "1"
-    });
-
-    $dom.find($dom.data("back")).css({
-      transform: rotateAxis + ($dom.data("reverse") ? "(180deg)" : "(-180deg)"),
-      "z-index": "0"
-    });
-
-    //Providing a nicely wrapped up callback because transform is essentially async
-     $dom.one(whichTransitionEvent(), function(){
-        $(this).trigger('flip:done');
-        if (callback !== undefined){
-          callback.call(this);
-        }
-      });
-  };
   // Function from David Walsh: http://davidwalsh.name/css-animation-callback licensed with http://opensource.org/licenses/MIT
-  var whichTransitionEvent = function(){
-    var t,
-        el = document.createElement("fakeelement"),
+  var whichTransitionEvent = function() {
+    var t, el = document.createElement("fakeelement"),
     transitions = {
       "transition"      : "transitionend",
       "OTransition"     : "oTransitionEnd",
@@ -55,217 +13,315 @@
       "WebkitTransition": "webkitTransitionEnd"
     };
 
-    for (t in transitions){
-      if (el.style[t] !== undefined){
+    for (t in transitions) {
+      if (el.style[t] !== undefined) {
         return transitions[t];
       }
     }
   };
-  $.fn.flip = function(options, callback) {
-    if (typeof options == 'function'){
-      //This allows flip to be called for setup with only a callback (default settings)
+
+  var Flip = function($el, options, callback) {
+    // Define default setting
+    var setting = $.extend({
+      axis: "y",
+      reverse: false,
+      trigger: "click",
+      speed: 500,
+      forceHeight: false,
+      forceWidth: false,
+      autoSize: true,
+      front: '.front',
+      back: '.back'
+    }, options );
+
+    // Attributes
+    this.setting = $.extend(setting, options);
+    this.element = $el;
+    this.frontElement = this.getFrontElement();
+    this.backElement = this.getBackElement();
+    if (typeof options === 'function') {
+      // This allows flip to be called for setup with only a callback (default settings)
       callback = options;
     }
-    this.each(function(){
-      var $dom = $(this);
+    this.callback = callback;
+    this.isFlipped = false;
 
-        if (options !== undefined && (typeof(options) == "boolean" || typeof(options) == "string")) { // Force flip the DOM
-          if (options == "toggle"){
-            options = !$dom.data("flipped");
-          }
-          if (options) {
-            flip($dom,callback);
-          } else {
-            unflip($dom,callback);
-          }
-          // //Providing a nicely wrapped up callback because transform is essentially async
-          //  $(this).one(whichTransitionEvent(), function(){
-          //     $(this).trigger('flip:done');
-          //     if (callback !== undefined){
-          //       callback.call(this);
-          //     }
-          //   });
-        } else if (!$dom.data("initiated")){ //Init flipable DOM
-          $dom.data("initiated", true);
+    this.init();
+  };
 
-          var settings = $.extend({
-            axis: "y",
-            reverse: false,
-            trigger: "click",
-            speed: 500,
-            forceHeight: false,
-            forceWidth: false,
-            autoSize: true,
-            front: 'auto',
-            back: 'auto'
-          }, options );
+  /*
+   * Public methods
+   */
+  $.extend(Flip.prototype, {
 
-          //By defualt we first check for the old front and back selectors for backward compatibility
-          //if they arent there we fall back to auto selecting the first and second div
-          if (settings.front == "auto"){
-            settings.front = ($dom.find('.front').length > 0)? '.front' : 'div:first-child';
-          }else if (settings.front == "autostrict"){
-            settings.front = 'div:first-child';
-          }
-          if (settings.back == "auto"){
-            //Note, we must use the old 'div:first-child + div' for IE compatibility
-            settings.back = ($dom.find('.back').length > 0)? '.back' : 'div:first-child + div';
-          }else if (settings.back == "autostrict"){
-            settings.back = 'div:first-child + div';
-          }
-          // save reverse and axis css to DOM for performing flip
-          $dom.data("reverse", settings.reverse);
-          $dom.data("axis", settings.axis);
-          $dom.data("front", settings.front);
-          $dom.data("back", settings.back);
+    flip: function() {
+      var self = this;
 
-          var rotateAxis = "rotate" + (settings.axis.toLowerCase() == "x" ? "x" : "y"), 
-              perspective = $dom["outer" + (rotateAxis == "rotatex" ? "Height" : "Width")]() * 2;
-
-          $dom.find($dom.data("back")).css({
-            transform: rotateAxis + "(" + (settings.reverse? "180deg" : "-180deg") + ")"
-          });
-
-          $dom.css({
-            perspective: perspective,
-            position: "relative"
-          });
-
-          var speedInSec = settings.speed / 1000 || 0.5;
-          var faces = $dom.find(settings.front).add(settings.back, $dom);
-          if (settings.forceHeight) {faces.outerHeight($dom.height());} else if (settings.autoSize) {faces.css({'height': '100%'});}
-          if (settings.forceWidth) {faces.outerWidth($dom.width());} else if (settings.autoSize) {faces.css({'width': '100%'});}
-          faces.css({
-            "backface-visibility": "hidden",
-            "transform-style": "preserve-3d",
-            position: "absolute",
-            "z-index": "1"
-          });
-          faces.find('*').css({
-            "backface-visibility": "hidden"
-          });
-          $dom.find($dom.data("back")).css({
-            transform: rotateAxis + "(" + (settings.reverse? "180deg" : "-180deg") + ")",
-            "z-index": "0"
-          });
-		  
-		  // Back face always visible on Chrome #39
-          if ((window.chrome || (window.Intl && Intl.v8BreakIterator)) && 'CSS' in window){
-            //Blink Engine, add preserve-3d to $dom
-            $dom.css({"-webkit-transform-style": "preserve-3d"});
-          }
-		  // /#39
-		  
-          // not forcing width/height may cause an initial flip to show up on
-          // page load when we apply the style to reverse the backface...
-          // To prevent this we first apply the basic styles and then give the
-          // browser a moment to apply them. Only afterwards do we add the transition.
-          setTimeout(function(){
-            // By now the browser should have applied the styles, so the transition
-            // will only affect subsequent flips.
-            faces.css({
-              transition: "all " + speedInSec + "s ease-out"
-            });
-            if (callback !== undefined){
-              callback.call(this);
-            }
-          //While this used to work with a setTimeout of zero, at some point that became
-          //unstable and the initial flip returned. The reason for this is unknown but we
-          //will temporarily use a short delay of 20 to mitigate this issue. 
-          }, 20);
-
-          if (settings.trigger.toLowerCase() == "click") {
-            $dom.on($.fn.tap ? "tap.flip" : "click.flip", function(event) {
-              if (!event) {event = window.event;}
-              if ($dom.find($(event.target).closest('button, a, input[type="submit"]')).length) {
-                return;
-              }
-
-              if ($dom.data("flipped")) {
-                unflip($dom);
-              } else {
-                flip($dom);
-              }
-            });
-          }
-          else if (settings.trigger.toLowerCase() == "hover") {
-            var performFlip = function() {
-              $dom.off('mouseleave.flip');
-
-              flip($dom);
-
-              setTimeout(function() {
-                $dom.on('mouseleave.flip', performUnflip);
-                if (!$dom.is(":hover")) {
-                  unflip($dom);
-                }
-              }, (settings.speed + 150));
-            };
-
-            var performUnflip = function() {
-              unflip($dom);
-            };
-
-            $dom.on('mouseenter.flip', performFlip);
-            $dom.on('mouseleave.flip', performUnflip);
-          }
-        }else{
-          //The element has been initiated, all we have to do is change applicable settings
-          if (options && (options.axis !== undefined || options.reverse !== undefined)){
-            changeSettings.call(this,options,function(){
-              $dom.trigger('flip:change');
-              if (callback !== undefined){
-                callback.call(this);
-              }
-            });
-          }
+      if (self.isFlipped) {
+        return;
       }
-    });
+
+      self.isFlipped = true;
+
+      var rotateAxis = "rotate" + self.setting.axis;
+      self.frontElement.css({
+        transform: rotateAxis + (self.setting.reverse ? "(-180deg)" : "(180deg)"),
+        "z-index": "0"
+      });
+
+      self.backElement.css({
+        transform: rotateAxis + "(0deg)",
+        "z-index": "1"
+      });
+
+      // Providing a nicely wrapped up callback because transform is essentially async
+      self.element.one(whichTransitionEvent(), function() {
+        self.element.trigger('flip:done');
+        if (self.callback !== undefined) {
+          self.callback.call(self.element);
+        }
+      });
+    },
+
+    unflip: function() {
+      var self = this;
+
+      if (!self.isFlipped) {
+        return;
+      }
+
+      self.isFlipped = false;
+
+      var rotateAxis = "rotate" + self.setting.axis;
+      self.frontElement.css({
+        transform: rotateAxis + "(0deg)",
+        "z-index": "1"
+      });
+
+      self.backElement.css({
+        transform: rotateAxis + (self.setting.reverse ? "(180deg)" : "(-180deg)"),
+        "z-index": "0"
+      });
+
+      // Providing a nicely wrapped up callback because transform is essentially async
+      self.element.one(whichTransitionEvent(), function(){
+        self.element.trigger('flip:done');
+        if (self.callback !== undefined){
+          self.callback.call(self.element);
+        }
+      });
+    },
+
+    getFrontElement: function() {
+      if (this.setting.front instanceof $) {
+        return this.setting.front;
+      } else {
+        return this.element.find(this.setting.front);
+      }
+    },
+
+    getBackElement: function() {
+      if (this.setting.back instanceof $) {
+        return this.setting.back;
+      } else {
+        return this.element.find(this.setting.back);
+      }
+    },
+
+    init: function() {
+      var self = this;
+
+      var faces = self.frontElement.add(self.backElement);
+      var rotateAxis = "rotate" + (self.setting.axis.toLowerCase() == "x" ? "x" : "y");
+      var perspective = self.element["outer" + (rotateAxis == "rotatex" ? "Height" : "Width")]() * 2;
+      var elementCss = {
+        'perspective': perspective,
+        'position': 'relative'
+      };
+      var backElementCss = {
+        "transform": rotateAxis + "(" + (self.setting.reverse ? "180deg" : "-180deg") + ")",
+        "z-index": "0"
+      };
+      var faceElementCss = {
+        "backface-visibility": "hidden",
+        "transform-style": "preserve-3d",
+        "position": "absolute",
+        "z-index": "1"
+      };
+
+      if (self.setting.forceHeight) {
+        faces.outerHeight(self.element.height());
+      } else if (self.setting.autoSize) {
+        faceElementCss['height'] = '100%';
+      }
+
+      if (self.setting.forceWidth) {
+        faces.outerWidth(self.element.width());
+      } else if (self.setting.autoSize) {
+        faceElementCss['width'] = '100%';
+      }
+
+      // Back face always visible on Chrome #39
+      if ((window.chrome || (window.Intl && Intl.v8BreakIterator)) && 'CSS' in window) {
+        //Blink Engine, add preserve-3d to self.element
+        elementCss["-webkit-transform-style"] = "preserve-3d";
+      }
+
+      self.element.css(elementCss);
+      self.backElement.css(backElementCss);
+      faces.css(faceElementCss).find('*').css({
+        "backface-visibility": "hidden"
+      });
+
+      // #39
+      // not forcing width/height may cause an initial flip to show up on
+      // page load when we apply the style to reverse the backface...
+      // To prevent self we first apply the basic styles and then give the
+      // browser a moment to apply them. Only afterwards do we add the transition.
+      setTimeout(function() {
+        // By now the browser should have applied the styles, so the transition
+        // will only affect subsequent flips.
+        var speedInSec = self.setting.speed / 1000 || 0.5;
+        faces.css({
+          "transition": "all " + speedInSec + "s ease-out"
+        });
+
+        if (self.callback !== undefined) {
+          self.callback.call(self.element);
+        }
+
+        // While this used to work with a setTimeout of zero, at some point that became
+        // unstable and the initial flip returned. The reason for this is unknown but we
+        // will temporarily use a short delay of 20 to mitigate this issue. 
+      }, 20);
+
+      self.attachEvents();
+    },
+
+    clickHandler: function(event) {
+      if (!event) { event = window.event; }
+      if (this.element.find($(event.target).closest('button, a, input[type="submit"]')).length) {
+        return;
+      }
+
+      if (this.isFlipped) {
+        this.unflip();
+      } else {
+        this.flip();
+      }
+    },
+
+    hoverHandler: function() {
+      var self = this;
+      self.element.off('mouseleave.flip');
+
+      self.flip();
+
+      setTimeout(function() {
+        self.element.on('mouseleave.flip', $.proxy(self.unflip, self));
+        if (!self.element.is(":hover")) {
+          self.unflip();
+        }
+      }, (self.setting.speed + 150));
+    },
+
+    attachEvents: function() {
+      var self = this;
+      if (self.setting.trigger.toLowerCase() === "click") {
+        self.element.on($.fn.tap ? "tap.flip" : "click.flip", $.proxy(self.clickHandler, self));
+      } else if (self.setting.trigger.toLowerCase() === "hover") {
+        self.element.on('mouseenter.flip', $.proxy(self.hoverHandler, self));
+        self.element.on('mouseleave.flip', $.proxy(self.unflip, self));
+      }
+    },
+
+    // TODO Fix this method
+    // changeSettings: function(options, callback) {
+    //   var changeNeeded = false;
+    //   if (options.axis !== undefined && this.setting.axis != options.axis.toLowerCase()) {
+    //     $(this).data("axis", options.axis.toLowerCase());
+    //     changeNeeded = true;
+    //   }
+
+    //   if (options.reverse !== undefined && this.setting.reverse != options.reverse) {
+    //     $(this).data("reverse", options.reverse);
+    //     changeNeeded = true;
+    //   }
+
+    //   if (changeNeeded) {
+    //     var faces = $(this).find(this.setting.front).add(this.setting.back, $(this));
+    //     var savedTrans = faces.css(["transition-property", "transition-timing-function", "transition-duration", "transition-delay"]);
+    //     faces.css({
+    //       transition: "none"
+    //     });
+
+    //     // Only setting the axis if it needs to be
+    //     // options.axis = options.axis.toLowerCase();
+    //     // $(this).data("axis", options.axis);
+
+    //     // This sets up the first flip in the new direction automatically
+    //     var rotateAxis = "rotate" + this.setting.axis;
+    //     if ($(this).data("flipped")) {
+    //       $(this).find(this.setting.front).css({
+    //         transform: rotateAxis + (this.setting.reverse ? "(-180deg)" : "(180deg)"),
+    //         "z-index": "0"
+    //       });
+    //     } else {
+    //       $(this).find(this.setting.back).css({
+    //         transform: rotateAxis + "(" + ($(this).data("reverse")? "180deg" : "-180deg") + ")",
+    //         "z-index": "0"
+    //       });
+    //     }
+    //     // Providing a nicely wrapped up callback because transform is essentially async
+    //     setTimeout(function() {
+    //       faces.css(savedTrans);
+    //       callback.call(this);
+    //     }.bind(this),0);
+    //   } else {
+    //     // If we didnt have to set the axis we can just call back.
+    //     setTimeout(callback.bind(this), 0);
+    //   }
+    // }
+  });
+
+  /*
+   * jQuery collection methods
+   */
+  $.fn.flip = function (options, callback) {
+    if (typeof options === "string" || typeof options === "boolean") {
+      this.each(function() {
+        var flip = $(this).data('flip-model');
+
+        if (options === "toggle") {
+          options = !flip.isFlipped;
+        }
+
+        if (options) {
+          flip.flip();
+        } else {
+          flip.unflip();
+        }
+      });
+    } else {
+      this.each(function() {
+        if ($(this).data('flip-model')) { // The element has been initiated, all we have to do is change applicable settings
+          var flip = $(this).data('flip-model');
+
+          if (options && (options.axis !== undefined || options.reverse !== undefined)) {
+            flip.changeSettings(options, function() {
+              flip.element.trigger('flip:change');
+              if (flip.callback !== undefined) {
+                flip.callback.call(flip.element);
+              }
+            });
+          }
+        } else { // Init
+          $(this).data('flip-model', new Flip($(this), options, callback));
+        }
+      });
+    }
 
     return this;
   };
-  var changeSettings = function(options,callback){
-    var changeNeeded = false;
-    if (options.axis !== undefined && $(this).data("axis") != options.axis.toLowerCase()){
-      $(this).data("axis", options.axis.toLowerCase());
-      changeNeeded = true;
-    }
-    if (options.reverse !== undefined && $(this).data("reverse") != options.reverse){
-      $(this).data("reverse", options.reverse);
-      changeNeeded = true;
-    }
-    if (changeNeeded){
-      var faces = $(this).find($(this).data("front")).add($(this).data("back"), $(this));
-      var savedTrans = faces.css(["transition-property", "transition-timing-function", "transition-duration", "transition-delay"]);
-      faces.css({
-        transition: "none"
-      });
-      //Only setting the axis if it needs to be
 
-      //options.axis = options.axis.toLowerCase();
-      //$(this).data("axis", options.axis);
-
-      //This sets up the first flip in the new direction automatically
-      var rotateAxis = "rotate" + $(this).data("axis");
-      if ($(this).data("flipped")){
-        $(this).find($(this).data("front")).css({
-          transform: rotateAxis + ($(this).data("reverse") ? "(-180deg)" : "(180deg)"),
-          "z-index": "0"
-        });
-      }else{
-        $(this).find($(this).data("back")).css({
-          transform: rotateAxis + "(" + ($(this).data("reverse")? "180deg" : "-180deg") + ")",
-          "z-index": "0"
-        });
-      }
-      //Providing a nicely wrapped up callback because transform is essentially async
-      setTimeout(function(){
-        faces.css(savedTrans);
-          callback.call(this);
-      }.bind(this),0);
-    }else{
-      //If we didnt have to set the axis we can just call back.
-        setTimeout(callback.bind(this), 0);
-    }
-  };
 }( jQuery ));
