@@ -20,6 +20,9 @@
     }
   };
 
+  /*
+   * Model declaration
+   */
   var Flip = function($el, options, callback) {
     // Define default setting
     var setting = $.extend({
@@ -39,14 +42,9 @@
     this.element = $el;
     this.frontElement = this.getFrontElement();
     this.backElement = this.getBackElement();
-    if (typeof options === 'function') {
-      // This allows flip to be called for setup with only a callback (default settings)
-      callback = options;
-    }
-    this.callback = callback;
     this.isFlipped = false;
 
-    this.init();
+    this.init(callback);
   };
 
   /*
@@ -54,18 +52,18 @@
    */
   $.extend(Flip.prototype, {
 
-    triggerCallback: function() {
+    flipDone: function(callback) {
       var self = this;
       // Providing a nicely wrapped up callback because transform is essentially async
       self.element.one(whichTransitionEvent(), function() {
         self.element.trigger('flip:done');
-        if (self.callback !== undefined) {
-          self.callback.call(self.element);
+        if (callback !== undefined) {
+          callback.call(self.element);
         }
       });
     },
 
-    flip: function() {
+    flip: function(callback) {
       if (this.isFlipped) {
         return;
       }
@@ -82,10 +80,10 @@
         transform: rotateAxis + "(0deg)",
         "z-index": "1"
       });
-      this.triggerCallback();
+      this.flipDone(callback);
     },
 
-    unflip: function() {
+    unflip: function(callback) {
       if (!this.isFlipped) {
         return;
       }
@@ -102,7 +100,7 @@
         transform: rotateAxis + (this.setting.reverse ? "(180deg)" : "(-180deg)"),
         "z-index": "0"
       });
-      this.triggerCallback();
+      this.flipDone(callback);
     },
 
     getFrontElement: function() {
@@ -121,12 +119,12 @@
       }
     },
 
-    init: function() {
+    init: function(callback) {
       var self = this;
 
       var faces = self.frontElement.add(self.backElement);
-      var rotateAxis = "rotate" + (self.setting.axis.toLowerCase() == "x" ? "x" : "y");
-      var perspective = self.element["outer" + (rotateAxis == "rotatex" ? "Height" : "Width")]() * 2;
+      var rotateAxis = "rotate" + (self.setting.axis.toLowerCase() === "x" ? "x" : "y");
+      var perspective = self.element["outer" + (rotateAxis === "rotatex" ? "Height" : "Width")]() * 2;
       var elementCss = {
         'perspective': perspective,
         'position': 'relative'
@@ -145,13 +143,13 @@
       if (self.setting.forceHeight) {
         faces.outerHeight(self.element.height());
       } else if (self.setting.autoSize) {
-        faceElementCss['height'] = '100%';
+        faceElementCss.height = '100%';
       }
 
       if (self.setting.forceWidth) {
         faces.outerWidth(self.element.width());
       } else if (self.setting.autoSize) {
-        faceElementCss['width'] = '100%';
+        faceElementCss.width = '100%';
       }
 
       // Back face always visible on Chrome #39
@@ -179,8 +177,9 @@
           "transition": "all " + speedInSec + "s ease-out"
         });
 
-        if (self.callback !== undefined) {
-          self.callback.call(self.element);
+        // This allows flip to be called for setup with only a callback (default settings)
+        if (callback !== undefined) {
+          callback.call(self.element);
         }
 
         // While this used to work with a setTimeout of zero, at some point that became
@@ -228,16 +227,17 @@
       }
     },
 
-    changeSettings: function(options) {
-      var self = this;
-      var flipChanged = function() {
-        self.element.trigger('flip:change');
-        if (self.callback !== undefined) {
-          self.callback.call(self.element);
-        }
-      };
+    flipChanged: function(callback) {
+      this.element.trigger('flip:change');
+      if (callback !== undefined) {
+        callback.call(this.element);
+      }
+    },
 
+    changeSettings: function(options, callback) {
+      var self = this;
       var changeNeeded = false;
+
       if (options.axis !== undefined && self.setting.axis !== options.axis.toLowerCase()) {
         self.setting.axis = options.axis.toLowerCase();
         changeNeeded = true;
@@ -273,11 +273,11 @@
         // Providing a nicely wrapped up callback because transform is essentially async
         setTimeout(function() {
           faces.css(savedTrans);
-          flipChanged.call(self);
+          self.flipChanged(callback);
         }, 0);
       } else {
         // If we didnt have to set the axis we can just call back.
-        flipChanged.call(self);
+        self.flipChanged(callback);
       }
     }
 
@@ -287,6 +287,10 @@
    * jQuery collection methods
    */
   $.fn.flip = function (options, callback) {
+    if (typeof options === 'function') {
+      callback = options;
+    }
+
     if (typeof options === "string" || typeof options === "boolean") {
       this.each(function() {
         var flip = $(this).data('flip-model');
@@ -296,9 +300,9 @@
         }
 
         if (options) {
-          flip.flip();
+          flip.flip(callback);
         } else {
-          flip.unflip();
+          flip.unflip(callback);
         }
       });
     } else {
@@ -307,9 +311,7 @@
           var flip = $(this).data('flip-model');
 
           if (options && (options.axis !== undefined || options.reverse !== undefined)) {
-            flip.changeSettings(options);
-          } else {
-            $(this).data('flip-model', new Flip($(this), options, callback));
+            flip.changeSettings(options, callback);
           }
         } else { // Init
           $(this).data('flip-model', new Flip($(this), options, callback));
