@@ -228,53 +228,59 @@
       }
     },
 
-    // TODO Fix this method
-    // changeSettings: function(options, callback) {
-    //   var changeNeeded = false;
-    //   if (options.axis !== undefined && this.setting.axis != options.axis.toLowerCase()) {
-    //     $(this).data("axis", options.axis.toLowerCase());
-    //     changeNeeded = true;
-    //   }
+    changeSettings: function(options) {
+      var self = this;
+      var flipChanged = function() {
+        self.element.trigger('flip:change');
+        if (self.callback !== undefined) {
+          self.callback.call(self.element);
+        }
+      };
 
-    //   if (options.reverse !== undefined && this.setting.reverse != options.reverse) {
-    //     $(this).data("reverse", options.reverse);
-    //     changeNeeded = true;
-    //   }
+      var changeNeeded = false;
+      if (options.axis !== undefined && self.setting.axis !== options.axis.toLowerCase()) {
+        self.setting.axis = options.axis.toLowerCase();
+        changeNeeded = true;
+      }
 
-    //   if (changeNeeded) {
-    //     var faces = $(this).find(this.setting.front).add(this.setting.back, $(this));
-    //     var savedTrans = faces.css(["transition-property", "transition-timing-function", "transition-duration", "transition-delay"]);
-    //     faces.css({
-    //       transition: "none"
-    //     });
+      if (options.reverse !== undefined && self.setting.reverse !== options.reverse) {
+        self.setting.reverse = options.reverse;
+        changeNeeded = true;
+      }
 
-    //     // Only setting the axis if it needs to be
-    //     // options.axis = options.axis.toLowerCase();
-    //     // $(this).data("axis", options.axis);
+      if (changeNeeded) {
+        var faces = self.frontElement.add(self.backElement);
+        var savedTrans = faces.css(["transition-property", "transition-timing-function", "transition-duration", "transition-delay"]);
 
-    //     // This sets up the first flip in the new direction automatically
-    //     var rotateAxis = "rotate" + this.setting.axis;
-    //     if ($(this).data("flipped")) {
-    //       $(this).find(this.setting.front).css({
-    //         transform: rotateAxis + (this.setting.reverse ? "(-180deg)" : "(180deg)"),
-    //         "z-index": "0"
-    //       });
-    //     } else {
-    //       $(this).find(this.setting.back).css({
-    //         transform: rotateAxis + "(" + ($(this).data("reverse")? "180deg" : "-180deg") + ")",
-    //         "z-index": "0"
-    //       });
-    //     }
-    //     // Providing a nicely wrapped up callback because transform is essentially async
-    //     setTimeout(function() {
-    //       faces.css(savedTrans);
-    //       callback.call(this);
-    //     }.bind(this),0);
-    //   } else {
-    //     // If we didnt have to set the axis we can just call back.
-    //     setTimeout(callback.bind(this), 0);
-    //   }
-    // }
+        faces.css({
+          transition: "none"
+        });
+
+        // This sets up the first flip in the new direction automatically
+        var rotateAxis = "rotate" + self.setting.axis;
+
+        if (self.isFlipped) {
+          self.frontElement.css({
+            transform: rotateAxis + (self.setting.reverse ? "(-180deg)" : "(180deg)"),
+            "z-index": "0"
+          });
+        } else {
+          self.backElement.css({
+            transform: rotateAxis + (self.setting.reverse ? "(180deg)" : "(-180deg)"),
+            "z-index": "0"
+          });
+        }
+        // Providing a nicely wrapped up callback because transform is essentially async
+        setTimeout(function() {
+          faces.css(savedTrans);
+          flipChanged.call(self);
+        }, 0);
+      } else {
+        // If we didnt have to set the axis we can just call back.
+        flipChanged.call(self);
+      }
+    }
+
   });
 
   /*
@@ -301,12 +307,9 @@
           var flip = $(this).data('flip-model');
 
           if (options && (options.axis !== undefined || options.reverse !== undefined)) {
-            flip.changeSettings(options, function() {
-              flip.element.trigger('flip:change');
-              if (flip.callback !== undefined) {
-                flip.callback.call(flip.element);
-              }
-            });
+            flip.changeSettings(options);
+          } else {
+            $(this).data('flip-model', new Flip($(this), options, callback));
           }
         } else { // Init
           $(this).data('flip-model', new Flip($(this), options, callback));
