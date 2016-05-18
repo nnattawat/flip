@@ -5,6 +5,7 @@
   "keywords": [
     "jquery-plugin"
   ],
+  "main": "dist/jquery.flip.js",
   "homepage": "https://github.com/nnattawat/flip",
   "bugs": "https://github.com/nnattawat/flip/issues",
   "author": {
