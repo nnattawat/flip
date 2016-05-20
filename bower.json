@@ -1,6 +1,6 @@
 {
 	"name": "flip",
-	"version": "1.0.20",
+	"version": "1.1.0",
 	"dependencies": {
 		"jquery": "~2.0"
 	},
@@ -8,7 +8,7 @@
 		"jquery": "~2.0"
 	},
 	"main": [
-		"src/flip.js"
+		"dist/jquery.flip.js"
 	],
 	"ignore": []
 }

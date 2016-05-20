@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/nnattawat/flip.svg?branch=master)](https://travis-ci.org/nnattawat/fixedBG)
 # jQuery Flip <sub><sup>v1.0.20</sup></sub>
 
 **A lightweight jQuery plugin to create 3d flip animation.** 

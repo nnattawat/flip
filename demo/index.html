@@ -11,25 +11,26 @@
         height: 400px;
         margin: 20px;
       }
-      .front, .back {
+      .front, .back, .other-front, .other-back {
         border: 2px gray solid;
         padding: 10px;
       }
-      .front {
+      .front, .other-front {
         background-color: #ccc;
       }
-      .back {
+      .back, .other-back {
         background-color: red;
       }
     </style>
   </head>
   <body>
     <div id="card-1" class="card">
-      <div class="front">
+      <div class="other-front">
           Front: Cursus aliquet mus et sociis, placerat adipiscing a placerat magnis integer nisi lacus in, turpis porttitor? Lectus nunc dis in porta, montes lacus. Tortor. Pid sit nisi eu nec aenean.
       </div>
-      <div class="back">
+      <div class="other-back">
           <a href="http://google.com">link</a>
+          Back: Dolor scelerisque ridiculus! Mus? Augue, montes, montes proin rhoncus vel a parturient dapibus eros? Penatibus nascetur. In turpis nisi elementum nascetur habitasse augue egestas, in ac rhoncus odio porttitor turpis.
           Back: Dolor scelerisque ridiculus! Mus? Augue, montes, montes proin rhoncus vel a parturient dapibus eros? Penatibus nascetur. In turpis nisi elementum nascetur habitasse augue egestas, in ac rhoncus odio porttitor turpis.
       </div>
     </div>
@@ -47,13 +48,14 @@
 
     <script type="text/javascript">
     $(function(){
-      // $(".card").flip();
-      
       $("#card-1").flip({
         axis: "y", // y or x
         reverse: false, // true and false
         trigger: "hover", // click or hover
-        speed: 1000
+        speed: 1000,
+        front: $('.other-front'),
+        back: $('.other-back'),
+        autoSize: false
       });
       $("#card-2").flip({
         axis: "x",
