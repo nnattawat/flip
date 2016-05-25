@@ -1,4 +1,4 @@
-/*! flip - v1.1.0 - 2016-05-20
+/*! flip - v1.1.1 - 2016-05-25
 * https://github.com/nnattawat/flip
 * Copyright (c) 2016 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
@@ -28,7 +28,7 @@
    */
   var Flip = function($el, options, callback) {
     // Define default setting
-    var setting = $.extend({
+    this.setting = {
       axis: "y",
       reverse: false,
       trigger: "click",
@@ -38,10 +38,48 @@
       autoSize: true,
       front: '.front',
       back: '.back'
-    }, options );
+    };
 
-    // Attributes
-    this.setting = $.extend(setting, options);
+    this.setting = $.extend(this.setting, options);
+
+    if (typeof options.axis === 'string' && (options.axis.toLowerCase() === 'x' || options.axis.toLowerCase() === 'y')) {
+      this.setting.axis = options.axis.toLowerCase();
+    }
+
+    if (typeof options.reverse === "boolean") {
+      this.setting.reverse = options.reverse;
+    }
+
+    if (typeof options.trigger === 'string') {
+      this.setting.trigger = options.trigger.toLowerCase();
+    }
+
+    var speed = parseInt(options.speed);
+    if (!isNaN(speed)) {
+      this.setting.speed = speed;
+    }
+
+    if (typeof options.forceHeight === "boolean") {
+      this.setting.forceHeight = options.forceHeight;
+    }
+
+    if (typeof options.forceWidth === "boolean") {
+      this.setting.forceWidth = options.forceWidth;
+    }
+
+    if (typeof options.autoSize === "boolean") {
+      this.setting.autoSize = options.autoSize;
+    }
+
+    if (typeof options.front === 'string' || options.front instanceof $) {
+      this.setting.front = options.front;
+    }
+
+    if (typeof options.back === 'string' || options.back instanceof $) {
+      this.setting.back = options.back;
+    }
+
+    // Other attributes
     this.element = $el;
     this.frontElement = this.getFrontElement();
     this.backElement = this.getBackElement();
@@ -60,7 +98,7 @@
       // Providing a nicely wrapped up callback because transform is essentially async
       self.element.one(whichTransitionEvent(), function() {
         self.element.trigger('flip:done');
-        if (callback !== undefined) {
+        if (typeof callback === 'function') {
           callback.call(self.element);
         }
       });
@@ -126,7 +164,7 @@
       var self = this;
 
       var faces = self.frontElement.add(self.backElement);
-      var rotateAxis = "rotate" + (self.setting.axis.toLowerCase() === "x" ? "x" : "y");
+      var rotateAxis = "rotate" + self.setting.axis;
       var perspective = self.element["outer" + (rotateAxis === "rotatex" ? "Height" : "Width")]() * 2;
       var elementCss = {
         'perspective': perspective,
@@ -181,7 +219,7 @@
         });
 
         // This allows flip to be called for setup with only a callback (default settings)
-        if (callback !== undefined) {
+        if (typeof callback === 'function') {
           callback.call(self.element);
         }
 
@@ -222,9 +260,9 @@
 
     attachEvents: function() {
       var self = this;
-      if (self.setting.trigger.toLowerCase() === "click") {
+      if (self.setting.trigger === "click") {
         self.element.on($.fn.tap ? "tap.flip" : "click.flip", $.proxy(self.clickHandler, self));
-      } else if (self.setting.trigger.toLowerCase() === "hover") {
+      } else if (self.setting.trigger === "hover") {
         self.element.on('mouseenter.flip', $.proxy(self.hoverHandler, self));
         self.element.on('mouseleave.flip', $.proxy(self.unflip, self));
       }
@@ -232,7 +270,7 @@
 
     flipChanged: function(callback) {
       this.element.trigger('flip:change');
-      if (callback !== undefined) {
+      if (typeof callback === 'function') {
         callback.call(this.element);
       }
     },
@@ -317,7 +355,7 @@
             flip.changeSettings(options, callback);
           }
         } else { // Init
-          $(this).data('flip-model', new Flip($(this), options, callback));
+          $(this).data('flip-model', new Flip($(this), (options || {}), callback));
         }
       });
     }
