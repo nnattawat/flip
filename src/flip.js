@@ -170,11 +170,12 @@
       var backElementCss = {
         "transform": rotateAxis + "(" + (self.setting.reverse ? "180deg" : "-180deg") + ")",
         "z-index": "0",
-        "position": "relative"
+        "position": "relative",
+        "-webkit-transform-style": ""
       };
       var faceElementCss = {
         "backface-visibility": "hidden",
-        "transform-style": "preserve-3d",
+        "transform-style": "",
         "position": "absolute",
         "z-index": "1"
       };
