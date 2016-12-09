@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/nnattawat/flip.svg?branch=master)](https://travis-ci.org/nnattawat/flip)
 # jQuery Flip
 
+[![Join the chat at https://gitter.im/nnattawat/flip](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nnattawat/flip?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 **A lightweight jQuery plugin to create 3d flip animation.** 
 See the [project page](http://nnattawat.github.io/flip/)
 
