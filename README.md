@@ -20,6 +20,9 @@ See the [project page](http://nnattawat.github.io/flip/)
 ### Bower
 <pre>bower install flip</pre>
 
+### NPM
+<pre>npm install nnattawat/flip</pre>
+
 ### Usage
 In your web page:
 
