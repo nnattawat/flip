@@ -1,6 +1,6 @@
-/*! flip - v1.1.2 - 2016-10-20
+/*! flip - v1.1.2 - 2018-03-27
 * https://github.com/nnattawat/flip
-* Copyright (c) 2016 Nattawat Nonsung; Licensed MIT */
+* Copyright (c) 2018 Nattawat Nonsung; Licensed MIT */
 (function( $ ) {
   /*
    * Private attributes and method
@@ -93,24 +93,14 @@
    */
   $.extend(Flip.prototype, {
 
-    flipDone: function(callback) {
-      var self = this;
-      // Providing a nicely wrapped up callback because transform is essentially async
-      self.element.one(whichTransitionEvent(), function() {
-        self.element.trigger('flip:done');
-        if (typeof callback === 'function') {
-          callback.call(self.element);
-        }
-      });
-    },
-
     flip: function(callback) {
       if (this.isFlipped) {
         return;
       }
 
+      this.fireEvents(['flip:start']);
       this.isFlipped = true;
-
+      
       var rotateAxis = "rotate" + this.setting.axis;
       this.frontElement.css({
         transform: rotateAxis + (this.setting.reverse ? "(-180deg)" : "(180deg)"),
@@ -121,7 +111,7 @@
         transform: rotateAxis + "(0deg)",
         "z-index": "1"
       });
-      this.flipDone(callback);
+      this.onTransitionFinished(callback, ['flip:done']);
     },
 
     unflip: function(callback) {
@@ -129,6 +119,7 @@
         return;
       }
 
+      this.fireEvents(['unflip:start']);
       this.isFlipped = false;
 
       var rotateAxis = "rotate" + this.setting.axis;
@@ -141,7 +132,25 @@
         transform: rotateAxis + (this.setting.reverse ? "(180deg)" : "(-180deg)"),
         "z-index": "0"
       });
-      this.flipDone(callback);
+      this.onTransitionFinished(callback, ['flip:done', 'unflip:done']);
+    },
+
+    onTransitionFinished: function(callback, eventsToTrigger){
+      var self = this;
+      // Providing a nicely wrapped up callback because transform is essentially async
+      self.element.one(whichTransitionEvent(), function() {
+        self.fireEvents(eventsToTrigger);
+        if (typeof callback === 'function') {
+          callback.call(self.element);
+        }
+      });
+    },
+
+    fireEvents: function(events){
+      var self = this;
+      $.each(events, function(index, event) {
+        self.element.trigger(event);
+      });
     },
 
     getFrontElement: function() {
@@ -272,7 +281,7 @@
     },
 
     flipChanged: function(callback) {
-      this.element.trigger('flip:change');
+      this.fireEvents(['flip:change']);
       if (typeof callback === 'function') {
         callback.call(this.element);
       }
