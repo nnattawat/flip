@@ -111,7 +111,7 @@
         transform: rotateAxis + "(0deg)",
         "z-index": "1"
       });
-      this.onTransitionFinished(callback, ['flip:done']);
+      this.transitionFinished(callback, ['flip:done']);
     },
 
     unflip: function(callback) {
@@ -132,10 +132,10 @@
         transform: rotateAxis + (this.setting.reverse ? "(180deg)" : "(-180deg)"),
         "z-index": "0"
       });
-      this.onTransitionFinished(callback, ['flip:done', 'unflip:done']);
+      this.transitionFinished(callback, ['flip:done', 'unflip:done']);
     },
 
-    onTransitionFinished: function(callback, eventsToTrigger){
+    transitionFinished: function(callback, eventsToTrigger){
       var self = this;
       // Providing a nicely wrapped up callback because transform is essentially async
       self.element.one(whichTransitionEvent(), function() {
