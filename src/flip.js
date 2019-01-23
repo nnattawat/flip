@@ -174,6 +174,7 @@
       };
       var faceElementCss = {
         "backface-visibility": "hidden",
+        "-webkit-backface-visibility": "hidden",
         "transform-style": "preserve-3d",
         "position": "absolute",
         "z-index": "1"
@@ -199,7 +200,8 @@
 
 
       faces.css(faceElementCss).find('*').css({
-        "backface-visibility": "hidden"
+        "backface-visibility": "hidden",
+        "-webkit-backface-visibility": "hidden"
       });
 
       self.element.css(elementCss);
